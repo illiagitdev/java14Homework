@@ -1,19 +1,20 @@
 public class ShakerSorting {
     public static void main(String[] args) {
-
         /*        new array for shaker sorting      */
         int array[] = fillArray(20);
+        System.out.println("Massive before sorting:");
         showArray(array);
 
         shakerSorting(array);
 
+        System.out.println("Massive after sorting:");
         showArray(array);
     }
 
     /**
      * Shaker sorting
      */
-    private static int[] shakerSorting(int[] array) {
+    private static void shakerSorting(int[] array) {
         int tmp;
         for (int i = 0; i < array.length - 1; i++) {
             for (int j = i; j < array.length - (i + 1); j++) {
@@ -32,7 +33,6 @@ public class ShakerSorting {
                 }
             }
         }
-        return array;
     }
 
     /**
