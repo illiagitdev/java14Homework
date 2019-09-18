@@ -4,7 +4,6 @@ public class Calculator {
     public static void main(String[] args) {
         int numberD;
         Scanner input = new Scanner(System.in);
-
         System.out.print("Enter a number: ");
         numberD = input.nextInt();
 
@@ -23,7 +22,6 @@ public class Calculator {
             result = hexa[x] + result;
             value /= base;
         }
-
         switch (base) {
             case 2: {
                 result = "0b" + result;
@@ -41,7 +39,6 @@ public class Calculator {
                 break;
             }
         }
-
         return result;
     }
 }
