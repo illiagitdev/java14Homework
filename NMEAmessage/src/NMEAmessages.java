@@ -70,6 +70,9 @@ public class NMEAmessages {
         }
     }
 
+    /**
+     * shows GGA fields
+     */
     private static void decodeGSA(String[] array) {
         Character workMode = array[0].charAt(0);
         int fixType = returnInteger(array[1]);
@@ -96,67 +99,69 @@ public class NMEAmessages {
                 VDOP+" - (Double) Vertical dilution of precision (00.0 to 99.9)");
     }
 
+    /**
+     * shows GGA fields
+     */
     private static void decodeGGA(String[] array) {
-        Date timeUTC = new Date((long) (returnDouble(array[0]) * 1000));//todo: fix formats;
-        double latitude = returnDouble(array[1]);
-        String indicatorNS = array[2];
-        double longitude = returnDouble(array[3]);
-        String indicatorEW = array[4];
+        Date timeUTC = new Date((long) (returnDouble(array[0]) * 1000));//todo: formats;
+        double latitude = returnDouble(array[1]);//todo: formats;
+        Character indicatorNS = array[2].charAt(0);
+        double longitude = returnDouble(array[3]);//todo: formats;
+        Character indicatorEW = array[4].charAt(0);
         int qualityIndicator = returnInteger(array[5]);
         int satellitesUsed = returnInteger(array[6]);
         double HDOP = returnDouble(array[7]);
         double altitude = returnDouble(array[8]);
-        String altitudeIndex = array[9];
+        Character altitudeIndex = array[9].charAt(0);
         double geoidalSeparation = returnDouble(array[10]);
-        String geoidalSeparationIndex = array[11];
-        Date alignmentDGPS = new Date((long) (returnDouble(array[12]) * 1000));
+        Character geoidalSeparationIndex = array[11].charAt(0);
+        Date alignmentDGPS = new Date((long) (returnDouble(array[12]) * 1000));//todo: formats;
         int refStation = returnInteger(array[13]);
 
-        System.out.println("GGA - Global Positioning System Fix Data");
-
-        System.out.println("UTC of position in hhmmss.sss format, (000000.000 ~ 235959.999): " + timeUTC);
-        System.out.println("Latitude in ddmm.mmmm format. Leading zeros are inserted. " + latitude);
-        System.out.println("‘N’ = North, ‘S’ = South " + indicatorNS);
-        System.out.println("Longitude in dddmm.mmmm format. Leading zeros are inserted. " + longitude);
-        System.out.println("‘E’ = East, ‘W’ = West" + indicatorEW);
-        System.out.println("GPS quality indicator\n" +
-                "0: position fix unavailable\n" +
-                "1: valid position fix, SPS mode\n" +
-                "2: valid position fix, differential GPS mode " + qualityIndicator);
-        System.out.println("Number of satellites in use, (00 ~ 24) " + satellitesUsed);
-        System.out.println("Horizontal dilution of precision, (00.0 ~ 99.9) " + HDOP);
-        System.out.println("Mean sea level altitude (-9999.9 ~ 17999.9) in meter " + altitude);
-        System.out.println("altitudeIndex " + altitudeIndex);
-        System.out.println("Geoidal Separation(meters) " + geoidalSeparation);
-        System.out.println("geoidalSeparationIndex " + geoidalSeparationIndex);
-        System.out.println("DGPS alignment " + alignmentDGPS);
-        System.out.println("Differential reference station ID, 0000 ~ 1023\n" +
-                "NULL when DGPS not used " + refStation);
+        System.out.println("GGA - Global Positioning System Fix Data\n\n"+
+                timeUTC+" - (Date) UTC of position\n"+
+                latitude+" - (Double) Latitude of position\n"+
+                indicatorNS+" - (Character) ‘N’ = North, ‘S’ = South\n"+
+                longitude+" - (Double) Longitude of position\n"+
+                indicatorEW+" - (Character) ‘E’ = East, ‘W’ = West\n"+
+                qualityIndicator+" - (Integer) GPS quality indicator: 0 - invalid, 1 - GPS fix, 2 - DGPD fix\n"+
+                satellitesUsed+" - (Integer) Number of Satellites\n"+
+                HDOP+" - (Double) HDOP\n"+
+                altitude+" meters - (Double) Mean sea level altitude\n"+
+                altitudeIndex+" - (Character) units of antenna altitude, meters\n"+
+                geoidalSeparation+" meters - (Double) Geoidal Separation\n"+
+                geoidalSeparationIndex+" - (Character) units of geoidal separation, meters\n"+
+                alignmentDGPS+" seconds - (Date) Age of Differential GPS data (seconds)\n"+
+                refStation+" - (Integer) DGPS reference station ID");
     }
 
+    /**
+     * shows GVT fields
+     */
     private static void decodeVTG(String[] array) {
         double courseTrue = returnDouble(array[0]);
-        String courseTrueID = array[1];
+        Character courseTrueID = array[1].charAt(0);
         double courseMagnetic = returnDouble(array[2]);
-        String courseMagneticID = array[3];
+        Character courseMagneticID = array[3].charAt(0);
         double speedKnots = returnDouble(array[4]);
-        String speedKnotsID = array[5];
+        Character speedKnotsID = array[5].charAt(0);
         double speedKpH = returnDouble(array[6]);
-        String speedKpHID = array[7];
+        Character speedKpHID = array[7].charAt(0);
 
-
-        System.out.println("VTG - Course Over Ground and Ground Speed");
-
-        System.out.println("Course over ground, degrees True (000.0 ~ 359.9) " + courseTrue);
-        System.out.println("courseTrue " + courseTrueID);
-        System.out.println("Course over ground, degrees Magnetic (000.0 ~ 359.9) " + courseMagnetic);
-        System.out.println("courseMagnetic " + courseMagneticID);
-        System.out.println("Speed over ground in knots (000.0 ~ 999.9) " + speedKnots);
-        System.out.println("speedKnots " + speedKnotsID);
-        System.out.println("Speed over ground in kilometers per hour (0000.0 ~ 1800.0) " + speedKpH);
-        System.out.println("speedKpH " + speedKpHID);
+        System.out.println("VTG - Course Over Ground and Ground Speed\n\n"+
+                courseTrue+" - (Double) Course over ground, degrees True\n"+
+                courseTrueID+" - (Character) 'T' indicates that track made good\n"+
+                courseMagnetic+" - (Double) Course over ground, degrees Magnetic\n"+
+                courseMagneticID+" - (Character) 'M' indicates that magnetic track made good\n"+
+                speedKnots+" knots - (Double) Speed over ground in knots\n"+
+                speedKnotsID+" - (Character) 'N' indicates that speed over ground in knots\n"+
+                speedKpH+" km/hour - (Double) Speed over ground in kilometers per hour\n"+
+                speedKpHID+" - (Character) 'K' indicates that speed over ground is in kilometers/hour");
     }
 
+    /**
+     * shows RMC fields
+     */
     private static void decodeRMC(String[] array) {
         Date timeUTC = new Date((long) (returnDouble(array[0]) * 1000));
         String statusIndicator = array[1];
