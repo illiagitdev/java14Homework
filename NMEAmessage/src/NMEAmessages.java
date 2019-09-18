@@ -1,3 +1,5 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -6,18 +8,18 @@ public class NMEAmessages {
         /**
          * set of NMEA messages
          */
-        String[] messages = {"$GPGSV,3,3,11,04,07,102,30,29,02,170,09,18,02,243,*42",
-                "$GPGLL,6012.5674,N,02449.6545,E,072022.000,A,A*50",
-                "$GPRMC,114353.000,A,6016.3245,N,02458.3270,E,0.01,0.00,121009,,,A*69",
-                "$GPVTG,45.67,T,,M,0.08,N,0.1,K*59",
-                "$GPGGA,165114.000,5601.0318,N,01211.3504,E,1,07,1.2,22.6,M,41.6,M,,0000*62",
-                "$GPGSA,A,3,05,17,22,09,14,04,30,,,,,,1.8,1.2,1.3*32"
+        String[] messages = {"$GNGGA,165114.000,5601.0318,N,01211.3504,E,1,07,1.2,22.6,M,41.6,M,,0000*62",
+                "$GNGLL,4916.45,N,12311.12,W,225444,A,*31",
+                "$GNGSA,A,3,05,17,22,09,14,04,30,,,,,,1.8,1.2,1.3*32",
+                "$GPGSV,3,3,11,04,07,102,30,29,02,170,09,18,02,243,*42",
+                "$GNRMC,123519,A,4807.038,N,01131.000,E,022.4,084.4,230394,003.1,W*6A",
+                "$GNVTG,45.67,T,,M,0.08,N,0.1,K*59"
         };
 
         Boolean flag = true;
         Scanner scan = new Scanner(System.in);
         int mNumber;
-        String message="";
+        String message = "";
 
         while (flag) {
             System.out.print("Select NMEA message from 0 to 5: ");
@@ -73,8 +75,73 @@ public class NMEAmessages {
     /**
      * shows GGA fields
      */
+    private static void decodeGGA(String[] array) {
+        String timeUTC = getTimeS(array[0]);//22:54:44 UTC
+
+        int latitudeDegree = returnInteger(array[1].substring(0, array[1].indexOf('.') - 2));
+        double latitudeMin = returnDouble(array[1].substring(array[1].indexOf('.') - 2));
+        Character indicatorNS = getChar0(array[2]);
+        int longitudeDegree = returnInteger(array[3].substring(0, array[3].indexOf('.') - 2));
+        double longitudeMin = returnDouble(array[3].substring(array[3].indexOf('.') - 2));
+        Character indicatorEW = getChar0(array[4]);
+
+        int qualityIndicator = returnInteger(array[5]);
+        int satellitesUsed = returnInteger(array[6]);
+        double HDOP = returnDouble(array[7]);
+        double altitude = returnDouble(array[8]);
+        Character altitudeIndex = getChar0(array[9]);
+        double geoidalSeparation = returnDouble(array[10]);
+        Character geoidalSeparationIndex = getChar0(array[11]);
+        int alignmentDGPS = returnInteger(array[12]);//Age of Differential GPS data (seconds)
+        int refStation = returnInteger(array[13]);
+
+        System.out.println("GGA - Global Positioning System Fix Data\n\n" +
+                timeUTC + " - (String) UTC of position\n" +
+                latitudeDegree + " deg. " + latitudeMin + " min. - (Integer,Double) Latitude of position\n" +
+                indicatorNS + " - (Character) ‘N’ = North, ‘S’ = South\n" +
+                longitudeDegree + " deg. " + longitudeMin + " min. - (Integer,Double) Longitude of position\n" +
+                indicatorEW + " - (Character) ‘E’ = East, ‘W’ = West\n" +
+                qualityIndicator + " - (Integer) GPS quality indicator: 0 - invalid, 1 - GPS fix, 2 - DGPD fix\n" +
+                satellitesUsed + " - (Integer) Number of Satellites\n" +
+                HDOP + " - (Double) HDOP\n" +
+                altitude + " meters - (Double) Mean sea level altitude\n" +
+                altitudeIndex + " - (Character) units of antenna altitude, meters\n" +
+                geoidalSeparation + " meters - (Double) Geoidal Separation\n" +
+                geoidalSeparationIndex + " - (Character) units of geoidal separation, meters\n" +
+                alignmentDGPS + " seconds - (Integer) Age of Differential GPS data (seconds)\n" +
+                refStation + " - (Integer) DGPS reference station ID");
+    }
+
+    /**
+     * shows GLL fields
+     */
+    private static void decodeGLL(String[] array) {
+        int latitudeDegree = returnInteger(array[0].substring(0, array[0].indexOf('.') - 2));
+        double latitudeMin = returnDouble(array[0].substring(array[0].indexOf('.') - 2));
+        Character indicatorNS = getChar0(array[1]);
+        int longitudeDegree = returnInteger(array[2].substring(0, array[2].indexOf('.') - 2));
+        double longitudeMin = returnDouble(array[2].substring(array[2].indexOf('.') - 2));
+        Character indicatorEW = getChar0(array[3]);
+
+        String timeUTC = getTime(array[4]);// 22:54:44 UTC
+        Character status = getChar0(array[5]);
+        Character mode = getChar0(array[6]);
+
+        System.out.println("GLL - Geographic Position – Latitude/Longitude\n\n" +
+                latitudeDegree + " deg. " + latitudeMin + " min. - (Integer,Double) Latitude of position\n" +
+                indicatorNS + " - (Character) ‘N’ = North, ‘S’ = South\n" +
+                longitudeDegree + " deg. " + longitudeMin + " min. - (Integer,Double) Longitude of position\n" +
+                indicatorEW + " - (Character) ‘E’ = East, ‘W’ = West\n" +
+                timeUTC + " - (String) UTC time of the fix\n" +
+                status + " - (Character) Status indicator. A = valid; V = invalid\n" +
+                mode + " - (Character) Mode indicator. A = autonomous; N = data not valid");
+    }
+
+    /**
+     * shows GSA fields
+     */
     private static void decodeGSA(String[] array) {
-        Character workMode = array[0].charAt(0);
+        Character workMode = getChar0(array[0]);
         int fixType = returnInteger(array[1]);
 
         int[] satelliteID = new int[12];
@@ -86,53 +153,17 @@ public class NMEAmessages {
         double HDOP = returnDouble(array[15]);
         double VDOP = returnDouble(array[16]);
 
-        System.out.println("GSA - GNSS DOP and Active Satellites\n\n"+
-                workMode+" - (Character) Mode: ‘M’ = Manual, ‘A’ = Automatic\n"+
-                fixType+" - (Integer) Fix type: 1 = Fix not available, 2 = 2D, 3 = 3D");
+        System.out.println("GSA - GNSS DOP and Active Satellites\n\n" +
+                workMode + " - (Character) Mode: ‘M’ = Manual, ‘A’ = Automatic\n" +
+                fixType + " - (Integer) Fix type: 1 = Fix not available, 2 = 2D, 3 = 3D");
 
         for (int i = 0; i < 12; i++) {
-            System.out.println(satelliteID[i]+" - (Integer) ID = "+(i+1)+", Satellite ID used in position fix" );
+            System.out.println(satelliteID[i] + " - (Integer) ID = " + (i + 1) + ", Satellite ID used in position fix");
         }
 
-        System.out.println(PDOP+" - (Double) Position dilution of precision (00.0 to 99.9)\n"+
-                HDOP+" - (Double) Horizontal dilution of precision (00.0 to 99.9)\n"+
-                VDOP+" - (Double) Vertical dilution of precision (00.0 to 99.9)");
-    }
-
-    /**
-     * shows GGA fields
-     */
-    private static void decodeGGA(String[] array) {
-        Date timeUTC = new Date((long) (returnDouble(array[0]) * 1000));//todo: formats;
-        double latitude = returnDouble(array[1]);//todo: formats;
-        Character indicatorNS = array[2].charAt(0);
-        double longitude = returnDouble(array[3]);//todo: formats;
-        Character indicatorEW = array[4].charAt(0);
-        int qualityIndicator = returnInteger(array[5]);
-        int satellitesUsed = returnInteger(array[6]);
-        double HDOP = returnDouble(array[7]);
-        double altitude = returnDouble(array[8]);
-        Character altitudeIndex = array[9].charAt(0);
-        double geoidalSeparation = returnDouble(array[10]);
-        Character geoidalSeparationIndex = array[11].charAt(0);
-        Date alignmentDGPS = new Date((long) (returnDouble(array[12]) * 1000));//todo: formats;
-        int refStation = returnInteger(array[13]);
-
-        System.out.println("GGA - Global Positioning System Fix Data\n\n"+
-                timeUTC+" - (Date) UTC of position\n"+
-                latitude+" - (Double) Latitude of position\n"+
-                indicatorNS+" - (Character) ‘N’ = North, ‘S’ = South\n"+
-                longitude+" - (Double) Longitude of position\n"+
-                indicatorEW+" - (Character) ‘E’ = East, ‘W’ = West\n"+
-                qualityIndicator+" - (Integer) GPS quality indicator: 0 - invalid, 1 - GPS fix, 2 - DGPD fix\n"+
-                satellitesUsed+" - (Integer) Number of Satellites\n"+
-                HDOP+" - (Double) HDOP\n"+
-                altitude+" meters - (Double) Mean sea level altitude\n"+
-                altitudeIndex+" - (Character) units of antenna altitude, meters\n"+
-                geoidalSeparation+" meters - (Double) Geoidal Separation\n"+
-                geoidalSeparationIndex+" - (Character) units of geoidal separation, meters\n"+
-                alignmentDGPS+" seconds - (Date) Age of Differential GPS data (seconds)\n"+
-                refStation+" - (Integer) DGPS reference station ID");
+        System.out.println(PDOP + " - (Double) Position dilution of precision (00.0 to 99.9)\n" +
+                HDOP + " - (Double) Horizontal dilution of precision (00.0 to 99.9)\n" +
+                VDOP + " - (Double) Vertical dilution of precision (00.0 to 99.9)");
     }
 
     /**
@@ -140,82 +171,62 @@ public class NMEAmessages {
      */
     private static void decodeVTG(String[] array) {
         double courseTrue = returnDouble(array[0]);
-        Character courseTrueID = array[1].charAt(0);
+        Character courseTrueID = getChar0(array[1]);
         double courseMagnetic = returnDouble(array[2]);
-        Character courseMagneticID = array[3].charAt(0);
+        Character courseMagneticID = getChar0(array[3]);
         double speedKnots = returnDouble(array[4]);
-        Character speedKnotsID = array[5].charAt(0);
+        Character speedKnotsID = getChar0(array[5]);
         double speedKpH = returnDouble(array[6]);
-        Character speedKpHID = array[7].charAt(0);
+        Character speedKpHID = getChar0(array[7]);
 
-        System.out.println("VTG - Course Over Ground and Ground Speed\n\n"+
-                courseTrue+" - (Double) Course over ground, degrees True\n"+
-                courseTrueID+" - (Character) 'T' indicates that track made good\n"+
-                courseMagnetic+" - (Double) Course over ground, degrees Magnetic\n"+
-                courseMagneticID+" - (Character) 'M' indicates that magnetic track made good\n"+
-                speedKnots+" knots - (Double) Speed over ground in knots\n"+
-                speedKnotsID+" - (Character) 'N' indicates that speed over ground in knots\n"+
-                speedKpH+" km/hour - (Double) Speed over ground in kilometers per hour\n"+
-                speedKpHID+" - (Character) 'K' indicates that speed over ground is in kilometers/hour");
+        System.out.println("VTG - Course Over Ground and Ground Speed\n\n" +
+                courseTrue + " - (Double) Course over ground, degrees True\n" +
+                courseTrueID + " - (Character) 'T' indicates that track made good\n" +
+                courseMagnetic + " - (Double) Course over ground, degrees Magnetic\n" +
+                courseMagneticID + " - (Character) 'M' indicates that magnetic track made good\n" +
+                speedKnots + " knots - (Double) Speed over ground in knots\n" +
+                speedKnotsID + " - (Character) 'N' indicates that speed over ground in knots\n" +
+                speedKpH + " km/hour - (Double) Speed over ground in kilometers per hour\n" +
+                speedKpHID + " - (Character) 'K' indicates that speed over ground is in kilometers/hour");
     }
 
     /**
      * shows RMC fields
      */
     private static void decodeRMC(String[] array) {
-        Date timeUTC = new Date((long) (returnDouble(array[0]) * 1000));
-        String statusIndicator = array[1];
-        double latitude = returnDouble(array[2]);
-        String direction = array[3];
-        double longitude = returnDouble(array[4]);
-        String directionEW = array[5];
+        String timeUTC = getTime(array[0]);// 22:54:46 UTC
+        Character statusIndicator = getChar0(array[1]);
+
+        int latitudeDegree = returnInteger(array[2].substring(0, array[2].indexOf('.') - 2));
+        double latitudeMin = returnDouble(array[2].substring(array[2].indexOf('.') - 2));
+        Character indicatorNS = getChar0(array[3]);
+        int longitudeDegree = returnInteger(array[4].substring(0, array[4].indexOf('.') - 2));
+        double longitudeMin = returnDouble(array[4].substring(array[4].indexOf('.') - 2));
+        Character indicatorEW = getChar0(array[5]);
+
         double speedKnots = returnDouble(array[6]);
         double heading = returnDouble(array[7]);
-        Date timeUTCfix = new Date((long) (returnDouble(array[8])));
+        Date timeUTCfix = new Date((long) (returnDouble(array[8])));//todo: formats time;191194       Date of fix  19 November 1994
         double magneticVar = returnDouble(array[9]);
-        String letter = array[10];
-        String modeIndicator = array[11];
+        Character magneticVarID = getChar0(array[10]);
 
-        System.out.println("RMC -  Recommended Minimum Specific GNSS Data");
-
-        System.out.println("UTC time of the fix. " + timeUTC);
-        System.out.println("Status indicator.\n" +
-                "A=valid; V=invalid " + statusIndicator);
-        System.out.println("Latitude coordinate. " + latitude);
-        System.out.println("Character denoting either N=North or S=South " + direction);
-        System.out.println("Longitude coordinate. " + longitude);
-        System.out.println("Character denoting either E=East or W=West " + directionEW);
-        System.out.println("Speed in knots " + speedKnots);
-        System.out.println("Heading " + heading);
-        System.out.println("UTC Date of the fix. " + timeUTCfix);
-        System.out.println("Magnetic variation in degrees, not supported " + magneticVar);
-        System.out.println("Letter denoting direction of magnetic variation. Either E=East or W=West. " + letter);
-        System.out.println("Mode indicator\n" +
-                "A=autonomous; N=data not valid " + modeIndicator);
+        System.out.println("RMC -  Recommended Minimum Specific GNSS Data\n\n" +
+                timeUTC + " - (String) UTC time of the fix\n" +
+                statusIndicator + " - (Character) Status indicator. A=valid; V=invalid\n" +
+                latitudeDegree + " deg. " + latitudeMin + " min. - (Integer,Double) Latitude of position\n" +
+                indicatorNS + " - (Character) ‘N’ = North, ‘S’ = South\n" +
+                longitudeDegree + " deg. " + longitudeMin + " min. - (Integer,Double) Longitude of position\n" +
+                indicatorEW + " - (Character) ‘E’ = East, ‘W’ = West\n" +
+                speedKnots + " knots - (Double) Speed over ground in knots\n" +
+                heading + " - (Double) True course\n" +
+                timeUTCfix + " - (Date) UTC Date of the fix\n" +
+                magneticVar + " degree - (Double) Magnetic variation\n" +
+                magneticVarID + " - (Character) direction of magnetic variation. Either E=East or W=West\n");
     }
 
-    private static void decodeGLL(String[] array) {
-        double latitude = returnDouble(array[0]);
-        String denotionNS = array[1];
-        double longitude = returnDouble(array[2]);
-        String denotionEW = array[3];
-        Date timeUTC = new Date((long) (returnDouble(array[4]) * 1000));
-        String status = array[5];
-        String mode = array[6];
-
-        System.out.println("GLL - Geographic Position – Latitude/Longitude");
-
-        System.out.println("Latitude coordinate. " + latitude);
-        System.out.println("Character denoting either N=North or S=South. " + denotionNS);
-        System.out.println("Longitude coordinate. " + longitude);
-        System.out.println("Character denoting either E=East or W=West " + denotionEW);
-        System.out.println("UTC time of the fix. " + timeUTC);
-        System.out.println("Status indicator.\n" +
-                "A=valid; V=invalid " + status);
-        System.out.println("Mode indicator.\n" +
-                "A=autonomous; N=data not valid " + mode);
-    }
-
+    /**
+     * shows GSV fields
+     */
     private static void decodeGSV(String[] array) {
         int messagesN = returnInteger(array[0]);
         int messageNumber = returnInteger(array[1]);
@@ -235,29 +246,22 @@ public class NMEAmessages {
         int satAzimuth3 = returnInteger(array[13]);
         int signalToNoise3 = returnInteger(array[14]);
 
-        System.out.println("GSV - GNSS DOP and Active Satellites");
-
-        System.out.println("Total number of messages, 1 to 9 " + messagesN);
-        System.out.println("Message number, 1 to 9 " + messageNumber);
-        System.out.println("Total number of satellites in view " + satellites);
-
-        System.out.println("Satellite ID (PRN) number " + satellitID1);
-        System.out.println("Satellite elevation, degrees 90 max " + satElevation1);
-        System.out.println("Satellite azimuth, degrees True, 000 to 359 " + satAzimuth1);
-        System.out.println("Signal-to-noise ration (C/No) 00-99 dB-Hz. Value of zero means that the satellite is predicted to\n" +
-                "be on the visible sky but it isn't being tracked. " + signalToNoise1);
-
-        System.out.println("Satellite ID (PRN) number " + satellitID2);
-        System.out.println("Satellite elevation, degrees 90 max " + satElevation2);
-        System.out.println("Satellite azimuth, degrees True, 000 to 359 " + satAzimuth2);
-        System.out.println("Signal-to-noise ration (C/No) 00-99 dB-Hz. Value of zero means that the satellite is predicted to\n" +
-                "be on the visible sky but it isn't being tracked. " + signalToNoise2);
-
-        System.out.println("Satellite ID (PRN) number " + satellitID3);
-        System.out.println("Satellite elevation, degrees 90 max " + satElevation3);
-        System.out.println("Satellite azimuth, degrees True, 000 to 359 " + satAzimuth3);
-        System.out.println("Signal-to-noise ration (C/No) 00-99 dB-Hz. Value of zero means that the satellite is predicted to\n" +
-                "be on the visible sky but it isn't being tracked. " + signalToNoise3);
+        System.out.println("GSV - GNSS DOP and Active Satellites\n\n" +
+                messagesN + " - (Integer) Total number of messages\n" +
+                messageNumber + " - (Integer) number of message\n" +
+                satellites + " - (Integer) Total number of satellites in view\n" +
+                satellitID1 + " - (Integer) Satellite ID\n" +
+                satElevation1 + " - (Integer) Satellite elevation, degrees 90 max\n" +
+                satAzimuth1 + " - (Integer) Satellite azimuth, degrees True, 000 to 359\n" +
+                signalToNoise1 + " - (Integer) Signal-to-noise ration (C/No) 00-99 dB-Hz\n" +
+                satellitID2 + " - (Integer) Satellite ID\n" +
+                satElevation2 + " - (Integer) Satellite elevation, degrees 90 max\n" +
+                satAzimuth2 + " - (Integer) Satellite azimuth, degrees True, 000 to 359\n" +
+                signalToNoise2 + " - (Integer) Signal-to-noise ration (C/No) 00-99 dB-Hz\n" +
+                satellitID3 + " - (Integer) Satellite ID\n" +
+                satElevation3 + " - (Integer) Satellite elevation, degrees 90 max\n" +
+                satAzimuth3 + " - (Integer) Satellite azimuth, degrees True, 000 to 359\n" +
+                signalToNoise3 + " - (Integer) Signal-to-noise ration (C/No) 00-99 dB-Hz");
     }
 
     /**
@@ -281,5 +285,48 @@ public class NMEAmessages {
      */
     private static int returnInteger(String s) {
         return s.isEmpty() ? 0 : Integer.valueOf(s);
+    }
+
+    /**
+     * returns char at index = 0 or null
+     */
+    private static Character getChar0(String s) {
+        return (s.isEmpty() || s.equals(null)) ? null : s.charAt(0);
+    }
+
+    //with miliseconds
+    private static String getTimeS(String s) {
+        Date date= null;
+        try {
+            date = new SimpleDateFormat("HHmmss.SSS").parse(s);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        String newDate=new SimpleDateFormat("HH:mm:ss.SSS").format(date);
+        return newDate;
+    }
+
+    //without miliseconds
+    private static String getTime(String s) {
+        Date date= null;
+        try {
+            date = new SimpleDateFormat("HHmmss").parse(s);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        String newDate=new SimpleDateFormat("HH:mm:ss").format(date);
+        return newDate;
+    }
+
+    //date
+    private static String getDate(String s) {
+        Date date= null;
+        try {
+            date = new SimpleDateFormat("ddMMyy").parse(s);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        String newDate=new SimpleDateFormat("HH:mm:ss").format(date);
+        return newDate;
     }
 }
