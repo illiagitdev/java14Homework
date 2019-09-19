@@ -13,14 +13,14 @@ public class Task7 {
     public static void main(String[] args) {
         boolean flag = true;
         do {
-                    System.out.print("Яку задачу ви хочете вирішити (1-6):\n" +
-                            "1 - Задача#1 ()\n" +
-                            "2 - Задача#2 ()\n" +
-                            "3 - Задача#3 ()\n" +
-                            "4 - Задача#4 ()\n" +
-                            "5 - Задача#5 ()\n" +
-                            "6 - Задача#6 ()\n" +
-                            "№ ");
+            System.out.print("Яку задачу ви хочете вирішити (1-6):\n" +
+                    "1 - Задача#1 (Перечислення від 1 до введеного Х)\n" +
+                    "2 - Задача#2 (Рисує прямокутник з символів)\n" +
+                    "3 - Задача#3 (Рисує квадрат з символів/Задача#2)\n" +
+                    "4 - Задача#4 (Виводить максимальне з двох чисел (int, float))\n" +
+                    "5 - Задача#5 (Задача#1 чурез рекурсію)\n" +
+                    "6 - Задача#6 (Задача#2 чурез рекурсію)\n" +
+                    "№ ");
 
             Scanner input = new Scanner(System.in);
             int selector = input.nextInt();
@@ -51,12 +51,12 @@ public class Task7 {
             }
 
             System.out.println("Продовжити розв'язувати задачі? (y/n)");
-            if (input.next().toLowerCase().equals("y")){
+            if (input.next().toLowerCase().equals("y")) {
                 continue;
-            }else {
+            } else {
                 flag = false;
             }
-        }while (flag);
+        } while (flag);
     }
 
 

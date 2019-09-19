@@ -1,20 +1,23 @@
 public class Task2 {
     public static void main(String[] args) {
-        int h=9, w=6;
+        int h = 9, w = 6;
 
-        drawRectangle(h,w);
+        drawRectangle(h, w);
         drawRectangle(h);
     }
 
     private static void drawRectangle(int h) {
-        drawRectangle(h,h);
+        drawRectangle(h, h);
     }
 
+    /**
+     * draws rectangle with width W and heights H
+     */
     private static void drawRectangle(int h, int w) {
-        char fill = 134;
+        char filling = 134;
         for (int i = 0; i < h; i++) {
             for (int j = 0; j < w; j++) {
-                System.out.print(fill);
+                System.out.print(filling);
             }
             System.out.println();
         }
