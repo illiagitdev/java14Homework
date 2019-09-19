@@ -39,7 +39,7 @@ public class NMEAmessages {
         array[array.length - 1] = array[array.length - 1].substring(0, array[array.length - 1].indexOf('*'));//deleting checksum
 
         // to check an output
-        showArray(array);
+//        showArray(array);
 
         switch (mesageType) {
             case "GSV": {

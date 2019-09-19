@@ -9,7 +9,7 @@ public class Task5 {
         printValue(value);
     }
 
-    //  first variation
+    //  function for recursion, do same as Task1
     private static void printValue(int value) {
             if(value==1){
                 System.out.println(value);

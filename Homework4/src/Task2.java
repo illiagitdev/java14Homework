@@ -6,6 +6,9 @@ public class Task2 {
         drawRectangle(h);
     }
 
+    /**
+     * Draws square with side H
+     */
     private static void drawRectangle(int h) {
         drawRectangle(h, h);
     }
@@ -14,7 +17,7 @@ public class Task2 {
      * draws rectangle with width W and heights H
      */
     private static void drawRectangle(int h, int w) {
-        char filling = 134;
+        char filling = 43;
         for (int i = 0; i < h; i++) {
             for (int j = 0; j < w; j++) {
                 System.out.print(filling);
