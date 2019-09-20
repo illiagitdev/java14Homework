@@ -52,14 +52,31 @@ public class Task7 {
         } while (flag);
     }
 
-    private static void doTask4() {//todo:nnnnn
-        int x = 5;
-        int y = 12;
-        getMax(x, y);
-
-        float a = 12.32f;
-        float b = 54.345f;
-        getMax(a, b);
+    /**
+     * Returns MAX of two values (int, float)
+     */
+    private static void doTask4() {
+        System.out.print("Виберіть яку числа будуть порівнюватися\n" +
+                "1 - int\t\t2 - float\n");
+        int id = getIntInput();
+        switch (id) {
+            case 1: {
+                System.out.print("Введіть перше число: ");
+                int x = getIntInput();
+                System.out.print("Введіть друге число: ");
+                int y = getIntInput();
+                getMax(x, y);
+                break;
+            }
+            case 2:{
+                System.out.print("Введіть перше число: ");
+                float x = getFloatInput();
+                System.out.print("Введіть друге число: ");
+                float y = getFloatInput();
+                getMax(x, y);
+                break;
+            }
+        }
     }
 
     /**
@@ -174,5 +191,22 @@ public class Task7 {
             }
         }
         return input.nextInt();
+    }
+
+    /**
+     * returns float with check for correct input
+     */
+    private static float getFloatInput() {
+        Scanner input = new Scanner(System.in);
+        boolean flag = true;
+        while (flag) {
+            if (input.hasNextFloat()) {
+                flag = false;
+            } else {
+                System.out.print("\nRepeat input: ");
+                input.next();
+            }
+        }
+        return input.nextFloat();
     }
 }
