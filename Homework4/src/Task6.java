@@ -1,6 +1,7 @@
 public class Task6 {
     public static void main(String[] args) {
-        int h = 9, w = 6;
+        //      Решить задачу 2, без использования циклов. Используя рекурсию.
+        int h = 3, w = 3;
 
         drawRectangle(h, w);
     }
@@ -8,13 +9,22 @@ public class Task6 {
     /**
      * draws rectangle with width W and heights H
      */
-    private static void drawRectangle(int h, int w) {
-        char filling = 134;
-        for (int i = 0; i < h; i++) {
-            for (int j = 0; j < w; j++) {
+    private static void drawRectangle(int h, int w) {//todo:add second recursion
+        char filling = 43;
+            if (w == 0&&h>0) {
+                System.out.println();
+                //drawRectangle(--h,w);
+            } else {
                 System.out.print(filling);
+                drawRectangle(h, w - 1);
             }
-            System.out.println();
-        }
+        //System.out.println(w==0?"\n":drawRectangle(h,w-1));
+
+//        for (int i = 0; i < h; i++) {
+//            for (int j = 0; j < w; j++) {
+//                System.out.print(filling);
+//            }
+//            System.out.println();
+//        }
     }
 }
