@@ -11,13 +11,14 @@ public class Task6 {
      */
     private static void drawRectangle(int h, int w) {//todo:add second recursion
         char filling = 43;
-            if (w == 0&&h>0) {
+        int q=0;
+            if (w >0) {
                 System.out.println();
-                //drawRectangle(--h,w);
+                drawRectangle(h, w - 1);
             } else {
                 System.out.print(filling);
-                drawRectangle(h, w - 1);
             }
+        drawRectangle(--h,w);
         //System.out.println(w==0?"\n":drawRectangle(h,w-1));
 
 //        for (int i = 0; i < h; i++) {
