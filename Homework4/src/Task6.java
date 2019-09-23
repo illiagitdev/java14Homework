@@ -2,7 +2,6 @@ public class Task6 {
     public static void main(String[] args) {
         //      Решить задачу 2, без использования циклов. Используя рекурсию.
         int h = 3, w = 5;
-
         drawRectangle(h, w);
     }
 
@@ -22,5 +21,4 @@ public class Task6 {
             System.out.println();
         }
     }
-
 }
