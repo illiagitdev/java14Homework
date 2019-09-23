@@ -35,6 +35,7 @@ public class Task7 {
                     break;
                 }
                 case 6: {
+                    doTask6();
                     break;
                 }
                 default: {
@@ -50,6 +51,10 @@ public class Task7 {
                 flag = false;
             }
         } while (flag);
+    }
+
+    private static void doTask6() {
+
     }
 
     /**
