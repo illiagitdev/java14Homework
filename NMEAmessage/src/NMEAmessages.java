@@ -1,5 +1,7 @@
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -8,7 +10,7 @@ public class NMEAmessages {
         /*
          * set of NMEA messages
          */
-        String[] messages = {"$GNGGA,165114.000,5601.0318,N,01211.3504,E,1,07,1.2,22.6,M,41.6,M,,0000*62",
+        String[] messages = {"$GNGGA,165114.005,5601.0318,N,01211.3504,E,1,07,1.2,22.6,M,41.6,M,,0000*62",
                 "$GNGLL,4916.45,N,12311.12,W,225444,A,*31",
                 "$GNGSA,A,3,05,17,22,09,14,04,30,,,,,,1.8,1.2,1.3*32",
                 "$GPGSV,3,3,11,04,07,102,30,29,02,170,09,18,02,243,*42",
@@ -77,7 +79,7 @@ public class NMEAmessages {
      * shows GGA fields
      */
     private static void decodeGGA(String[] array) {
-        String timeUTC = getTimeS(array[0]);//22:54:44 UTC
+        LocalTime timeUTC = getTimeS(array[0]);//22:54:44 UTC
 
         int latitudeDegree = returnInteger(array[1].substring(0, array[1].indexOf('.') - 2));
         double latitudeMin = returnDouble(array[1].substring(array[1].indexOf('.') - 2));
@@ -124,7 +126,7 @@ public class NMEAmessages {
         double longitudeMin = returnDouble(array[2].substring(array[2].indexOf('.') - 2));
         Character indicatorEW = getChar0(array[3]);
 
-        String timeUTC = getTime(array[4]);// 22:54:44 UTC
+        LocalTime timeUTC = getTime(array[4]);// 22:54:44 UTC
         Character status = getChar0(array[5]);
         Character mode = getChar0(array[6]);
 
@@ -195,7 +197,7 @@ public class NMEAmessages {
      * shows RMC fields
      */
     private static void decodeRMC(String[] array) {
-        String timeUTC = getTime(array[0]);// 22:54:46 UTC
+        LocalTime timeUTC = getTime(array[0]);// 22:54:46 UTC
         Character statusIndicator = getChar0(array[1]);
 
         int latitudeDegree = returnInteger(array[2].substring(0, array[2].indexOf('.') - 2));
@@ -292,29 +294,17 @@ public class NMEAmessages {
      * returns char at index = 0 or null
      */
     private static Character getChar0(String s) {
-        return (s.isEmpty() || s.equals(null)) ? null : s.charAt(0);
+        return (s.isEmpty() || s.equals(" ")) ? null : s.charAt(0);
     }
 
     //with miliseconds
-    private static String getTimeS(String s) {
-        Date date= null;
-        try {
-            date = new SimpleDateFormat("HHmmss.SSS").parse(s);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return new SimpleDateFormat("HH:mm:ss.SSS").format(date);
+    private static LocalTime getTimeS(String s) {
+            return LocalTime.parse(s,DateTimeFormatter.ofPattern("HHmmss.SSS"));
     }
 
     //without miliseconds
-    private static String getTime(String s) {
-        Date date= null;
-        try {
-            date = new SimpleDateFormat("HHmmss").parse(s);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return new SimpleDateFormat("HH:mm:ss").format(date);
+    private static LocalTime getTime(String s) {
+            return LocalTime.parse(s,DateTimeFormatter.ofPattern("HHmmss"));
     }
 
     /* date */
