@@ -8,7 +8,7 @@ public class Task6 {
     /**
      * draws rectangle with width W and heights H
      */
-    private static void drawRectangle(int h, int w) {//todo:add second recursion
+    private static void drawRectangle(int h, int w) {
         char fill = 43;
         if (h > 1) {//  розгортка по рядках
             drawRectangle(--h,w);
