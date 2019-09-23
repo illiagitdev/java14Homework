@@ -1,5 +1,6 @@
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -209,7 +210,7 @@ public class NMEAmessages {
 
         double speedKnots = returnDouble(array[6]);
         double heading = returnDouble(array[7]);
-        String timeUTCfix = getDate(array[8]);
+        LocalDate timeUTCfix = getDate(array[8]);
         double magneticVar = returnDouble(array[9]);
         Character magneticVarID = getChar0(array[10]);
 
@@ -299,22 +300,16 @@ public class NMEAmessages {
 
     //with miliseconds
     private static LocalTime getTimeS(String s) {
-            return LocalTime.parse(s,DateTimeFormatter.ofPattern("HHmmss.SSS"));
+        return LocalTime.parse(s, DateTimeFormatter.ofPattern("HHmmss.SSS"));
     }
 
     //without miliseconds
     private static LocalTime getTime(String s) {
-            return LocalTime.parse(s,DateTimeFormatter.ofPattern("HHmmss"));
+        return LocalTime.parse(s, DateTimeFormatter.ofPattern("HHmmss"));
     }
 
     /* date */
-    private static String getDate(String s) {
-        Date date= null;
-        try {
-            date = new SimpleDateFormat("ddMMyy").parse(s);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return new SimpleDateFormat("dd MMMM yyyy").format(date);
+    private static LocalDate getDate(String s) {
+        return LocalDate.parse(s, DateTimeFormatter.ofPattern("ddMMyy"));
     }
 }
