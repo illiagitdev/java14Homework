@@ -53,8 +53,34 @@ public class Task7 {
         } while (flag);
     }
 
+    /**
+     *  Draws rectangle with recursion: Task2
+     */
     private static void doTask6() {
+        int height;
+        int width;
+        System.out.print("Введіть висоту прямокутника: ");
+        height=getIntInput();
+        System.out.print("Введіть ширину прямокутника: ");
+        width=getIntInput();
+        drawRectangleRecursion(height,width);
+    }
 
+    /**
+     * draws rectangle with width W and heights H using recursion
+     */
+    private static void drawRectangleRecursion ( int h, int w){
+        char fill = 43;
+        if (h > 1) {//  розгортка по рядках
+            drawRectangleRecursion(--h, w);
+        }
+        // заповнення рядків символами
+        if (w > 0) {
+            System.out.print(fill);
+            drawRectangleRecursion(1, --w);
+        } else {
+            System.out.println();
+        }
     }
 
     /**
@@ -73,7 +99,7 @@ public class Task7 {
                 getMax(x, y);
                 break;
             }
-            case 2:{
+            case 2: {
                 System.out.print("Введіть перше число: ");
                 float x = getFloatInput();
                 System.out.print("Введіть друге число: ");
