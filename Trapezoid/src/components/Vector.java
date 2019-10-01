@@ -52,23 +52,23 @@ public class Vector {
     /**
      * Returns length of the vector
      */
-    public double length(Vector a) {
-        return Math.sqrt(a.x * a.x + a.y * a.y );
+    public double length() {
+        return Math.sqrt(x * x + y * y );
     }
 
     /**
      * Returns unit vector of the vector
      */
-    public Vector unitVector(Vector a) {
-        double module = length(a);
-        return new Vector(a.x / module, a.y / module);
+    public Vector unitVector() {
+        double module = length();
+        return new Vector(x / module, y / module);
     }
 
     /**
      * Returns scalar product
      */
-    public double dotProduct(Vector a, Vector b) {
-        return (a.x * b.x + a.y * b.y);
+    public double dotProduct(Vector b) {
+        return (this.x * b.x + this.y * b.y);
     }
 
     /**
