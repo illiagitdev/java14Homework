@@ -28,4 +28,8 @@ public class Point {
                 ", y=" + y +
                 '}';
     }
+
+    public String wrightToFile(){
+        return  x + ", " + y ;
+    }
 }

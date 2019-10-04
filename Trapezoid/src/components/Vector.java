@@ -12,9 +12,14 @@ public class Vector {
         return y;
     }
 
-    /**
-     * Creates vector with determined values
-     */
+    public void setX(double x) {
+        this.x = x;
+    }
+
+    public void setY(double y) {
+        this.y = y;
+    }
+
     public Vector(double x, double y) {
         this.x = x;
         this.y = y;
@@ -30,50 +35,35 @@ public class Vector {
     /**
      * Creates vector based on start and end points
      */
-    public Vector(Point a, Point b) {
-        x = b.getX() - a.getX();
-        y = b.getY() - a.getY();
+    public Vector(double startX, double startY, double endX, double endY) {
+        x = endX-startX;
+        y = endY-startY;
     }
 
     /**
      * Returns vector: sum of two vectors
      */
-    public Vector addVectors(Vector a, Vector b) {
-        return new Vector(a.x + b.x, a.y + b.y);
+    public Vector addVector(Vector b) {
+        return new Vector(x + b.x, y + b.y);
     }
 
-    /**
-     * Returns dot multiplication of scalar on vector
-     */
-    public Vector dotByValue(Vector a, double value) {
-        return new Vector(a.x * value, a.y * value);
+    public Vector dotByValue(double value) {
+        return new Vector(x * value, y * value);
     }
 
-    /**
-     * Returns length of the vector
-     */
     public double length() {
         return Math.sqrt(x * x + y * y );
     }
 
-    /**
-     * Returns unit vector of the vector
-     */
-    public Vector unitVector() {
+    public Vector unitVector(Vector a) {
         double module = length();
         return new Vector(x / module, y / module);
     }
 
-    /**
-     * Returns scalar product
-     */
     public double dotProduct(Vector b) {
         return (this.x * b.x + this.y * b.y);
     }
 
-    /**
-     * Returns Z- component of vector product
-     */
     public double crossProductZ(Vector a) {
         return (a.x * this.y - a.y * this.x);
     }
