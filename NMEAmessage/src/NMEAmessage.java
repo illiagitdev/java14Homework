@@ -261,10 +261,13 @@ public class NMEAmessage {
                 signalToNoise3 + " - (Integer) Signal-to-noise ration (C/No) 00-99 dB-Hz");
     }
 
+
+//todo:зробити клас утиліт - статичний
     /**
      * returns double or 0.0 if empty
      */
     private static double returnDouble(String s) {
+// 
         return s.isEmpty() ? 0.0 : Double.valueOf(s);
     }
 

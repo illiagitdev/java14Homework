@@ -1,4 +1,4 @@
 package categories;
 
-public class Computer {
+public class Computer extends Goods {
 }

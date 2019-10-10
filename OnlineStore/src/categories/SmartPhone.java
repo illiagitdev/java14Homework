@@ -1,4 +1,6 @@
 package categories;
 
-public class SmartPhone {
+public class SmartPhone extends Goods {
+
+    
 }

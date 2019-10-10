@@ -1,4 +1,4 @@
 package categories;
 
-public class Sweets {
+public class Sweets extends Goods {
 }

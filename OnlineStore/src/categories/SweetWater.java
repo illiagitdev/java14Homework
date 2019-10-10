@@ -1,4 +1,4 @@
 package categories;
 
-public class SweetWater {
+public class SweetWater extends Goods {
 }
