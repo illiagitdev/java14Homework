@@ -21,28 +21,28 @@ public class LineSegment {
         return firstX;
     }
 
-    public void setFirstX(double firstX) {
-        this.firstX = firstX;
-    }
-
     public double getFirstY() {
         return firstY;
-    }
-
-    public void setFirstY(double firstY) {
-        this.firstY = firstY;
     }
 
     public double getSecondX() {
         return secondX;
     }
 
-    public void setSecondX(double secondX) {
-        this.secondX = secondX;
-    }
-
     public double getSecondY() {
         return secondY;
+    }
+
+    public void setFirstX(double firstX) {
+        this.firstX = firstX;
+    }
+
+    public void setFirstY(double firstY) {
+        this.firstY = firstY;
+    }
+
+    public void setSecondX(double secondX) {
+        this.secondX = secondX;
     }
 
     public void setSecondY(double secondY) {
@@ -54,7 +54,7 @@ public class LineSegment {
     }
 
     public double segmentLength(double x1, double y1, double x2, double y2) {
-        return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+        return Math.sqrt(Math.pow(x2 - x1, 2.) + Math.pow(y2 - y1, 2.));
     }
 
     public boolean pointOnSegment(double x, double y) {
@@ -63,5 +63,15 @@ public class LineSegment {
         piece1 = Math.round(segmentLength(firstX, firstY, x, y) * 1000) / 1000;
         piece2 = Math.round(segmentLength(secondX, secondY, x, y) * 1000) / 1000;
         return segment == (piece1 + piece2);
+    }
+
+    @Override
+    public String toString() {
+        return "LineSegment{" +
+                "Ax, Ay {" + firstX +
+                " " + firstY +
+                "} Bx, By {" + secondX +
+                " " + secondY +
+                "} }";
     }
 }

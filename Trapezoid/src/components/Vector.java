@@ -4,6 +4,23 @@ public class Vector {
     private double x;
     private double y;
 
+    /**
+     * Creates zero-vector
+     */
+    public Vector() {
+        this(0.0, 0.0);
+    }
+
+    public Vector(double x, double y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    public Vector(double startX, double startY, double endX, double endY) {
+        x = endX-startX;
+        y = endY-startY;
+    }
+
     public double getX() {
         return x;
     }
@@ -20,29 +37,6 @@ public class Vector {
         this.y = y;
     }
 
-    public Vector(double x, double y) {
-        this.x = x;
-        this.y = y;
-    }
-
-    /**
-     * Creates zero-vector
-     */
-    public Vector() {
-        this(0.0, 0.0);
-    }
-
-    /**
-     * Creates vector based on start and end points
-     */
-    public Vector(double startX, double startY, double endX, double endY) {
-        x = endX-startX;
-        y = endY-startY;
-    }
-
-    /**
-     * Returns vector: sum of two vectors
-     */
     public Vector addVector(Vector b) {
         return new Vector(x + b.x, y + b.y);
     }
@@ -51,13 +45,13 @@ public class Vector {
         return new Vector(x * value, y * value);
     }
 
-    public double length() {
-        return Math.sqrt(x * x + y * y );
-    }
-
     public Vector unitVector(Vector a) {
         double module = length();
         return new Vector(x / module, y / module);
+    }
+
+    public double length() {
+        return Math.sqrt(x * x + y * y );
     }
 
     public double dotProduct(Vector b) {

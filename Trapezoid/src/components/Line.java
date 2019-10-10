@@ -6,6 +6,18 @@ public class Line {
     private double b = 0;
     private double c = 0;
 
+    public Line(double a, double b, double c) {
+        this.a = a;
+        this.b = b;
+        this.c = c;
+    }
+
+    public Line(double startPointX, double startPointY, double endPointX, double endPointY) {
+        a = startPointY - endPointY;
+        b = endPointX - startPointX;
+        c = startPointX * endPointY - endPointX * startPointY;
+    }
+
     public double getA() {
         return a;
     }
@@ -30,21 +42,16 @@ public class Line {
         this.c = c;
     }
 
-    public Line(double a, double b, double c) {
-        this.a = a;
-        this.b = b;
-        this.c = c;
-    }
-
-    public Line(double startPointX, double startPointY, double endPointX, double endPointY) {
-        a = startPointY - endPointY;
-        b = endPointX - startPointX;
-        c = startPointX * endPointY - endPointX * startPointY;
-    }
-
     /**
      * Returns X coordinate of crossing two lines
      */
+    public boolean hasCross(Line z) {//todo: accuracy
+        if (a / z.getA() != b / z.getB() && b / z.getB() != c / z.getC()) {
+            return true;
+        }
+        return false;
+    }
+
     public double crossLineX(Line z) {
         double base = a * z.getB() - z.getA() * b;
         if (base != 0) {
@@ -78,10 +85,9 @@ public class Line {
 
     @Override
     public String toString() {
-        return "Line{" +
-                "a=" + a +
-                ", b=" + b +
-                ", c=" + c +
+        return "Line{" + a +
+                "*x + " + b +
+                "*y + " + c +
                 '}';
     }
 }

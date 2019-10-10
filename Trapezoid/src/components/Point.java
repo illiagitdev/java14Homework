@@ -32,4 +32,5 @@ public class Point {
     public String wrightToFile(){
         return  x + ", " + y ;
     }
+
 }
