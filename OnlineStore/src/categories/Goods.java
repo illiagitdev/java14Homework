@@ -15,31 +15,11 @@ public class Goods {
         this.price = price;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setAmount(int amount) {
-        this.amount = amount;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
     public String show() {
-        return "\tID=" + id + "\n" +
-                "\tназвание\t'" + name + "\n" +
-                "\tкол-во\t\t" + amount + "\n" +
-                "\tdescription\t'" + description + "\n" +
-                "\tprice\t\t" + price + "$";
+        return "\tID\t\t\t\t" + id + "\n" +
+                "\tназвание\t\t" + name + "\n" +
+                "\tкол-во\t\t\t" + amount + "\n" +
+                "\tописание\t\t{" + description + "}\n" +
+                "\tцена\t\t\t" + price + "$";
     }
 }

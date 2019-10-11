@@ -7,6 +7,7 @@ public class DrinkWater extends Goods {
 
     @Override
     public String show() {
-        return "питьевая вода:{\n" + super.show() + '}';
+        return "питьевая вода:{\n" + super.show() + "\n"+
+                '}';
     }
 }
