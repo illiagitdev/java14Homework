@@ -16,6 +16,9 @@ public class Vector {
         this.y = y;
     }
 
+    /**
+     * Creates vector based on start and end points
+     */
     public Vector(double startX, double startY, double endX, double endY) {
         x = endX-startX;
         y = endY-startY;
@@ -37,6 +40,9 @@ public class Vector {
         this.y = y;
     }
 
+    /**
+     * Returns vector: sum of two vectors
+     */
     public Vector addVector(Vector b) {
         return new Vector(x + b.x, y + b.y);
     }

@@ -6,11 +6,13 @@ import components.Vector;
 
 public class PointsProcessing {
 
+    // get points and fit so this set of points good for work
     public Point[] preparePoints(Point[] shape) {
         shape = validateShape(shape);
         return shape;
     }
 
+    // extends shape with new points
     public Point[] extentPointsSet(Point[] shape, int index) {
         LineSegment[] segments = setSegments(shape);
         Point[] extendedShapes = addPoints(segments, shape, index);
@@ -47,6 +49,9 @@ public class PointsProcessing {
         return tempPoint;
     }
 
+    /**
+     * Returns vectors on given points
+     */
     private Vector[] defineVectors(Point[] shape) {
         Vector[] shapeVectors = new Vector[shape.length];
         Point tmp = shape[shape.length - 1];
@@ -60,6 +65,7 @@ public class PointsProcessing {
     /**
      * Returns new set of points and vectors if condition met - all cross products either > or < '0'
      * clears next incapable point and check again
+     * double teta = " + Math.toDegrees(Math.asin(vectorCross[i] / (tmp.length() * shapeVectors[i].length())))
      */
     private Point[] validateShape(Point[] shape) {
         Vector[] shapeVectors = defineVectors(shape);
@@ -105,6 +111,9 @@ public class PointsProcessing {
         return shape;
     }
 
+    /**
+     * returns resized set of points and vectors, each iteration do '-1'
+     */
     private Point[] resizePointsArray(Point[] shape, int i) {
         Point[] newShape = new Point[shape.length - 1];
         int k = 0;
@@ -130,9 +139,10 @@ public class PointsProcessing {
         return segments;
     }
 
+    // wrights new points from the end of old set of points
     private Point[] addPoints(LineSegment[] segment, Point[] pull, int index) {
         Point[] newPoints = new Point[pull.length * (index + 1)];
-        Point[] tmp;
+        Point[] tmp; // todo: fix - adding points in correct order
         for (int i = 0; i < pull.length; i++) {
             newPoints[i] = pull[i];
             tmp = addPoint(segment[i], index);
@@ -143,6 +153,9 @@ public class PointsProcessing {
         return newPoints;
     }
 
+    /**
+     * Adding new points to the end of current pull of poins
+     */
     private Point[] addPoint(LineSegment segment, int index) {
         double dx = (segment.getSecondX() - segment.getFirstX()) / (index + 1);
         double dy = (segment.getSecondY() - segment.getFirstY()) / (index + 1);
