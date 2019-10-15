@@ -21,11 +21,71 @@ public class AreaCalc {
         Point[][] set = new Point[workingSet.length][];
         getPoints(spectator, crossCount, workingSet, set);
         Utils.writeFile(set);
-        int range = Utils.summm(workingSet.length - 1);
 
-        double[] areas = new double[range];
-        //areas=trueTrapezoidArea(set);
+        double[] areas;
+        areas=trueTrapezoidArea(set);
         return areas;
+    }
+
+    private double[] trueTrapezoidArea(Point[][] set) {
+        double[] temporary = new double[Utils.summm(set.length)];
+        int q = 0;
+        try {
+            for (int i = 0; i < set.length; i++) {
+                if (!set[i][0].toString().isEmpty()) {
+                    for (int j = 1; j < set.length - 1; j++) {
+                        if (!set[j][0].toString().isEmpty()) {
+                            temporary[q++] = getEdges(set[i], set[j]);
+                        }
+                    }
+                }
+            }
+        }catch (NullPointerException e){
+            System.out.println("Empty point "+e.getStackTrace());
+        }
+        return temporary;
+    }
+
+    /**
+     * returns trapezoid Edges, fix one edge so it become trapezoid
+     */
+    private double getEdges(Point[] in1, Point[] in2) {
+        Point[] set1, set2;
+        set1 = in1;
+        set2 = in2;
+        Line baseB = new Line(set1[0].getX(), set1[0].getY(), set2[0].getX(), set2[0].getY());
+        double d1, d2;
+        d1 = baseB.distanceToPoint(set1[1].getX(), set1[1].getY());
+        d2 = baseB.distanceToPoint(set2[1].getX(), set2[1].getY());
+        if (d1 < d2) {
+            set2[1] = newCrossPoint(baseB, set1[1], set2);
+        } else if (d2 < d1) {
+            set1[1] = newCrossPoint(baseB, set1[2], set1);
+        }
+
+        return trapezoidArea(set1,set2);
+    }
+
+    /**
+     * trapezoid area by 4-points, base a(set1[0], set2[0]) & base b(set1[1], set2[1])
+     */
+    private double trapezoidArea(Point[] set1, Point[] set2) {
+        double a, b, c, d, s;
+        a = (new LineSegment(set1[0].getX(), set1[0].getY(), set2[0].getX(), set2[0].getY())).segmentLength();
+        b = (new LineSegment(set1[1].getX(), set1[1].getY(), set2[1].getX(), set2[1].getY())).segmentLength();
+        c = (new LineSegment(set1[0].getX(), set1[0].getY(), set1[1].getX(), set1[1].getY())).segmentLength();
+        d = (new LineSegment(set2[0].getX(), set2[0].getY(), set2[1].getX(), set2[1].getY())).segmentLength();
+        s = (a + b + c + d) / 2;
+        double area = ((a + b) / Math.abs(b - a) * Math.sqrt((s - b) * (s - a) * (s - b - c) * (s - b - d)));
+        return area;
+    }
+
+    private Point newCrossPoint(Line baseB, Point point, Point[] set) {
+        Line baseA = new Line(baseB.getA(), baseB.getB(), (-baseB.getA() * point.getX() - baseB.getA() * point.getY()));
+        Line cross = new Line(set[0].getX(), set[0].getY(), set[1].getX(), set[1].getY());
+        double x = baseA.crossLineX(cross);
+        double y = baseA.crossLineY(cross);
+        return new Point(x, y);
     }
 
     private void getPoints(Point spectator, int[] crossCount, Point[] workingSet, Point[][] set) {
