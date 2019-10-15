@@ -23,7 +23,7 @@ public class AreaCalc {
         Utils.writeFile(set);
 
         double[] areas;
-        areas=trueTrapezoidArea(set);
+        areas = trueTrapezoidArea(set);
         return areas;
     }
 
@@ -31,17 +31,18 @@ public class AreaCalc {
         double[] temporary = new double[Utils.summm(set.length)];
         int q = 0;
         try {
-            for (int i = 0; i < set.length; i++) {
-                if (!set[i][0].toString().isEmpty()) {
-                    for (int j = 1; j < set.length - 1; j++) {
-                        if (!set[j][0].toString().isEmpty()) {
-                            temporary[q++] = getEdges(set[i], set[j]);
+            for (int i = 0; i < set.length-1; i++) {
+                if (set[i] != null) {
+                    for (int j = 1; j < set.length; j++) {
+                        if (set[j] != null) {
+                            temporary[q] = getEdges(set[i], set[j]);
+                            q++;
                         }
                     }
                 }
             }
-        }catch (NullPointerException e){
-            System.out.println("Empty point "+e.getStackTrace());
+        } catch (NullPointerException e) {
+            System.out.println("Empty point " + e.getStackTrace());
         }
         return temporary;
     }
@@ -60,10 +61,10 @@ public class AreaCalc {
         if (d1 < d2) {
             set2[1] = newCrossPoint(baseB, set1[1], set2);
         } else if (d2 < d1) {
-            set1[1] = newCrossPoint(baseB, set1[2], set1);
+            set1[1] = newCrossPoint(baseB, set2[1], set1);
         }
 
-        return trapezoidArea(set1,set2);
+        return trapezoidArea(set1, set2);
     }
 
     /**
@@ -92,7 +93,8 @@ public class AreaCalc {
         int q = 0;
         for (int i = 0; i < crossCount.length; i++) {
             if (crossCount[i] == 2) {
-                set[q++] = crossPoints(spectator, workingSet[i]);
+                set[q] = crossPoints(spectator, workingSet[i]);
+                q++;
             }
         }
     }
@@ -112,15 +114,15 @@ public class AreaCalc {
             System.out.println("Null exception " + e.fillInStackTrace());
         }
         double one, two;
-            one = (new LineSegment(spectator.getX(), spectator.getY(), tmp[0].getX(), tmp[0].getY()).segmentLength());
-            two = (new LineSegment(spectator.getX(), spectator.getY(), tmp[1].getX(), tmp[1].getY()).segmentLength());
-            if (one > two) {
-                return tmp;
-            } else {
-                Point z=tmp[0];
-                tmp[0] = tmp[1];
-                tmp[1] = z;
-            }
+        one = (new LineSegment(spectator.getX(), spectator.getY(), tmp[0].getX(), tmp[0].getY()).segmentLength());
+        two = (new LineSegment(spectator.getX(), spectator.getY(), tmp[1].getX(), tmp[1].getY()).segmentLength());
+        if (one > two) {
+            return tmp;
+        } else {
+            Point z = tmp[0];
+            tmp[0] = tmp[1];
+            tmp[1] = z;
+        }
         return tmp;
     }
 
