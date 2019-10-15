@@ -151,10 +151,19 @@ public class AreaCalc {
     private int counterSegments(LineSegment segment, Line test, Line line) {
         double x, y;
         x = test.crossLineX(line);
-//        y = test.crossLineY(line);
-        if (segment.getFirstX() <= x && segment.getSecondX() >= x) {
+        y = test.crossLineY(line);
+        boolean xRight, xReverse, yRight, yReverse;
+        xRight = segment.getFirstX() <= x && segment.getSecondX() >= x;
+        xReverse = segment.getFirstX() >= x && segment.getSecondX() <= x;
+        yRight = segment.getFirstY() <= y && segment.getSecondY() >= y;
+        yReverse = segment.getFirstY() >= y && segment.getSecondY() <= y;
+        if (xRight && yRight) {
             return 1;
-        } else if (segment.getFirstX() >= x && segment.getSecondX() <= x) {
+        } else if (xReverse && yReverse) {
+            return 1;
+        }else if (xRight && yReverse){
+            return 1;
+        }else if (xReverse && yRight){
             return 1;
         }
         return 0;
