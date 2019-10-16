@@ -2,9 +2,9 @@ package components;
 
 public class Line {
     // equation of the line: a*x + b*y + c = 0
-    private double a = 0;
-    private double b = 0;
-    private double c = 0;
+    private double a;
+    private double b;
+    private double c;
 
     public Line(double a, double b, double c) {
         this.a = a;
@@ -45,7 +45,7 @@ public class Line {
     /**
      * Returns X coordinate of crossing two lines
      */
-    public boolean hasCross(Line z) {//todo: accuracy
+    public boolean hasCross(Line z) {
         if (a / z.getA() != b / z.getB() && b / z.getB() != c / z.getC()) {
             return true;
         }

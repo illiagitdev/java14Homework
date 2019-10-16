@@ -28,7 +28,7 @@ public class AreaCalc {
     }
 
     private double[] trueTrapezoidArea(Point[][] set) {
-        double[] temporary = new double[Utils.summm(set.length)];
+        double[] temporary = new double[Utils.summm(set.length+49)];
         int q = 0;
         try {
             for (int i = 0; i < set.length-1; i++) {
@@ -52,8 +52,8 @@ public class AreaCalc {
      */
     private double getEdges(Point[] in1, Point[] in2) {
         Point[] set1, set2;
-        set1 = in1;
-        set2 = in2;
+        set1=in1.clone();
+        set2=in2.clone();
         Line baseB = new Line(set1[0].getX(), set1[0].getY(), set2[0].getX(), set2[0].getY());
         double d1, d2;
         d1 = baseB.distanceToPoint(set1[1].getX(), set1[1].getY());
@@ -106,7 +106,7 @@ public class AreaCalc {
         try {
             for (int j = 0; j < lines.length; j++) {
                 if (lines[j].hasCross(line) && (counterSegments(segments[j], line, lines[j]) == 1)) {//sout to console
-                    tmp[q] = setCrossPoint(segments[j], line, lines[j]);
+                    tmp[q] = setCrossPoint(line, lines[j]);
                     q++;
                 }
             }
@@ -126,7 +126,7 @@ public class AreaCalc {
         return tmp;
     }
 
-    private Point setCrossPoint(LineSegment segments, Line test, Line lines) {
+    private Point setCrossPoint(Line test, Line lines) {
         double x, y;
         x = test.crossLineX(lines);
         y = test.crossLineY(lines);
