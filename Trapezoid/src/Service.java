@@ -35,7 +35,7 @@ class Service {
             areaSet[1] = trapezoidAreasNear[0];
         }
 //------------------- by MIX points
-        double[] trapezoidAreasMix = trapezoidArea.getAreaTMPMix(spectator, shape, workingSetFar, workingSetNear);
+        double[] trapezoidAreasMix = trapezoidArea.getAreaTMPMix(spectator, workingSetFar, workingSetNear);
         if (trapezoidAreasMix.length > 1) {
             areaSet[2] = Utils.getMax(trapezoidAreasMix);
         } else {
