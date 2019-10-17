@@ -41,13 +41,14 @@ public class Utils {
         return list;
     }
 
-    public static void writeFile(Point[] shape) {
+    public static void writeFile(Point[] shape, String comment) {
         LocalDateTime time = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd+HH-mm-ss-SSS");
         String path = "files/output/points" + time.format(formatter) + ".csv";
         try {
             FileWriter writer = new FileWriter(path);
             //writer.flush();
+            writer.write(comment + "\n");
             for (Point point : shape) {
                 writer.write(point.wrightToFile() + "\n");
             }
@@ -57,9 +58,6 @@ public class Utils {
         }
     }
 
-    /**
-     * Shaker sorting
-     */
     public static void shakerSorting(double[] distance, Point[] extendedShapes) {
         double tmp;
         Point pointTmp;
@@ -97,22 +95,22 @@ public class Utils {
         return max;
     }
 
-    public static int summm(int n) {
-        if (n == 2) {
+    static int summm(int n) {
+        if (n == 0) {
             return 1;
         }
         return n + summm(n - 1);
     }
 
-    public static void writeFile(Point[][] set) {
+    static void writeFile(Point[][] set) {
         LocalDateTime time = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd+HH-mm-ss-SSS");
         String path = "files/output/edges" + time.format(formatter) + ".csv";
         try {
             FileWriter writer = new FileWriter(path);
-            for (int i = 0; i < set.length; i++) {
-                if (set[i]!=null){
-                    for (Point point : set[i]) {
+            for (Point[] x:set) {
+                if (x!=null){
+                    for (Point point : x) {
                         writer.write(point.wrightToFile() + "\n");
                     }
                 }

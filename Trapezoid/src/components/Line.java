@@ -1,7 +1,6 @@
 package components;
 
 public class Line {
-    // equation of the line: a*x + b*y + c = 0
     private double a;
     private double b;
     private double c;
@@ -30,26 +29,8 @@ public class Line {
         return c;
     }
 
-    public void setA(double a) {
-        this.a = a;
-    }
-
-    public void setB(double b) {
-        this.b = b;
-    }
-
-    public void setC(double c) {
-        this.c = c;
-    }
-
-    /**
-     * Returns X coordinate of crossing two lines
-     */
     public boolean hasCross(Line z) {
-        if (a / z.getA() != b / z.getB() && b / z.getB() != c / z.getC()) {
-            return true;
-        }
-        return false;
+        return a / z.getA() != b / z.getB() && b / z.getB() != c / z.getC();
     }
 
     public double crossLineX(Line z) {
@@ -70,17 +51,6 @@ public class Line {
 
     public double distanceToPoint(double coordinateX, double coordinateY) {
         return Math.abs(a * coordinateX + b * coordinateY + c) / Math.sqrt(a * a + b * b);
-    }
-
-    /**
-     * Returns X point
-     */
-    public double closestPointOnLineX(double coordinateX, double coordinateY) {
-        return (b * (b * coordinateX - a * coordinateY) - a * c) / (a * a + b * b);
-    }
-
-    public double closestPointOnLineY(double coordinateX, double coordinateY) {
-        return (a * (-b * coordinateX + a * coordinateY) - b * c) / (a * a + b * b);
     }
 
     @Override
