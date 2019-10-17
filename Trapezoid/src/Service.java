@@ -3,37 +3,60 @@ import processing.AreaCalc;
 import processing.PointsProcessing;
 import processing.Utils;
 
-public class Service {
+class Service {
     private Point spectator;
     private Point[] shape;
     private double fraction;
-    private Point[] workingSet;
+    private Point[] workingSetFar;
+    private Point[] workingSetNear;
 
 
-    public Service(String pathToFile, Point spectator, int index, double fraction) {
+    Service(String pathToFile, Point spectator, int index, double fraction) {
         this.fraction = fraction;
         this.spectator = spectator;
         operatePoints(pathToFile, index);
-
     }
 
-    public double areaCalculation() {
+    double[] areaCalculation() {
+        double[] areaSet = new double[3];
         AreaCalc trapezoidArea = new AreaCalc();
-        double[] trapezoidAreas = trapezoidArea.getAreaTMP(spectator, shape, workingSet);
-        return Utils.getMax(trapezoidAreas);
+        //------------------- by Far points
+        double[] trapezoidAreasFar = trapezoidArea.getAreaTMP(spectator, shape, workingSetFar);
+        if (trapezoidAreasFar.length > 1) {
+            areaSet[0] = Utils.getMax(trapezoidAreasFar);
+        } else {
+            areaSet[0] = trapezoidAreasFar[0];
+        }
+        //------------------- by Near points
+        double[] trapezoidAreasNear = trapezoidArea.getAreaTMP(spectator, shape, workingSetNear);
+        if (trapezoidAreasFar.length > 1) {
+            areaSet[1] = Utils.getMax(trapezoidAreasNear);
+        } else {
+            areaSet[1] = trapezoidAreasNear[0];
+        }
+//------------------- by MIX points
+        double[] trapezoidAreasMix = trapezoidArea.getAreaTMPMix(spectator, shape, workingSetFar, workingSetNear);
+        if (trapezoidAreasMix.length > 1) {
+            areaSet[2] = Utils.getMax(trapezoidAreasMix);
+        } else {
+            areaSet[2] = trapezoidAreasMix[0];
+        }
+        return areaSet;
     }
 
     private void operatePoints(String path, int index) {
         PointsProcessing points = new PointsProcessing();
-        shape = Utils.readPoints(path);// read from file
-        shape = points.preparePoints(shape);//returns valid points
-        Utils.writeFile(shape);
+        shape = Utils.readPoints(path);
+        shape = points.preparePoints(shape);
+        Utils.writeFile(shape, "for shape points");
         Point[] extendedShapes = points.extentPointsSet(shape, index);
-        Utils.writeFile(extendedShapes);
+        Utils.writeFile(extendedShapes, "for extendedShapes points");
         double[] distances = points.distance(spectator, extendedShapes);
         Utils.shakerSorting(distances, extendedShapes);
         // only for sorted by distance
-        workingSet = points.pointsForWork(distances, extendedShapes, fraction);//todo: returns incorrect set of points
-        Utils.writeFile(workingSet);
+        workingSetFar = points.pointsForWorkFar(distances, extendedShapes, fraction);
+        Utils.writeFile(workingSetFar, "for FAR points");
+        workingSetNear = points.pointsForWorkNear(distances, extendedShapes, fraction);
+        Utils.writeFile(workingSetNear, "for NEAR points");
     }
 }
