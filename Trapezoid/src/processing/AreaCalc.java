@@ -102,7 +102,6 @@ public class AreaCalc {
         d = (new LineSegment(set2[0].getX(), set2[0].getY(), set2[1].getX(), set2[1].getY())).segmentLength();
         s = (a + b + c + d) / 2;
         double area = Math.sqrt((s - b) * (s - a) * (s - b - c) * (s - b - d)) * ((a + b) / Math.abs(b - a));
-        System.out.println("AREA: "+area);
         if (area > 0) {
             return area;
         }
