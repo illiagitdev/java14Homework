@@ -1,13 +1,16 @@
 package categories;
 
 public class Goods {
-    private int id;
-    private String name;
-    private int amount;
-    private String description;
-    private double price;
+    public int id;
+    public String name;
+    public int amount;
+    public String description;
+    public float price;
 
-    public Goods(int id, String name, int amount, String description, double price) {
+    public Goods() {
+    }
+
+    public Goods(int id, String name, int amount, String description, float price) {
         this.id = id;
         this.name = name;
         this.amount = amount;

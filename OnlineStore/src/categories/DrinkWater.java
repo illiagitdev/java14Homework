@@ -1,7 +1,10 @@
 package categories;
 
 public class DrinkWater extends Goods {
-    public DrinkWater(int id, String name, int amount, String description, double price) {
+    public DrinkWater() {
+    }
+
+    public DrinkWater(int id, String name, int amount, String description, float price) {
         super(id, name, amount, description, price);
     }
 
