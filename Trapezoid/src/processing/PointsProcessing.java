@@ -44,10 +44,10 @@ public class PointsProcessing {
     public Point[] pointsForWorkNear(double[] distances, Point[] extendedShapes, double fraction) {
         int newLength = 0;
         double limit = distances[0] + (distances[distances.length - 1] - distances[0]) * fraction;
-        int k=0;
+        int k = 0;
         while (distances[k] < limit) {
-                newLength = k++;
-            }
+            newLength = k++;
+        }
         Point[] tempPoint = new Point[newLength];
         for (int i = 0; i < newLength; i++) {
             tempPoint[i] = new Point(extendedShapes[i].getX(), extendedShapes[i].getY());
@@ -59,7 +59,9 @@ public class PointsProcessing {
         Vector[] shapeVectors = new Vector[shape.length];
         Point tmp = shape[shape.length - 1];
         for (int i = 0; i < shape.length; i++) {
-            shapeVectors[i] = new Vector(tmp.getX(), tmp.getY(), shape[i].getX(), shape[i].getY());
+            shapeVectors[i]=new Vector();
+            shapeVectors[i].setX(shape[i].getX() - tmp.getX());
+            shapeVectors[i].setY(shape[i].getY() - tmp.getY());
             tmp = shape[i];
         }
         return shapeVectors;
