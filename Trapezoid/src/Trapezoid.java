@@ -5,7 +5,8 @@ public class Trapezoid {
         Point spectator = new Point(1.111, 11.800);
         String pathToFile = "files/set2.txt";
 
-        Service service = new Service(pathToFile, spectator, 25, 0.35);
+        Service service = new Service(spectator, 0.35);
+        service.operatePoints(pathToFile,5);
 
         double[] area = service.areaCalculation();
         System.out.println("Trapezoid MAX area by FAR point is = " + area[0]);

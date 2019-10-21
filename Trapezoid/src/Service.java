@@ -11,10 +11,10 @@ class Service {
     private Point[] workingSetNear;
 
 
-    Service(String pathToFile, Point spectator, int index, double fraction) {
+    Service(Point spectator, double fraction) {
         this.fraction = fraction;
         this.spectator = spectator;
-        operatePoints(pathToFile, index);
+        //operatePoints(pathToFile, index);
     }
 
     double[] areaCalculation() {
@@ -44,7 +44,7 @@ class Service {
         return areaSet;
     }
 
-    private void operatePoints(String path, int index) {
+    public void operatePoints(String path, int index) {
         PointsProcessing points = new PointsProcessing();
         shape = Utils.readPoints(path);
         shape = points.preparePoints(shape);
