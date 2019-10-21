@@ -16,7 +16,6 @@ public class Utils {
      */
     public static Point[] readPoints(String path) {
         String[] lines;
-        Point[] list = null;
         int length = 0;
         try {
             Scanner file = new Scanner(new File(path));
@@ -27,16 +26,17 @@ public class Utils {
             file.close();
 
             file = new Scanner(new File(path));
-            list = new Point[length];
+            Point[] list = new Point[length];
             for (int i = 0; i < length; i++) {
                 lines = file.next().split(",");
                 list[i] = new Point(Double.parseDouble(lines[0]), Double.parseDouble(lines[1]));
             }
             file.close();
+            return list;
         } catch (FileNotFoundException e) {
             System.out.println("error: File not found!" + e.toString());
         }
-        return list;
+        return null;
     }
 
     public static void writeFile(Point[] shape, String comment) {
