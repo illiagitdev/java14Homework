@@ -4,9 +4,12 @@ public class Vector {
     private double x;
     private double y;
 
-    public Vector(double startX, double startY, double endX, double endY) {
-        x = endX-startX;
-        y = endY-startY;
+    public void setX(double x) {
+        this.x = x;
+    }
+
+    public void setY(double y) {
+        this.y = y;
     }
 
     public double crossProductZ(Vector a) {
