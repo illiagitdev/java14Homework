@@ -28,11 +28,9 @@ public class Utils {
 
             file = new Scanner(new File(path));
             list = new Point[length];
-            length = 0;
-            while (file.hasNext()) {
+            for (int i = 0; i < length; i++) {
                 lines = file.next().split(",");
-                list[length] = new Point(Double.parseDouble(lines[0]), Double.parseDouble(lines[1]));
-                length++;
+                list[i] = new Point(Double.parseDouble(lines[0]), Double.parseDouble(lines[1]));
             }
             file.close();
         } catch (FileNotFoundException e) {
