@@ -141,11 +141,11 @@ public class AreaCalc {
         } catch (NullPointerException e) {
             System.out.println("Null exception " + e.fillInStackTrace());
         }
-
-        double one, two;
-        one = (new LineSegment(spectator.getX(), spectator.getY(), tmp[0].getX(), tmp[0].getY()).segmentLength());
-        two = (new LineSegment(spectator.getX(), spectator.getY(), tmp[1].getX(), tmp[1].getY()).segmentLength());
-        if (one > two) {
+        double[] segment=new double[2];
+        for (int i = 0; i < tmp.length; i++) {
+            segment[i] = (new LineSegment(spectator.getX(), spectator.getY(), tmp[i].getX(), tmp[i].getY()).segmentLength());
+        }
+        if (segment[0] > segment[1]) {
             return tmp;
         } else {
             Point z = tmp[0];
@@ -185,13 +185,7 @@ public class AreaCalc {
         xReverse = segment.getFirstX() >= x && segment.getSecondX() <= x;
         yRight = segment.getFirstY() <= y && segment.getSecondY() >= y;
         yReverse = segment.getFirstY() >= y && segment.getSecondY() <= y;
-        if (xRight && yRight) {
-            return 1;
-        } else if (xReverse && yReverse) {
-            return 1;
-        } else if (xRight && yReverse) {
-            return 1;
-        } else if (xReverse && yRight) {
+        if (xRight && yRight || (xReverse && yReverse) || (xRight && yReverse) || (xReverse && yRight)) {
             return 1;
         }
         return 0;
