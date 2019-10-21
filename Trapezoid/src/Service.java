@@ -48,7 +48,6 @@ class Service {
         PointsProcessing points = new PointsProcessing();
         shape = Utils.readPoints(path);
         shape = points.preparePoints(shape);
-        Utils.writeFile(shape, "for shape points");
         Point[] extendedShapes = points.extentPointsSet(shape, index);
         Utils.writeFile(extendedShapes, "for extendedShapes points");
         double[] distances = points.distance(spectator, extendedShapes);
