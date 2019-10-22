@@ -59,7 +59,7 @@ public class PointsProcessing {
         Vector[] shapeVectors = new Vector[shape.length];
         Point tmp = shape[shape.length - 1];
         for (int i = 0; i < shape.length; i++) {
-            shapeVectors[i]=new Vector();
+            shapeVectors[i] = new Vector();
             shapeVectors[i].setX(shape[i].getX() - tmp.getX());
             shapeVectors[i].setY(shape[i].getY() - tmp.getY());
             tmp = shape[i];

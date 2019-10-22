@@ -83,11 +83,13 @@ public class Utils {
         }
     }
 
-    public static double getMax(double[] array) {
-        double max = array[0];
+    public static TrapezoidComponents getMax(TrapezoidComponents[] array) {
+        TrapezoidComponents max = array[0];
         for (int i = 1; i < array.length; i++) {
-            if (max < array[i]) {
-                max = array[i];
+            if (array[i]!=null) {
+                if (max.getArea() < array[i].getArea()) {
+                    max = array[i];
+                }
             }
         }
         return max;

@@ -1,6 +1,7 @@
 import components.Point;
 import processing.AreaCalc;
 import processing.PointsProcessing;
+import processing.TrapezoidComponents;
 import processing.Utils;
 
 class Service {
@@ -9,33 +10,43 @@ class Service {
     private double fraction;
     private Point[] workingSetFar;
     private Point[] workingSetNear;
+    private Point edges[][];
+    private TrapezoidComponents[] trapezoids;
 
+//    public Point[][] getEdges() {
+//        return edges;
+//    }
 
     Service(Point spectator, double fraction) {
         this.fraction = fraction;
         this.spectator = spectator;
-        //operatePoints(pathToFile, index);
+        trapezoids=new TrapezoidComponents[3];
     }
 
-    double[] areaCalculation() {
-        double[] areaSet = new double[3];
+    TrapezoidComponents[] areaCalculation() {
+        TrapezoidComponents[] areaSet = new TrapezoidComponents[3];
         AreaCalc trapezoidArea = new AreaCalc();
         //------------------- by Far points
-        double[] trapezoidAreasFar = trapezoidArea.getAreaTMP(spectator, shape, workingSetFar);
+        TrapezoidComponents[] trapezoidAreasFar = trapezoidArea.getAreaTMP(spectator, shape, workingSetFar);
+//        for (int i = 0; i < edges.length; i++) {
+//            for (int j = 0; j < edges[i].length; j++) {
+//                System.out.println("edges " + edges[i][j].toString());
+//            }
+//        }
         if (trapezoidAreasFar.length > 1) {
             areaSet[0] = Utils.getMax(trapezoidAreasFar);
         } else {
             areaSet[0] = trapezoidAreasFar[0];
         }
         //------------------- by Near points
-        double[] trapezoidAreasNear = trapezoidArea.getAreaTMP(spectator, shape, workingSetNear);
+        TrapezoidComponents[] trapezoidAreasNear = trapezoidArea.getAreaTMP(spectator, shape, workingSetNear);
         if (trapezoidAreasFar.length > 1) {
             areaSet[1] = Utils.getMax(trapezoidAreasNear);
         } else {
             areaSet[1] = trapezoidAreasNear[0];
         }
 //------------------- by MIX points
-        double[] trapezoidAreasMix = trapezoidArea.getAreaTMPMix(spectator, workingSetFar, workingSetNear);
+        TrapezoidComponents[] trapezoidAreasMix = trapezoidArea.getAreaTMPMix(spectator, workingSetFar, workingSetNear);
         if (trapezoidAreasMix.length > 1) {
             areaSet[2] = Utils.getMax(trapezoidAreasMix);
         } else {

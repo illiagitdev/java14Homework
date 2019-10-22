@@ -9,8 +9,9 @@ import java.util.Arrays;
 public class AreaCalc {
     private Line[] lines;
     private LineSegment[] segments;
+    private Point[][] edges;
 
-    public double[] getAreaTMPMix(Point spectator, Point[] workingSetFar, Point[] workingSetNear) {
+    public TrapezoidComponents[] getAreaTMPMix(Point spectator, Point[] workingSetFar, Point[] workingSetNear) {
         int[] crossCountFar = new int[workingSetFar.length];
         int[] crossCountNear = new int[workingSetNear.length];
         crossCounter(crossCountFar, spectator, workingSetFar);
@@ -19,13 +20,13 @@ public class AreaCalc {
         Point[][] setNear = new Point[workingSetNear.length][];
         getPoints(spectator, crossCountFar, workingSetFar, setFar);
         getPoints(spectator, crossCountNear, workingSetNear, setNear);
-        double[] areas;
+        TrapezoidComponents[] areas;
         areas = trueTrapezoidArea(setFar, setNear);
         return areas;
     }
 
-    private double[] trueTrapezoidArea(Point[][] setFar, Point[][] setNear) {
-        double[] temporary = new double[setFar.length * setNear.length];
+    private TrapezoidComponents[]  trueTrapezoidArea(Point[][] setFar, Point[][] setNear) {
+        TrapezoidComponents[] temporary = new TrapezoidComponents[setFar.length * setNear.length];
         int q = 0;
         try {
             for (int i = 0; i < setFar.length; i++) {
@@ -44,22 +45,22 @@ public class AreaCalc {
         return temporary;
     }
 
-    public double[] getAreaTMP(Point spectator, Point[] shape, Point[] workingSet) {
+    public TrapezoidComponents[] getAreaTMP(Point spectator, Point[] shape, Point[] workingSet) {
         lines = new Line[shape.length];
         segments = new LineSegment[shape.length];
         initialiseLineSegment(shape);
         int[] crossCount = new int[workingSet.length];
         crossCounter(crossCount, spectator, workingSet);
         Point[][] set = new Point[workingSet.length][];
+        edges = new Point[Utils.summm(set.length)][4];
         getPoints(spectator, crossCount, workingSet, set);
         Utils.writeFile(set);
-        double[] areas;
-        areas = trueTrapezoidArea(set);
+        TrapezoidComponents[] areas = trueTrapezoidArea(set);
         return areas;
     }
 
-    private double[] trueTrapezoidArea(Point[][] set) {
-        double[] temporary = new double[Utils.summm(set.length)];
+    private TrapezoidComponents[] trueTrapezoidArea(Point[][] set) {
+        TrapezoidComponents[] temporary = new TrapezoidComponents[Utils.summm(set.length)];
         int q = 0;
         try {
             for (int i = 0; i < set.length - 1; i++) {
@@ -78,8 +79,8 @@ public class AreaCalc {
         return temporary;
     }
 
-    private double getEdges(Point[] in1, Point[] in2) {
-        Point[] set1, set2;
+    private TrapezoidComponents getEdges(Point[] in1, Point[] in2) {
+        Point[] set1, set2, out = new Point[4];
         set1 = in1.clone();
         set2 = in2.clone();
         Line baseB = new Line(set1[0].getX(), set1[0].getY(), set2[0].getX(), set2[0].getY());
@@ -91,7 +92,15 @@ public class AreaCalc {
         } else if (d2 < d1) {
             set1[1] = newCrossPoint(baseB, set2[1], set1);
         }
-        return trapezoidArea(set1, set2);
+        for (int i = 0; i < set1.length; i++) {
+            out[i] = set1[i];
+            out[2 + i] = set2[i];
+        }
+        TrapezoidComponents output = new TrapezoidComponents();
+        output.setTrapezEdges(out);
+        double area = trapezoidArea(set1, set2);
+        output.setArea(area);
+        return output;
     }
 
     private double trapezoidArea(Point[] set1, Point[] set2) {
@@ -141,7 +150,7 @@ public class AreaCalc {
         } catch (NullPointerException e) {
             System.out.println("Null exception " + e.fillInStackTrace());
         }
-        double[] segment=new double[2];
+        double[] segment = new double[2];
         for (int i = 0; i < tmp.length; i++) {
             segment[i] = (new LineSegment(spectator.getX(), spectator.getY(), tmp[i].getX(), tmp[i].getY()).segmentLength());
         }
