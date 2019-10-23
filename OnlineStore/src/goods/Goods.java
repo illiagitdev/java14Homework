@@ -1,6 +1,6 @@
 package goods;
 
-public abstract class Goods {
+public class Goods {
     private int id;
     private String name;
     private int amount;
@@ -12,10 +12,10 @@ public abstract class Goods {
     }
 
     public String show() {
-        return "\tID\t\t\t\t" + id + "\n" +
-                "\tназвание\t\t" + name + "\n" +
-                "\tкол-во\t\t\t" + amount + "\n" +
-                "\tописание\t\t{" + description + "}\n" +
-                "\tцена\t\t\t" + price + "$";
+        return "\nID\t\t\t" + id + "\n" +
+                "назва\t\t" + name + "\n" +
+                "кількість\t" + amount + " одиниць\n" +
+                "писання\t\t{" + description + "}\n" +
+                "ціна\t\t" + price + " грн.";
     }
 }
