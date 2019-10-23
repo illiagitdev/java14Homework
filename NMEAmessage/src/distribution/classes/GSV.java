@@ -4,29 +4,29 @@ import distribution.GpsMessages;
 import distribution.Utils;
 
 public class GSV implements GpsMessages {
-    public String[] array=new String[15];
+    @Override
+    public void getDescription(String[] input) {
+        String[] content = input;
 
+        int messagesN = Utils.returnInteger(content[0]);
+        int messageNumber = Utils.returnInteger(content[1]);
+        int satellites = Utils.returnInteger(content[2]);
 
-    private int messagesN = Utils.returnInteger(array[0]);
-    private int messageNumber = Utils.returnInteger(array[1]);
-    private int satellites = Utils.returnInteger(array[2]);
+        int satellitID1 = Utils.returnInteger(content[3]);
+        int satElevation1 = Utils.returnInteger(content[4]);
+        int satAzimuth1 = Utils.returnInteger(content[5]);
+        int signalToNoise1 = Utils.returnInteger(content[6]);
 
-    private int satellitID1 = Utils.returnInteger(array[3]);
-    private int satElevation1 = Utils.returnInteger(array[4]);
-    private int satAzimuth1 = Utils.returnInteger(array[5]);
-    private int signalToNoise1 = Utils.returnInteger(array[6]);
+        int satellitID2 = Utils.returnInteger(content[7]);
+        int satElevation2 = Utils.returnInteger(content[8]);
+        int satAzimuth2 = Utils.returnInteger(content[9]);
+        int signalToNoise2 = Utils.returnInteger(content[10]);
 
-    private int satellitID2 =Utils. returnInteger(array[7]);
-    private int satElevation2 = Utils.returnInteger(array[8]);
-    private int satAzimuth2 = Utils.returnInteger(array[9]);
-    private int signalToNoise2 = Utils.returnInteger(array[10]);
+        int satellitID3 = Utils.returnInteger(content[11]);
+        int satElevation3 = Utils.returnInteger(content[12]);
+        int satAzimuth3 = Utils.returnInteger(content[13]);
+        int signalToNoise3 = Utils.returnInteger(content[14]);
 
-    private  int satellitID3 = Utils.returnInteger(array[11]);
-    private  int satElevation3 = Utils.returnInteger(array[12]);
-    private int satAzimuth3 =Utils. returnInteger(array[13]);
-    private int signalToNoise3 = Utils.returnInteger(array[14]);
-
-    public void show() {
         System.out.println("GSV - GNSS DOP and Active Satellites\n\n" +
                 messagesN + " - (Integer) Total number of messages\n" +
                 messageNumber + " - (Integer) number of message\n" +

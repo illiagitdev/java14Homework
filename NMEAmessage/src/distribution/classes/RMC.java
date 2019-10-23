@@ -7,27 +7,24 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class RMC implements GpsMessages {
-    public String[] array=new String[15];
+    @Override
+    public void getDescription(String[] input) {
+        LocalTime timeUTC = Utils.getTimeSS(input[0]);
+        Character statusIndicator = Utils.getChar0(input[1]);
 
+        int latitudeDegree = Utils.returnInteger(input[2].substring(0, input[2].indexOf('.') - 2));
+        double latitudeMin = Utils.returnDouble(input[2].substring(input[2].indexOf('.') - 2));
+        Character indicatorNS = Utils.getChar0(input[3]);
+        int longitudeDegree = Utils.returnInteger(input[4].substring(0, input[4].indexOf('.') - 2));
+        double longitudeMin = Utils.returnDouble(input[4].substring(input[4].indexOf('.') - 2));
+        Character indicatorEW = Utils.getChar0(input[5]);
 
+        double speedKnots = Utils.returnDouble(input[6]);
+        double heading = Utils.returnDouble(input[7]);
+        LocalDate timeUTCfix = Utils.getDate(input[8]);
+        double magneticVar = Utils.returnDouble(input[9]);
+        Character magneticVarID = Utils.getChar0(input[10]);
 
-    private LocalTime timeUTC = Utils.getTime(array[0]);// 22:54:46 UTC
-    private Character statusIndicator = Utils.getChar0(array[1]);
-
-    private int latitudeDegree = Utils.returnInteger(array[2].substring(0, array[2].indexOf('.') - 2));
-    private double latitudeMin = Utils.returnDouble(array[2].substring(array[2].indexOf('.') - 2));
-    private Character indicatorNS = Utils.getChar0(array[3]);
-    private int longitudeDegree = Utils.returnInteger(array[4].substring(0, array[4].indexOf('.') - 2));
-    private double longitudeMin = Utils.returnDouble(array[4].substring(array[4].indexOf('.') - 2));
-    private Character indicatorEW = Utils.getChar0(array[5]);
-
-    private double speedKnots = Utils.returnDouble(array[6]);
-    private double heading = Utils.returnDouble(array[7]);
-    private LocalDate timeUTCfix =Utils. getDate(array[8]);
-    private double magneticVar = Utils.returnDouble(array[9]);
-    private Character magneticVarID = Utils.getChar0(array[10]);
-
-    public void show() {
         System.out.println("RMC -  Recommended Minimum Specific GNSS Data\n\n" +
                 timeUTC + " - (String) UTC time of the fix\n" +
                 statusIndicator + " - (Character) Status indicator. A=valid; V=invalid\n" +

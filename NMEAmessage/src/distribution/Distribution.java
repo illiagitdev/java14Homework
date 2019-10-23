@@ -1,48 +1,55 @@
 package distribution;
 
-import java.util.Scanner;
+import distribution.classes.*;
 
 public class Distribution {
-
-
-
-
-
-    //int messageChecksum = Integer.parseInt(message.substring(message.indexOf("*") + 1), 16);
-    String head = messages[mNumber].substring(1, messages[mNumber].indexOf(","));
-    String messageType = head.substring(2);
-
-    String[] array = messages[mNumber].substring(messages[mNumber].indexOf(",") + 1).split(",");
-    array[array.length - 1] = array[array.length - 1].substring(0, array[array.length - 1].indexOf('*'));//deleting checksum
-
-        switch (messageType) {
-        case "GSV": {
-            decodeGSV(array);
-            break;
+    public void getDescription(String message) {
+        String head = message.substring(1, message.indexOf(","));
+        if (head.length() == 5) {
+            head = head.substring(2);
+            String[] content = message.substring(message.indexOf(",") + 1).split(",");
+            content[content.length - 1] = content[content.length - 1].substring(0, content[content.length- 1].indexOf('*'));
+            GpsMessages ms;
+            switch (head) {
+                case "GSV": {
+                    ms=new GSV();
+                    ms.getDescription(content);
+                    break;
+                }
+                case "GLL": {
+                    ms=new GLL();
+                    ms.getDescription(content);
+                    break;
+                }
+                case "RMC": {
+                    ms=new RMC();
+                    ms.getDescription(content);
+                    break;
+                }
+                case "VTG": {
+                    ms=new VTG();
+                    ms.getDescription(content);
+                    break;
+                }
+                case "GGA": {
+                    ms=new GGA();
+                    ms.getDescription(content);
+                    break;
+                }
+                case "GSA": {
+                    ms=new GSA();
+                    ms.getDescription(content);
+                    break;
+                }
+                default: {
+                    System.out.println("Not NMEA message or no defined method to read.");
+                    break;
+                }
+            }
+        }else {
+            System.out.println("Not NMEA message.");
         }
-        case "GLL": {
-            decodeGLL(array);
-            break;
-        }
-        case "RMC": {
-            decodeRMC(array);
-            break;
-        }
-        case "VTG": {
-            decodeVTG(array);
-            break;
-        }
-        case "GGA": {
-            decodeGGA(array);
-            break;
-        }
-        case "GSA": {
-            decodeGSA(array);
-            break;
-        }
-        default: {
-            System.out.println("Not NMEA message or no method to read it.");
-            break;
-        }
+
     }
+
 }

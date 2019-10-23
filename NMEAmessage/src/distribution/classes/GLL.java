@@ -6,21 +6,18 @@ import distribution.Utils;
 import java.time.LocalTime;
 
 public class GLL implements GpsMessages {
-    public String[] array=new String[15];
+    @Override
+    public void getDescription(String[] input) {
+        int latitudeDegree = Utils.returnInteger(input[0].substring(0, input[0].indexOf('.') - 2));
+        double latitudeMin = Utils.returnDouble(input[0].substring(input[0].indexOf('.') - 2));
+        Character indicatorNS = Utils.getChar0(input[1]);
+        int longitudeDegree = Utils.returnInteger(input[2].substring(0, input[2].indexOf('.') - 2));
+        double longitudeMin = Utils.returnDouble(input[2].substring(input[2].indexOf('.') - 2));
+        Character indicatorEW = Utils.getChar0(input[3]);
 
-
-        private int latitudeDegree = Utils.returnInteger(array[0].substring(0, array[0].indexOf('.') - 2));
-        private double latitudeMin = Utils.returnDouble(array[0].substring(array[0].indexOf('.') - 2));
-        private Character indicatorNS = Utils.getChar0(array[1]);
-        private int longitudeDegree = Utils.returnInteger(array[2].substring(0, array[2].indexOf('.') - 2));
-        private double longitudeMin = Utils.returnDouble(array[2].substring(array[2].indexOf('.') - 2));
-        private Character indicatorEW = Utils.getChar0(array[3]);
-
-        private LocalTime timeUTC = Utils.getTime(array[4]);// 22:54:44 UTC
-        private Character status = Utils.getChar0(array[5]);
-        private Character mode = Utils.getChar0(array[6]);
-
-    public void show() {
+        LocalTime timeUTC = Utils.getTime(input[4]);// 22:54:44 UTC
+        Character status = Utils.getChar0(input[5]);
+        Character mode = Utils.getChar0(input[6]);
 
         System.out.println("GLL - Geographic Position – Latitude/Longitude\n\n" +
                 latitudeDegree + " deg. " + latitudeMin + " min. - (Integer,Double) Latitude of position\n" +

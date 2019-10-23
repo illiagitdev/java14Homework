@@ -4,21 +4,15 @@ import distribution.GpsMessages;
 import distribution.Utils;
 
 public class GSA implements GpsMessages {
-    public String[] array=new String[15];
-
-
-        private Character workMode = Utils.getChar0(array[0]);
-        private   int fixType = Utils.returnInteger(array[1]);
-
-        private int[] satelliteID = new int[12];
-//        for (int i = 0; i < 12; i++) {
-//            satelliteID[i] = Utils.returnInteger(array[2 + i]);
-//        }
-
-        private double PDOP = Utils.returnDouble(array[14]);
-        private double HDOP = Utils.returnDouble(array[15]);
-        private  double VDOP = Utils.returnDouble(array[16]);
-    public void show() {
+    @Override
+    public void getDescription(String[] input) {
+        String[] content = input;
+        Character workMode = Utils.getChar0(content[0]);
+        int fixType = Utils.returnInteger(content[1]);
+        int[] satelliteID = new int[12];
+        double PDOP = Utils.returnDouble(content[14]);
+        double HDOP = Utils.returnDouble(content[15]);
+        double VDOP = Utils.returnDouble(content[16]);
 
         System.out.println("GSA - GNSS DOP and Active Satellites\n\n" +
                 workMode + " - (Character) Mode: ‘M’ = Manual, ‘A’ = Automatic\n" +

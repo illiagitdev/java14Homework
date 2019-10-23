@@ -6,29 +6,29 @@ import distribution.Utils;
 import java.time.LocalTime;
 
 public class GGA implements GpsMessages {
-    public String[] array=new String[15];
+    @Override
+    public void getDescription(String[] input) {
+        String[] content = input;
 
+        LocalTime timeUTC = Utils.getTimeS(content[0]);//22:54:44 UTC
 
-        private LocalTime timeUTC = Utils.getTimeS(array[0]);//22:54:44 UTC
+        int latitudeDegree = Utils.returnInteger(content[1].substring(0, content[1].indexOf('.') - 2));
+        double latitudeMin = Utils.returnDouble(content[1].substring(content[1].indexOf('.') - 2));
+        Character indicatorNS = Utils.getChar0(content[2]);
+        int longitudeDegree = Utils.returnInteger(content[3].substring(0, content[3].indexOf('.') - 2));
+        double longitudeMin = Utils.returnDouble(content[3].substring(content[3].indexOf('.') - 2));
+        Character indicatorEW = Utils.getChar0(content[4]);
 
-        private int latitudeDegree = Utils.returnInteger(array[1].substring(0, array[1].indexOf('.') - 2));
-        private double latitudeMin = Utils.returnDouble(array[1].substring(array[1].indexOf('.') - 2));
-        private Character indicatorNS = Utils.getChar0(array[2]);
-        private int longitudeDegree = Utils.returnInteger(array[3].substring(0, array[3].indexOf('.') - 2));
-        private  double longitudeMin = Utils.returnDouble(array[3].substring(array[3].indexOf('.') - 2));
-        private Character indicatorEW = Utils.getChar0(array[4]);
+        int qualityIndicator = Utils.returnInteger(content[5]);
+        int satellitesUsed = Utils.returnInteger(content[6]);
+        double HDOP = Utils.returnDouble(content[7]);
+        double altitude = Utils.returnDouble(content[8]);
+        Character altitudeIndex = Utils.getChar0(content[9]);
+        double geoidalSeparation = Utils.returnDouble(content[10]);
+        Character geoidalSeparationIndex = Utils.getChar0(content[11]);
+        int alignmentDGPS = Utils.returnInteger(content[12]);//Age of Differential GPS data (seconds)
+        int refStation = Utils.returnInteger(content[13]);
 
-        private  int qualityIndicator = Utils.returnInteger(array[5]);
-        private int satellitesUsed = Utils.returnInteger(array[6]);
-        private  double HDOP = Utils.returnDouble(array[7]);
-        private  double altitude = Utils.returnDouble(array[8]);
-        private  Character altitudeIndex = Utils.getChar0(array[9]);
-        private  double geoidalSeparation = Utils.returnDouble(array[10]);
-        private Character geoidalSeparationIndex =Utils.getChar0(array[11]);
-        private  int alignmentDGPS = Utils.returnInteger(array[12]);//Age of Differential GPS data (seconds)
-        private  int refStation = Utils.returnInteger(array[13]);
-
-        public void show() {
         System.out.println("GGA - Global Positioning System Fix Data\n\n" +
                 timeUTC + " - (String) UTC of position\n" +
                 latitudeDegree + " deg. " + latitudeMin + " min. - (Integer,Double) Latitude of position\n" +

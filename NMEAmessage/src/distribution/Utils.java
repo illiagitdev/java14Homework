@@ -6,11 +6,11 @@ import java.time.format.DateTimeFormatter;
 
 public class Utils {
     public static double returnDouble(String s) {
-        return s.isEmpty() ? 0.0 : Double.valueOf(s);
+        return s.isEmpty() ? 0.0 : Double.parseDouble(s);
     }
 
     public static int returnInteger(String s) {
-        return s.isEmpty() ? 0 : Integer.valueOf(s);
+        return s.isEmpty() ? 0 : Integer.parseInt(s);
     }
 
     public static Character getChar0(String s) {
@@ -23,6 +23,10 @@ public class Utils {
 
     public static LocalTime getTime(String s) {
         return LocalTime.parse(s, DateTimeFormatter.ofPattern("HHmmss"));
+    }
+
+    public static LocalTime getTimeSS(String s) {
+        return LocalTime.parse(s, DateTimeFormatter.ofPattern("HHmmss.SS"));
     }
 
     public static LocalDate getDate(String s) {
