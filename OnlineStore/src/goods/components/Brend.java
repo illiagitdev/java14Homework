@@ -1,6 +1,6 @@
-package properties;
+package goods.components;
 
-public class WearBrand {
+public class Brend {
     private int brandFoundationYeat;
     private String brandName;
     private int brandEmploeesNumber;
