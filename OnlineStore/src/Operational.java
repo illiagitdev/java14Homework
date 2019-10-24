@@ -1,14 +1,15 @@
 import store.Store;
+import store.functionaliti.Services;
 import store.functionaliti.Utils;
 
-import java.io.Console;
-
 public class Operational {
-    Store store = new Store();
+    private Store store;
+
+    public void setStore(Store store) {
+        this.store = store;
+    }
 
     public void run() {
-
-        store.open();
         boolean leaveStore = false;
         while (!leaveStore) {
             whatToDo();
@@ -17,17 +18,15 @@ public class Operational {
             leaveStore = stayOrLeave(leaveStore);
         }
 
-        store.close();
     }
 
     private boolean stayOrLeave(boolean leaveStore) {
-        System.out.println("Продовжити/вийти з магазину: y/n");
+        System.out.println("Вийти з магазину: y/n");
         String str = Utils.getStr().toLowerCase();
         switch (str) {
             case "y": {
                 System.out.println("Вихід з магазину.");
                 leaveStore = true;
-                store.close();
                 break;
             }
             case "n": {
@@ -46,32 +45,39 @@ public class Operational {
         System.out.print("Введіть номер: ");
         int choice = Utils.getInt();
         System.out.print("Вибрано пункт: " + choice + "\n");
+        Services services = new Services();
 
         switch (choice) {
-            case 1:
+            case 1: {
                 System.out.println("Вибрано: 1 - Перевірити наявні товари.");
-
+                services.showByCategory(store);
                 break;
-            case 2:
+            }
+            case 2: {
                 System.out.println("Вибрано: 2 - Вся інформація про товар по id.");
-
+                services.getItemByID(store);
                 break;
-            case 3:
+            }
+            case 3: {
                 System.out.println("Вибрано: 3 - Пошук товару по назві.");
-
+                services.getByName(store);
                 break;
-            case 4:
+            }
+            case 4: {
                 System.out.println("Вибрано: 4 - Фільтр по ціні:");
 
                 break;
-            case 5:
+            }
+            case 5: {
                 System.out.println("Вибрано: 5 - Отримати нову поставку.");
 
                 break;
-            case 6:
+            }
+            case 6: {
                 System.out.println("Вибрано: 6 - Продати товар.");
 
                 break;
+            }
             default: {
                 System.out.println("невірний ввід(");
                 break;
