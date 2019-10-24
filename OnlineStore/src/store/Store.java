@@ -1,6 +1,5 @@
 package store;
 
-import goods.Goods;
 import goods.categoris.*;
 
 public class Store {
@@ -75,11 +74,5 @@ public class Store {
 
     public void setClothes(Clothes[] clothes) {
         this.clothes = clothes;
-    }
-
-    private class Balance{//todo: balance control
-        void wereSold(Goods item, int quantity){
-            balance-=item.getAmount()*quantity;
-        }
     }
 }

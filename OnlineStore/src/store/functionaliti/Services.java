@@ -1,7 +1,7 @@
 package store.functionaliti;
 
 import goods.Goods;
-import goods.categoris.Phone;
+import goods.categoris.*;
 import store.Store;
 
 public class Services {
@@ -53,7 +53,7 @@ public class Services {
             }
         }
         if (count == 1) {
-            return id;
+            return count;
         }
         return 0;
     }
@@ -193,9 +193,11 @@ public class Services {
     }
 
     public void addGoods(Store store) {
-        int id = getItemByID(store);
-        System.out.println("Додаємо старий або новий товар.");
-        if (id == 1) {
+        int count = getItemByID(store);
+        if (count == 1) {
+            System.out.println("Додаємо старий товар.");
+            System.out.println("Введіть ID товару:");
+            int id = Utils.getInt();
             System.out.print("Скільки одиниць товару додаємо: ");
             int amount = Utils.getInt();
             setItemAmount(store, id, amount);
@@ -243,42 +245,158 @@ public class Services {
         }
     }
 
-    private void addNewElement(Store store) {
-
-    }
-
     private void addClothes(Store store) {
-        addNewElement(store);
+        Clothes[] addClothes = new Clothes[store.getPhones().length + 1];
+        for (int i = 0; i < addClothes.length - 1; i++) {
+            addClothes[i] = store.getClothes()[i];
+        }
+
+        int id = addClothes[addClothes.length - 2].getId() + 1;
+        System.out.println("ID нового товару: " + id);
+        System.out.print("Введіть назву одягу ");
+        String name = Utils.getStr();
+        System.out.print("Введіть кількість товару в поставці: ");
+        int amount = Utils.getInt();
+        System.out.print("Введіть опис товару: ");
+        String description = Utils.getStr();
+        System.out.print("Вкажіть вартість товару: ");
+        float price = Utils.getFloat();
+
+        addClothes[addClothes.length - 1] = new Clothes(id, name, amount, description, price);
+        store.setClothes(addClothes);
+        System.out.println(store.getClothes()[addClothes.length - 1].show());
     }
 
     private void addSweetWater(Store store) {
-        addNewElement(store);
+        SweetWater[] addSweetWater = new SweetWater[store.getPhones().length + 1];
+        for (int i = 0; i < addSweetWater.length - 1; i++) {
+            addSweetWater[i] = store.getSweetWaters()[i];
+        }
 
+        int id = addSweetWater[addSweetWater.length - 2].getId() + 1;
+        System.out.println("ID нового товару: " + id);
+        System.out.print("Введіть назву Солодкої води ");
+        String name = Utils.getStr();
+        System.out.print("Введіть кількість товару в поставці: ");
+        int amount = Utils.getInt();
+        System.out.print("Введіть опис товару: ");
+        String description = Utils.getStr();
+        System.out.print("Вкажіть вартість товару: ");
+        float price = Utils.getFloat();
+
+        addSweetWater[addSweetWater.length - 1] = new SweetWater(id, name, amount, description, price);
+        store.setSweetWaters(addSweetWater);
+        System.out.println(store.getSweetWaters()[addSweetWater.length - 1].show());
     }
 
     private void addFreshWater(Store store) {
-        addNewElement(store);
+        FreshWater[] addFreshWater = new FreshWater[store.getPhones().length + 1];
+        for (int i = 0; i < addFreshWater.length - 1; i++) {
+            addFreshWater[i] = store.getFreshWaters()[i];
+        }
 
+        int id = addFreshWater[addFreshWater.length - 2].getId() + 1;
+        System.out.println("ID нового товару: " + id);
+        System.out.print("Введіть назву води ");
+        String name = Utils.getStr();
+        System.out.print("Введіть кількість товару в поставці: ");
+        int amount = Utils.getInt();
+        System.out.print("Введіть опис товару: ");
+        String description = Utils.getStr();
+        System.out.print("Вкажіть вартість товару: ");
+        float price = Utils.getFloat();
+
+        addFreshWater[addFreshWater.length - 1] = new FreshWater(id, name, amount, description, price);
+        store.setFreshWaters(addFreshWater);
+        System.out.println(store.getFreshWaters()[addFreshWater.length - 1].show());
     }
 
     private void addSweets(Store store) {
-        addNewElement(store);
+        Sweets[] addSweets = new Sweets[store.getPhones().length + 1];
+        for (int i = 0; i < addSweets.length - 1; i++) {
+            addSweets[i] = store.getSweets()[i];
+        }
 
+        int id = addSweets[addSweets.length - 2].getId() + 1;
+        System.out.println("ID нового товару: " + id);
+        System.out.print("Введіть назву солодощів ");
+        String name = Utils.getStr();
+        System.out.print("Введіть кількість товару в поставці: ");
+        int amount = Utils.getInt();
+        System.out.print("Введіть опис товару: ");
+        String description = Utils.getStr();
+        System.out.print("Вкажіть вартість товару: ");
+        float price = Utils.getFloat();
+
+        addSweets[addSweets.length - 1] = new Sweets(id, name, amount, description, price);
+        store.setSweets(addSweets);
+        System.out.println(store.getSweets()[addSweets.length - 1].show());
     }
 
     private void addVegetables(Store store) {
-        addNewElement(store);
+        Vegetable[] addVegetable = new Vegetable[store.getPhones().length + 1];
+        for (int i = 0; i < addVegetable.length - 1; i++) {
+            addVegetable[i] = store.getVegetables()[i];
+        }
 
+        int id = addVegetable[addVegetable.length - 2].getId() + 1;
+        System.out.println("ID нового товару: " + id);
+        System.out.print("Введіть назву овочів ");
+        String name = Utils.getStr();
+        System.out.print("Введіть кількість товару в поставці: ");
+        int amount = Utils.getInt();
+        System.out.print("Введіть опис товару: ");
+        String description = Utils.getStr();
+        System.out.print("Вкажіть вартість товару: ");
+        float price = Utils.getFloat();
+
+        addVegetable[addVegetable.length - 1] = new Vegetable(id, name, amount, description, price);
+        store.setVegetables(addVegetable);
+        System.out.println(store.getVegetables()[addVegetable.length - 1].show());
     }
 
     private void addComputer(Store store) {
-        addNewElement(store);
+        Computer[] addComputer = new Computer[store.getPhones().length + 1];
+        for (int i = 0; i < addComputer.length - 1; i++) {
+            addComputer[i] = store.getComputers()[i];
+        }
 
+        int id = addComputer[addComputer.length - 2].getId() + 1;
+        System.out.println("ID нового товару: " + id);
+        System.out.print("Введіть назву комп'ютер ");
+        String name = Utils.getStr();
+        System.out.print("Введіть кількість товару в поставці: ");
+        int amount = Utils.getInt();
+        System.out.print("Введіть опис товару: ");
+        String description = Utils.getStr();
+        System.out.print("Вкажіть вартість товару: ");
+        float price = Utils.getFloat();
+
+        addComputer[addComputer.length - 1] = new Computer(id, name, amount, description, price);
+        store.setComputers(addComputer);
+        System.out.println(store.getComputers()[addComputer.length - 1].show());
     }
 
     private void addPhone(Store store) {
-        addNewElement(store);
+        Phone[] addPhone = new Phone[store.getPhones().length + 1];
+        for (int i = 0; i < addPhone.length - 1; i++) {
+            addPhone[i] = store.getPhones()[i];
+        }
 
+        int id = addPhone[addPhone.length - 2].getId() + 1;
+        System.out.println("ID нового товару: " + id);
+        System.out.print("Введіть назву телефону ");
+        String name = Utils.getStr();
+        System.out.print("Введіть кількість товару в поставці: ");
+        int amount = Utils.getInt();
+        System.out.print("Введіть опис товару: ");
+        String description = Utils.getStr();
+        System.out.print("Вкажіть вартість товару: ");
+        float price = Utils.getFloat();
+
+        addPhone[addPhone.length - 1] = new Phone(id, name, amount, description, price);
+        store.setPhones(addPhone);
+        System.out.println(store.getPhones()[addPhone.length - 1].show());
     }
 
     public void setItemAmount(Store store, int id, int amount) {
