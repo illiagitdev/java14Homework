@@ -13,6 +13,10 @@ public class Store {
     private SweetWater[] sweetWaters;
     private Clothes[] clothes;
 
+    public double getBalance() {
+        return balance;
+    }
+
     public Phone[] getPhones() {
         return phones;
     }
@@ -39,6 +43,10 @@ public class Store {
 
     public Clothes[] getClothes() {
         return clothes;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
     }
 
     public void setPhones(Phone[] phones) {

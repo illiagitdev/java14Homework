@@ -12,7 +12,7 @@ public class Operational {
     public void run() {
         boolean leaveStore = false;
         while (!leaveStore) {
-            whatToDo();
+            whatToDo(store);
             toDo();
 
             leaveStore = stayOrLeave(leaveStore);
@@ -64,17 +64,12 @@ public class Operational {
                 break;
             }
             case 4: {
-                System.out.println("Вибрано: 4 - Фільтр по ціні:");
-
+                System.out.println("Вибрано: 4 - Отримати нову поставку.");
+                services.addGoods(store);
                 break;
             }
             case 5: {
-                System.out.println("Вибрано: 5 - Отримати нову поставку.");
-
-                break;
-            }
-            case 6: {
-                System.out.println("Вибрано: 6 - Продати товар.");
+                System.out.println("Вибрано: 5 - Продати товар.");
 
                 break;
             }
@@ -85,16 +80,14 @@ public class Operational {
         }
     }
 
-    private void whatToDo() {
-        System.out.println("Магазин \"Дрібнички\" відкрито.");
+    private void whatToDo(Store store) {
+        System.out.print("Магазин \"Дрібнички\" відкрито.");
+        System.out.println("Поточний баланс: "+store.getBalance());
         System.out.println("1 - Перевірити наявні товари.");
         System.out.println("2 - Вся інформація про товар по id.");
         System.out.println("3 - Пошук товару по назві.");
-        System.out.println("4 - Фільтр по ціні:");
-        System.out.println("\ta - Ціна вища від:");
-        System.out.println("\tb - Ціна нижча від:");
-        System.out.println("5 - Отримати нову поставку.");
-        System.out.println("6 - Продати товар.");
+        System.out.println("4 - Отримати нову поставку.");
+        System.out.println("5 - Продати товар.");
     }
 
 }
