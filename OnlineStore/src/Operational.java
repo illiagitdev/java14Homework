@@ -34,7 +34,7 @@ public class Operational {
                 break;
             }
             default: {
-                System.out.println("");
+                System.out.println();
                 stayOrLeave(leaveStore);
             }
         }
@@ -82,7 +82,7 @@ public class Operational {
 
     private void whatToDo(Store store) {
         System.out.print("Магазин \"Дрібнички\" відкрито.");
-        System.out.println("Поточний баланс: "+store.getBalance());
+        System.out.println("Поточний баланс: " + store.getBalance());
         System.out.println("1 - Перевірити наявні товари.");
         System.out.println("2 - Вся інформація про товар по id.");
         System.out.println("3 - Пошук товару по назві.");

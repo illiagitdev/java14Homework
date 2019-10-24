@@ -14,6 +14,10 @@ public class Clothes extends Goods {
     public Clothes() {
     }
 
+    public void setBrend(Brend brend) {
+        this.brend = brend;
+    }
+
     @Override
     public String show() {
         return "Одяг:" + super.show() + toString();
@@ -23,7 +27,7 @@ public class Clothes extends Goods {
     public String toString() {
         return "\nЗаснування\t\t\t\t" + brend.getBrandFoundationYear() + " рік" +
                 "\nназва:\t\t\t\t\t" + brend.getBrandName() +
-                "\nпостійних працівників\t" + brend.getBrandEmploeesNumber() +
+                "\nпостійних працівників\t" + brend.getBrandEmployeesNumber() +
                 "\nпродається в\t\t\t" + brend.getBrandSellCountiesNumber() + " країнах";
     }
 }
