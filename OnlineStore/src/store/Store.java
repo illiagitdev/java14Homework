@@ -12,13 +12,61 @@ public class Store {
     private FreshWater[] freshWaters;
     private SweetWater[] sweetWaters;
     private Clothes[] clothes;
-    private Goods[][] storeItems={phones,computers,vegetables,sweets,freshWaters,sweetWaters,clothes};
 
-    public void open() {//todo: read from configuration
-
+    public Phone[] getPhones() {
+        return phones;
     }
 
-    public void close() {//todo: write to configuration
+    public Computer[] getComputers() {
+        return computers;
+    }
+
+    public Vegetable[] getVegetables() {
+        return vegetables;
+    }
+
+    public Sweets[] getSweets() {
+        return sweets;
+    }
+
+    public FreshWater[] getFreshWaters() {
+        return freshWaters;
+    }
+
+    public SweetWater[] getSweetWaters() {
+        return sweetWaters;
+    }
+
+    public Clothes[] getClothes() {
+        return clothes;
+    }
+
+    public void setPhones(Phone[] phones) {
+        this.phones = phones;
+    }
+
+    public void setComputers(Computer[] computers) {
+        this.computers = computers;
+    }
+
+    public void setVegetables(Vegetable[] vegetables) {
+        this.vegetables = vegetables;
+    }
+
+    public void setSweets(Sweets[] sweets) {
+        this.sweets = sweets;
+    }
+
+    public void setFreshWaters(FreshWater[] freshWaters) {
+        this.freshWaters = freshWaters;
+    }
+
+    public void setSweetWaters(SweetWater[] sweetWaters) {
+        this.sweetWaters = sweetWaters;
+    }
+
+    public void setClothes(Clothes[] clothes) {
+        this.clothes = clothes;
     }
 
     private class Balance{//todo: balance control
