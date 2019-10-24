@@ -12,6 +12,7 @@ public class Store {
     private FreshWater[] freshWaters;
     private SweetWater[] sweetWaters;
     private Clothes[] clothes;
+    private Goods[][] storeItems={phones,computers,vegetables,sweets,freshWaters,sweetWaters,clothes};
 
     public void open() {//todo: read from configuration
 

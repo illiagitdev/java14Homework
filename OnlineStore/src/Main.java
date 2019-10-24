@@ -1,8 +1,6 @@
-import store.Store;
-
 public class Main {
     public static void main(String[] args) {
-        Operational store=new Operational();
+        Operational store = new Operational();
         store.run();
 
 //        Goods[] someGoods = new Goods[21];
