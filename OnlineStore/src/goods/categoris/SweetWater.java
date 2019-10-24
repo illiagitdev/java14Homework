@@ -6,8 +6,12 @@ import goods.components.ExpirationTime;
 public class SweetWater extends Goods {
     private ExpirationTime expirationTime;
 
-    public SweetWater() {
+    public SweetWater(int id, String name, int amount, String description, float price) {
+        super(id, name, amount, description, price);
         expirationTime=new ExpirationTime();
+    }
+
+    public SweetWater() {
     }
 
     @Override

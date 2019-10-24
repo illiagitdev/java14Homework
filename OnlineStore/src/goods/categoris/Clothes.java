@@ -6,8 +6,12 @@ import goods.components.Brend;
 public class Clothes extends Goods {
     private Brend brend;
 
-    public Clothes() {
+    public Clothes(int id, String name, int amount, String description, float price) {
+        super(id, name, amount, description, price);
         brend = new Brend();
+    }
+
+    public Clothes() {
     }
 
     @Override

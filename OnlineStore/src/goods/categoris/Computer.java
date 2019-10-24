@@ -4,19 +4,21 @@ import goods.Goods;
 import goods.components.Warranty;
 import goods.components.tech.*;
 
-import java.util.Arrays;
-
 public class Computer extends Goods {
     private RAM ram;
     private CPU cpu;
     private VideoCard videoCard;
     private Warranty warranty;
 
-    public Computer() {
+    public Computer(int id, String name, int amount, String description, float price) {
+        super(id, name, amount, description, price);
         ram = new RAM();
         cpu = new CPU();
         videoCard = new VideoCard();
         warranty = new Warranty();
+    }
+
+    public Computer() {
     }
 
     @Override

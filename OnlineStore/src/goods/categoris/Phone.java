@@ -4,8 +4,6 @@ import goods.Goods;
 import goods.components.Warranty;
 import goods.components.tech.*;
 
-import java.util.Arrays;
-
 public class Phone extends Goods {
     private OperatingSystem system;
     private RAM ram;
@@ -14,13 +12,41 @@ public class Phone extends Goods {
     private WorkingTime workingTime;
     private Warranty warranty;
 
-    public Phone() {
+    public Phone(int id, String name, int amount, String description, float price) {
+        super(id, name, amount, description, price);
         system = new OperatingSystem();
         ram = new RAM();
         cpu = new CPU();
         diagonal = new ScreenDiagonal();
         workingTime = new WorkingTime();
         warranty = new Warranty();
+    }
+
+    public void setSystem(OperatingSystem system) {
+        this.system = system;
+    }
+
+    public void setRam(RAM ram) {
+        this.ram = ram;
+    }
+
+    public void setCpu(CPU cpu) {
+        this.cpu = cpu;
+    }
+
+    public void setDiagonal(ScreenDiagonal diagonal) {
+        this.diagonal = diagonal;
+    }
+
+    public void setWorkingTime(WorkingTime workingTime) {
+        this.workingTime = workingTime;
+    }
+
+    public void setWarranty(Warranty warranty) {
+        this.warranty = warranty;
+    }
+
+    public Phone() {
     }
 
     @Override

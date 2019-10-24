@@ -1,5 +1,6 @@
 package goods;
 
+
 public class Goods {
     private int id;
     private String name;
@@ -7,8 +8,28 @@ public class Goods {
     private String description;
     private float price;
 
+    public Goods() {
+    }
+
+    public Goods(int id, String name, int amount, String description, float price) {
+        this.id = id;
+        this.name = name;
+        this.amount = amount;
+        this.description = description;
+        this.price = price;
+    }
+
+
+    public int getId() {
+        return id;
+    }
+
     public int getAmount() {
         return amount;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public String show() {

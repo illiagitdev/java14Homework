@@ -2,13 +2,16 @@ package goods.categoris;
 
 import goods.Goods;
 import goods.components.ExpirationTime;
-import goods.components.Warranty;
 
 public class Vegetable extends Goods {
     private ExpirationTime expirationTime;
 
-    public Vegetable() {
+    public Vegetable(int id, String name, int amount, String description, float price) {
+        super(id, name, amount, description, price);
         expirationTime = new ExpirationTime();
+    }
+
+    public Vegetable() {
     }
 
     @Override
