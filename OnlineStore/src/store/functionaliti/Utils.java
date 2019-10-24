@@ -13,4 +13,9 @@ public class Utils {
         Scanner scan=new Scanner(System.in);
         return scan.next();
     }
+
+    public static float getFloat() {
+        Scanner scan=new Scanner(System.in);
+        return   scan.hasNextFloat()?scan.nextFloat():getFloat();
+    }
 }
