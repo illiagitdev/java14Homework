@@ -28,6 +28,12 @@ public class Goods {
         return amount;
     }
 
+    public void setAmount(int amount) {
+        if (amount > 0) {
+            this.amount = amount;
+        }
+    }
+
     public String getName() {
         return name;
     }

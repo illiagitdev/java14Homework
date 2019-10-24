@@ -6,44 +6,56 @@ import store.Store;
 
 public class Services {
 
-    public void getItemByID(Store store) {
+    public int getItemByID(Store store) {
         System.out.println("Введіть ID товару:");
         int id = Utils.getInt();
-        for (Goods x:store.getPhones()) {
+        int count = 0;
+        for (Goods x : store.getPhones()) {
             if (x.getId() == id) {
                 System.out.println(x.show());
+                count++;
             }
         }
-        for (Goods x:store.getComputers()) {
+        for (Goods x : store.getComputers()) {
             if (x.getId() == id) {
                 System.out.println(x.show());
+                count++;
             }
         }
-        for (Goods x:store.getVegetables()) {
+        for (Goods x : store.getVegetables()) {
             if (x.getId() == id) {
                 System.out.println(x.show());
+                count++;
             }
         }
-        for (Goods x:store.getSweets()) {
+        for (Goods x : store.getSweets()) {
             if (x.getId() == id) {
                 System.out.println(x.show());
+                count++;
             }
         }
-        for (Goods x:store.getFreshWaters()) {
+        for (Goods x : store.getFreshWaters()) {
             if (x.getId() == id) {
                 System.out.println(x.show());
+                count++;
             }
         }
-        for (Goods x:store.getSweetWaters()) {
+        for (Goods x : store.getSweetWaters()) {
             if (x.getId() == id) {
                 System.out.println(x.show());
+                count++;
             }
         }
-        for (Goods x:store.getClothes()) {
+        for (Goods x : store.getClothes()) {
             if (x.getId() == id) {
                 System.out.println(x.show());
+                count++;
             }
         }
+        if (count == 1) {
+            return id;
+        }
+        return 0;
     }
 
     public void showByCategory(Store store) {
@@ -120,7 +132,7 @@ public class Services {
     }
 
     public void getByName(Store store) {
-        int in=inCategory();
+        int in = inCategory();
         System.out.println("Введіть назву товару:");
         String name = Utils.getStr();
         switch (in) {
@@ -176,6 +188,147 @@ public class Services {
             default: {
                 System.out.println("Категорії не існує.");
                 break;
+            }
+        }
+    }
+
+    public void addGoods(Store store) {
+        int id = getItemByID(store);
+        System.out.println("Додаємо старий або новий товар.");
+        if (id == 1) {
+            System.out.print("Скільки одиниць товару додаємо: ");
+            int amount = Utils.getInt();
+            setItemAmount(store, id, amount);
+        } else {
+            System.out.println("Товару в магазині немає.\nДодайте його вручну:");
+            int newElementTo = inCategory();
+            addElement(store, newElementTo);
+        }
+    }
+
+    private void addElement(Store store, int newElementTo) {
+        switch (newElementTo) {
+            case 1: {
+                addPhone(store);
+                break;
+            }
+            case 2: {
+                addComputer(store);
+                break;
+            }
+            case 3: {
+                addVegetables(store);
+                break;
+            }
+            case 4: {
+                addSweets(store);
+                break;
+            }
+            case 5: {
+                addFreshWater(store);
+                break;
+            }
+            case 6: {
+                addSweetWater(store);
+                break;
+            }
+            case 7: {
+                addClothes(store);
+                break;
+            }
+            default: {
+                System.out.println("Категорії не існує.");
+                break;
+            }
+        }
+    }
+
+    private void addNewElement(Store store) {
+
+    }
+
+    private void addClothes(Store store) {
+        addNewElement(store);
+    }
+
+    private void addSweetWater(Store store) {
+        addNewElement(store);
+
+    }
+
+    private void addFreshWater(Store store) {
+        addNewElement(store);
+
+    }
+
+    private void addSweets(Store store) {
+        addNewElement(store);
+
+    }
+
+    private void addVegetables(Store store) {
+        addNewElement(store);
+
+    }
+
+    private void addComputer(Store store) {
+        addNewElement(store);
+
+    }
+
+    private void addPhone(Store store) {
+        addNewElement(store);
+
+    }
+
+    public void setItemAmount(Store store, int id, int amount) {
+        for (Goods x : store.getPhones()) {
+            if (x.getId() == id) {
+                System.out.println("Старе значення: " + x.getId() + " " + x.getAmount());
+                x.setAmount(x.getAmount() + amount);
+                System.out.println("Нове значення: " + x.getId() + " " + x.getAmount());
+            }
+        }
+        for (Goods x : store.getComputers()) {
+            if (x.getId() == id) {
+                System.out.println("Старе значення: " + x.getId() + " " + x.getAmount());
+                x.setAmount(x.getAmount() + amount);
+                System.out.println("Нове значення: " + x.getId() + " " + x.getAmount());
+            }
+        }
+        for (Goods x : store.getVegetables()) {
+            if (x.getId() == id) {
+                System.out.println("Старе значення: " + x.getId() + " " + x.getAmount());
+                x.setAmount(x.getAmount() + amount);
+                System.out.println("Нове значення: " + x.getId() + " " + x.getAmount());
+            }
+        }
+        for (Goods x : store.getSweets()) {
+            if (x.getId() == id) {
+                System.out.println("Старе значення: " + x.getId() + " " + x.getAmount());
+                x.setAmount(x.getAmount() + amount);
+                System.out.println("Нове значення: " + x.getId() + " " + x.getAmount());
+            }
+        }
+        for (Goods x : store.getFreshWaters()) {
+            if (x.getId() == id) {
+                System.out.println("Старе значення: " + x.getId() + " " + x.getAmount());
+                x.setAmount(x.getAmount() + amount);
+                System.out.println("Нове значення: " + x.getId() + " " + x.getAmount());
+            }
+        }
+        for (Goods x : store.getSweetWaters()) {
+            if (x.getId() == id) {
+                System.out.println("Старе значення: " + x.getId() + " " + x.getAmount());
+                x.setAmount(x.getAmount() + amount);
+                System.out.println("Нове значення: " + x.getId() + " " + x.getAmount());
+            }
+        }
+        for (Goods x : store.getClothes()) {
+            if (x.getId() == id) {
+                System.out.println("Старе значення: " + x.getId() + " " + x.getAmount());
+                x.setAmount(x.getAmount() + amount);
+                System.out.println("Нове значення: " + x.getId() + " " + x.getAmount());
             }
         }
     }
