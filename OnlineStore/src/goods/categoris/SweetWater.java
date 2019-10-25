@@ -14,6 +14,10 @@ public class SweetWater extends Goods {
     public SweetWater() {
     }
 
+    public void setExpirationTime(ExpirationTime expirationTime) {
+        this.expirationTime = expirationTime;
+    }
+
     @Override
     public String show() {
         return "Солодка вода:" + super.show() + toString();

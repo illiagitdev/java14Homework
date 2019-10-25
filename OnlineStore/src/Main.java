@@ -1,7 +1,10 @@
 import goods.categoris.*;
 import goods.components.Brend;
+import goods.components.ExpirationTime;
 import goods.components.tech.OperatingSystem;
 import store.Store;
+
+import java.util.Calendar;
 
 public class Main {
     public static void main(String[] args) {
@@ -88,7 +91,9 @@ public class Main {
         {
             sweetWaters[0] = new SweetWater(61, "Упаковка безалкогольного напитка Pepsi Max 1 л х 12 бутылок",
                     543, "Упаковка безалкогольного напитка Pepsi Max 1 л х 12 бутылок", 180);
-//                               "5/5/2019", 15, "6 месяцев");
+            Calendar tmp=Calendar.getInstance();tmp.set(2019,5,5);
+            Calendar tmp1=Calendar.getInstance();tmp1.set(2019,11,5);
+            ExpirationTime expire=new ExpirationTime(tmp,15, tmp1);
             sweetWaters[1] = new SweetWater(62, "Упаковка безалкогольного напитка Coca-Cola 2 л х 6 бутылок",
                     641, "Coca-Cola была создана в Атланте, штат Джорджия, доктором Джоном С. Пембертоном в далеком 1886 " +
                     "году путем смешивания сиропа и воды.", 150);

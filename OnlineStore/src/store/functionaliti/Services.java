@@ -2,7 +2,11 @@ package store.functionaliti;
 
 import goods.Goods;
 import goods.categoris.*;
+import goods.components.Brend;
+import goods.components.ExpirationTime;
 import store.Store;
+
+import java.util.Calendar;
 
 public class Services {
 
@@ -261,8 +265,18 @@ public class Services {
         String description = Utils.getStr();
         System.out.print("Вкажіть вартість товару: ");
         float price = Utils.getFloat();
+        System.out.print("Вкажіть рік заснування бренду: ");
+         int brandFoundationYear=Utils.getInt();
+        System.out.print("Вкажіть назву бренду: ");
+        String brandName= Utils.getStr();
+        System.out.print("Вкажіть кількість працівників: ");
+        int brandEmployeesNumber=Utils.getInt();
+        System.out.print("Вкажіть кількість країн в яких продається бренд: ");
+        int brandSellCountiesNumber=Utils.getInt();
 
+        Brend brend=new Brend();
         addClothes[addClothes.length - 1] = new Clothes(id, name, amount, description, price);
+        addClothes[addClothes.length - 1].setBrend(brend);
         store.setClothes(addClothes);
         System.out.println(store.getClothes()[addClothes.length - 1].show());
     }
@@ -284,7 +298,23 @@ public class Services {
         System.out.print("Вкажіть вартість товару: ");
         float price = Utils.getFloat();
 
+        System.out.print("Вкажіть дату виготовлення день: ");
+        int day = Utils.getInt();
+        System.out.print("місяць: ");
+        int month = Utils.getInt();
+        System.out.print("рік: ");
+        int year = Utils.getInt();
+        Calendar productionDate=Calendar.getInstance();
+        productionDate.set(year,month,day);
+        System.out.print("Вкажіть температуру зберігання: ");
+        int saveTemperature = Utils.getInt();
+        System.out.print("Вкажіть термін придатності: ");
+        int expireInDays = Utils.getInt();
+        Calendar  expirationTime=Calendar.getInstance();//=productionDate.set();//todo:fix
+        ExpirationTime expirationTime1=new ExpirationTime(productionDate,saveTemperature,expirationTime);
+
         addSweetWater[addSweetWater.length - 1] = new SweetWater(id, name, amount, description, price);
+        addSweetWater[addSweetWater.length - 1].setExpirationTime(expirationTime1);
         store.setSweetWaters(addSweetWater);
         System.out.println(store.getSweetWaters()[addSweetWater.length - 1].show());
     }
