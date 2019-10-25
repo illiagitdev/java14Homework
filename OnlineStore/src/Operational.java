@@ -1,4 +1,5 @@
 import store.Store;
+import store.functionaliti.Selling;
 import store.functionaliti.Services;
 import store.functionaliti.Utils;
 
@@ -70,7 +71,8 @@ public class Operational {
             }
             case 5: {
                 System.out.println("Вибрано: 5 - Продати товар.");
-
+                Selling selling=new Selling();
+                selling.sell(store);
                 break;
             }
             default: {

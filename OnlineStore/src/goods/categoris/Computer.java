@@ -21,6 +21,22 @@ public class Computer extends Goods {
     public Computer() {
     }
 
+    public void setRam(RAM ram) {
+        this.ram = ram;
+    }
+
+    public void setCpu(CPU cpu) {
+        this.cpu = cpu;
+    }
+
+    public void setVideoCard(VideoCard videoCard) {
+        this.videoCard = videoCard;
+    }
+
+    public void setWarranty(Warranty warranty) {
+        this.warranty = warranty;
+    }
+
     @Override
     public String show() {
         return "Комп'ютер:"+super.show() + toString();

@@ -4,6 +4,7 @@ import goods.Goods;
 import goods.components.ExpirationTime;
 
 public class Vegetable extends Goods {
+    private String type;
     private ExpirationTime expirationTime;
 
     public Vegetable(int id, String name, int amount, String description, float price) {
@@ -12,6 +13,14 @@ public class Vegetable extends Goods {
     }
 
     public Vegetable() {
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setExpirationTime(ExpirationTime expirationTime) {
+        this.expirationTime = expirationTime;
     }
 
     @Override

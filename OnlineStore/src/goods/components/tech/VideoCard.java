@@ -9,6 +9,11 @@ public class VideoCard implements TechSpecifics {
         videoRAM = new VideoRAM();
     }
 
+    public VideoCard(CPU gpu, VideoRAM videoRAM) {
+        this.gpu = gpu;
+        this.videoRAM = videoRAM;
+    }
+
     public CPU getGpu() {
         return gpu;
     }

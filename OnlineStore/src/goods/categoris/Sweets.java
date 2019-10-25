@@ -14,6 +14,10 @@ public class Sweets extends Goods {
     public Sweets() {
     }
 
+    public void setExpirationTime(ExpirationTime expirationTime) {
+        this.expirationTime = expirationTime;
+    }
+
     @Override
     public String show() {
         return "Солодощі:" + super.show() + toString();

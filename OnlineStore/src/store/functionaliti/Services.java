@@ -4,6 +4,8 @@ import goods.Goods;
 import goods.categoris.*;
 import goods.components.Brend;
 import goods.components.ExpirationTime;
+import goods.components.Warranty;
+import goods.components.tech.*;
 import store.Store;
 
 import java.util.Calendar;
@@ -266,15 +268,15 @@ public class Services {
         System.out.print("Вкажіть вартість товару: ");
         float price = Utils.getFloat();
         System.out.print("Вкажіть рік заснування бренду: ");
-         int brandFoundationYear=Utils.getInt();
+        int brandFoundationYear = Utils.getInt();
         System.out.print("Вкажіть назву бренду: ");
-        String brandName= Utils.getStr();
+        String brandName = Utils.getStr();
         System.out.print("Вкажіть кількість працівників: ");
-        int brandEmployeesNumber=Utils.getInt();
+        int brandEmployeesNumber = Utils.getInt();
         System.out.print("Вкажіть кількість країн в яких продається бренд: ");
-        int brandSellCountiesNumber=Utils.getInt();
+        int brandSellCountiesNumber = Utils.getInt();
 
-        Brend brend=new Brend();
+        Brend brend = new Brend(brandFoundationYear, brandName, brandEmployeesNumber, brandSellCountiesNumber);
         addClothes[addClothes.length - 1] = new Clothes(id, name, amount, description, price);
         addClothes[addClothes.length - 1].setBrend(brend);
         store.setClothes(addClothes);
@@ -304,17 +306,22 @@ public class Services {
         int month = Utils.getInt();
         System.out.print("рік: ");
         int year = Utils.getInt();
-        Calendar productionDate=Calendar.getInstance();
-        productionDate.set(year,month,day);
+        Calendar productionDate = Calendar.getInstance();
+        productionDate.set(year, month, day);
         System.out.print("Вкажіть температуру зберігання: ");
         int saveTemperature = Utils.getInt();
-        System.out.print("Вкажіть термін придатності: ");
-        int expireInDays = Utils.getInt();
-        Calendar  expirationTime=Calendar.getInstance();//=productionDate.set();//todo:fix
-        ExpirationTime expirationTime1=new ExpirationTime(productionDate,saveTemperature,expirationTime);
+        System.out.print("Вкажіть термін придатності день: ");
+        day = Utils.getInt();
+        System.out.print("місяць: ");
+        month = Utils.getInt();
+        System.out.print("рік: ");
+        year = Utils.getInt();
+        Calendar expireDate = Calendar.getInstance();
+        expireDate.set(year, month, day);
 
+        ExpirationTime expirationTime = new ExpirationTime(productionDate, saveTemperature, expireDate);
         addSweetWater[addSweetWater.length - 1] = new SweetWater(id, name, amount, description, price);
-        addSweetWater[addSweetWater.length - 1].setExpirationTime(expirationTime1);
+        addSweetWater[addSweetWater.length - 1].setExpirationTime(expirationTime);
         store.setSweetWaters(addSweetWater);
         System.out.println(store.getSweetWaters()[addSweetWater.length - 1].show());
     }
@@ -358,7 +365,28 @@ public class Services {
         System.out.print("Вкажіть вартість товару: ");
         float price = Utils.getFloat();
 
+        System.out.print("Вкажіть дату виготовлення день: ");
+        int day = Utils.getInt();
+        System.out.print("місяць: ");
+        int month = Utils.getInt();
+        System.out.print("рік: ");
+        int year = Utils.getInt();
+        Calendar productionDate = Calendar.getInstance();
+        productionDate.set(year, month, day);
+        System.out.print("Вкажіть температуру зберігання: ");
+        int saveTemperature = Utils.getInt();
+        System.out.print("Вкажіть термін придатності день: ");
+        day = Utils.getInt();
+        System.out.print("місяць: ");
+        month = Utils.getInt();
+        System.out.print("рік: ");
+        year = Utils.getInt();
+        Calendar expireDate = Calendar.getInstance();
+        expireDate.set(year, month, day);
+
+        ExpirationTime expirationTime = new ExpirationTime(productionDate, saveTemperature, expireDate);
         addSweets[addSweets.length - 1] = new Sweets(id, name, amount, description, price);
+        addSweets[addSweets.length - 1].setExpirationTime(expirationTime);
         store.setSweets(addSweets);
         System.out.println(store.getSweets()[addSweets.length - 1].show());
     }
@@ -379,8 +407,32 @@ public class Services {
         String description = Utils.getStr();
         System.out.print("Вкажіть вартість товару: ");
         float price = Utils.getFloat();
+        System.out.print("Вкажіть тип продукту ");
+        String type = Utils.getStr();
 
+        System.out.print("Вкажіть дату виготовлення день: ");
+        int day = Utils.getInt();
+        System.out.print("місяць: ");
+        int month = Utils.getInt();
+        System.out.print("рік: ");
+        int year = Utils.getInt();
+        Calendar productionDate = Calendar.getInstance();
+        productionDate.set(year, month, day);
+        System.out.print("Вкажіть температуру зберігання: ");
+        int saveTemperature = Utils.getInt();
+        System.out.print("Вкажіть термін придатності день: ");
+        day = Utils.getInt();
+        System.out.print("місяць: ");
+        month = Utils.getInt();
+        System.out.print("рік: ");
+        year = Utils.getInt();
+        Calendar expireDate = Calendar.getInstance();
+        expireDate.set(year, month, day);
+
+        ExpirationTime expirationTime = new ExpirationTime(productionDate, saveTemperature, expireDate);
         addVegetable[addVegetable.length - 1] = new Vegetable(id, name, amount, description, price);
+        addVegetable[addVegetable.length - 1].setType(type);
+        addVegetable[addVegetable.length - 1].setExpirationTime(expirationTime);
         store.setVegetables(addVegetable);
         System.out.println(store.getVegetables()[addVegetable.length - 1].show());
     }
@@ -402,7 +454,47 @@ public class Services {
         System.out.print("Вкажіть вартість товару: ");
         float price = Utils.getFloat();
 
+        System.out.println("Вкажіть характеристики оперативноъ пам'яті: ");
+        System.out.print("Вкажіть розмір мамяті(GB): ");
+        float memorySize = Utils.getFloat();
+        System.out.print("Вкажіть тип пам'яті(DDRx): ");
+        String memoryType = Utils.getStr();
+        RAM ram = new RAM(memorySize, memoryType);
+        System.out.println("Вкажіть характеристики процесора: ");
+        System.out.print("Вкажіть кількість ядер: ");
+        int coreNumber = Utils.getInt();
+        System.out.print("Вкажіть частоту процесора (ГГц): ");
+        float frequency = Utils.getFloat();
+        CPU cpu = new CPU(coreNumber, frequency);
+
+        System.out.print("Вкажіть характеристики відеокарти: ");
+        System.out.print("Вкажіть кількість ядер GPU: ");
+        coreNumber = Utils.getInt();
+        System.out.print("Вкажіть частоту процесора GPU (ГГц): ");
+        frequency = Utils.getFloat();
+        CPU gpu = new CPU(coreNumber, frequency);
+        System.out.print("Вкажіть розмір мамяті(GB): ");
+        memorySize = Utils.getFloat();
+        System.out.print("Вкажіть тип пам'яті(DDRx): ");
+        memoryType = Utils.getStr();
+        VideoRAM videoRAM = new VideoRAM(memorySize, memoryType);
+        VideoCard videoCard = new VideoCard(gpu, videoRAM);
+
+        System.out.print("Вкажіть гарантыйний термін товару: ");
+        int day = Utils.getInt();
+        System.out.print("місяць: ");
+        int month = Utils.getInt();
+        System.out.print("рік: ");
+        int year = Utils.getInt();
+        Calendar expireDate = Calendar.getInstance();
+        expireDate.set(year, month, day);
+        Warranty warranty = new Warranty(expireDate);
+
         addComputer[addComputer.length - 1] = new Computer(id, name, amount, description, price);
+        addComputer[addComputer.length - 1].setRam(ram);
+        addComputer[addComputer.length - 1].setCpu(cpu);
+        addComputer[addComputer.length - 1].setVideoCard(videoCard);
+        addComputer[addComputer.length - 1].setWarranty(warranty);
         store.setComputers(addComputer);
         System.out.println(store.getComputers()[addComputer.length - 1].show());
     }
@@ -423,8 +515,46 @@ public class Services {
         String description = Utils.getStr();
         System.out.print("Вкажіть вартість товару: ");
         float price = Utils.getFloat();
+        System.out.println("Вкажіть тип операційної системи: ");
+        String operational=Utils.getStr();
+        OperatingSystem system =new OperatingSystem(operational);
+
+        System.out.println("Вкажіть характеристики оперативноъ пам'яті: ");
+        System.out.print("Вкажіть розмір мамяті(GB): ");
+        float memorySize = Utils.getFloat();
+        System.out.print("Вкажіть тип пам'яті(DDRx): ");
+        String memoryType = Utils.getStr();
+        RAM ram = new RAM(memorySize, memoryType);
+        System.out.println("Вкажіть характеристики процесора: ");
+        System.out.print("Вкажіть кількість ядер: ");
+        int coreNumber = Utils.getInt();
+        System.out.print("Вкажіть частоту процесора (ГГц): ");
+        float frequency = Utils.getFloat();
+        CPU cpu = new CPU(coreNumber, frequency);
+
+        System.out.print("Вкажіть діагональ екрану: ");
+        ScreenDiagonal diagonal=new ScreenDiagonal(Utils.getInt());
+        System.out.print("Вкажіть ас роботи від батареї (годин): ");
+        WorkingTime workingTime=new WorkingTime(Utils.getFloat());
+
+        System.out.print("Вкажіть гарантыйний термін товару: ");
+        int day = Utils.getInt();
+        System.out.print("місяць: ");
+        int month = Utils.getInt();
+        System.out.print("рік: ");
+        int year = Utils.getInt();
+        Calendar expireDate = Calendar.getInstance();
+        expireDate.set(year, month, day);
+        Warranty warranty = new Warranty(expireDate);
 
         addPhone[addPhone.length - 1] = new Phone(id, name, amount, description, price);
+        addPhone[addPhone.length - 1].setSystem(system);
+        addPhone[addPhone.length - 1].setRam(ram);
+        addPhone[addPhone.length - 1].setCpu(cpu);
+        addPhone[addPhone.length - 1].setDiagonal(diagonal);
+        addPhone[addPhone.length - 1].setWorkingTime(workingTime);
+        addPhone[addPhone.length - 1].setWarranty(warranty);
+
         store.setPhones(addPhone);
         System.out.println(store.getPhones()[addPhone.length - 1].show());
     }
