@@ -128,7 +128,7 @@ public class Services {
         }
     }
 
-    private int inCategory() {
+    public int inCategory() {
         System.out.println("Категорії:\n\t1 - Смартфони\t\t2 - Комп'ютери" +
                 "\n\t3 - Овочі\t\t4 - Солодощі" +
                 "\n\t5 - Вода\t\t6 - Солодка вода" +
