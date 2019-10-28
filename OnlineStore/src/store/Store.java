@@ -1,6 +1,7 @@
 package store;
 
 import goods.categoris.*;
+import subscription.SubscriptionManager;
 
 public class Store {
     private double balance;
@@ -11,6 +12,7 @@ public class Store {
     private FreshWater[] freshWaters;
     private SweetWater[] sweetWaters;
     private Clothes[] clothes;
+    private SubscriptionManager subscribtion;
 
     public double getBalance() {
         return balance;
