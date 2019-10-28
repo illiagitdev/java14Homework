@@ -38,6 +38,11 @@ public class Goods {
         return name;
     }
 
+    public float getPrice() {
+        return price;
+    }
+
+
     public String show() {
         return "\nID\t\t\t" + id + "\n" +
                 "назва\t\t" + name + "\n" +
