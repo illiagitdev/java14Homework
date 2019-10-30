@@ -1,8 +1,5 @@
 import distribution.Distribution;
 
-import java.util.Random;
-import java.util.Scanner;
-
 public class MainNMEA {
     public static void main(String[] args) {
         Distribution messageAnaliser=new Distribution();

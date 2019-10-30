@@ -7,6 +7,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class RMC implements GpsMessages {
+    private String text;
+
     @Override
     public void getDescription(String[] input) {
         LocalTime timeUTC = Utils.getTimeSS(input[0]);
@@ -25,7 +27,7 @@ public class RMC implements GpsMessages {
         double magneticVar = Utils.returnDouble(input[9]);
         Character magneticVarID = Utils.getChar0(input[10]);
 
-        System.out.println("RMC -  Recommended Minimum Specific GNSS Data\n\n" +
+        text = "RMC -  Recommended Minimum Specific GNSS Data\n\n" +
                 timeUTC + " - (String) UTC time of the fix\n" +
                 statusIndicator + " - (Character) Status indicator. A=valid; V=invalid\n" +
                 latitudeDegree + " deg. " + latitudeMin + " min. - (Integer,Double) Latitude of position\n" +
@@ -36,6 +38,11 @@ public class RMC implements GpsMessages {
                 heading + " - (Double) True course\n" +
                 timeUTCfix + " - (Date) UTC Date of the fix\n" +
                 magneticVar + " degree - (Double) Magnetic variation\n" +
-                magneticVarID + " - (Character) direction of magnetic variation. Either E=East or W=West\n");
+                magneticVarID + " - (Character) direction of magnetic variation. Either E=East or W=West\n";
+    }
+
+    @Override
+    public void show() {
+        System.out.println(text);
     }
 }

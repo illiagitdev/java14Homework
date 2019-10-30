@@ -4,26 +4,31 @@ import distribution.GpsMessages;
 import distribution.Utils;
 
 public class GSA implements GpsMessages {
+    private String text;
+
     @Override
     public void getDescription(String[] input) {
-        String[] content = input;
-        Character workMode = Utils.getChar0(content[0]);
-        int fixType = Utils.returnInteger(content[1]);
-        int[] satelliteID = new int[12];
-        double PDOP = Utils.returnDouble(content[14]);
-        double HDOP = Utils.returnDouble(content[15]);
-        double VDOP = Utils.returnDouble(content[16]);
+        Character workMode = Utils.getChar0(input[0]);
+        int fixType = Utils.returnInteger(input[1]);
+        double PDOP = Utils.returnDouble(input[14]);
+        double HDOP = Utils.returnDouble(input[15]);
+        double VDOP = Utils.returnDouble(input[16]);
 
-        System.out.println("GSA - GNSS DOP and Active Satellites\n\n" +
+        text = "GSA - GNSS DOP and Active Satellites\n\n" +
                 workMode + " - (Character) Mode: ‘M’ = Manual, ‘A’ = Automatic\n" +
-                fixType + " - (Integer) Fix type: 1 = Fix not available, 2 = 2D, 3 = 3D");
+                fixType + " - (Integer) Fix type: 1 = Fix not available, 2 = 2D, 3 = 3D\n";
 
-        for (int i = 0; i < 12; i++) {
-            System.out.println(satelliteID[i] + " - (Integer) ID = " + (i + 1) + ", Satellite ID used in position fix");
+        for (int i = 2; i < 14; i++) {
+            text += Utils.returnDouble(input[i]) + " - (Integer) ID = " + (i - 1) + ", Satellite ID used in position fix\n";
         }
 
-        System.out.println(PDOP + " - (Double) Position dilution of precision (00.0 to 99.9)\n" +
+        text += PDOP + " - (Double) Position dilution of precision (00.0 to 99.9)\n" +
                 HDOP + " - (Double) Horizontal dilution of precision (00.0 to 99.9)\n" +
-                VDOP + " - (Double) Vertical dilution of precision (00.0 to 99.9)");
+                VDOP + " - (Double) Vertical dilution of precision (00.0 to 99.9)";
+    }
+
+    @Override
+    public void show() {
+        System.out.println(text);
     }
 }

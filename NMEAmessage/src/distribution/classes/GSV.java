@@ -4,6 +4,8 @@ import distribution.GpsMessages;
 import distribution.Utils;
 
 public class GSV implements GpsMessages {
+    private String text;
+
     @Override
     public void getDescription(String[] input) {
         String[] content = input;
@@ -27,7 +29,7 @@ public class GSV implements GpsMessages {
         int satAzimuth3 = Utils.returnInteger(content[13]);
         int signalToNoise3 = Utils.returnInteger(content[14]);
 
-        System.out.println("GSV - GNSS DOP and Active Satellites\n\n" +
+        text = "GSV - GNSS DOP and Active Satellites\n\n" +
                 messagesN + " - (Integer) Total number of messages\n" +
                 messageNumber + " - (Integer) number of message\n" +
                 satellites + " - (Integer) Total number of satellites in view\n" +
@@ -42,6 +44,11 @@ public class GSV implements GpsMessages {
                 satellitID3 + " - (Integer) Satellite ID\n" +
                 satElevation3 + " - (Integer) Satellite elevation, degrees 90 max\n" +
                 satAzimuth3 + " - (Integer) Satellite azimuth, degrees True, 000 to 359\n" +
-                signalToNoise3 + " - (Integer) Signal-to-noise ration (C/No) 00-99 dB-Hz");
+                signalToNoise3 + " - (Integer) Signal-to-noise ration (C/No) 00-99 dB-Hz";
+    }
+
+    @Override
+    public void show() {
+        System.out.println(text);
     }
 }
