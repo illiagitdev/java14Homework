@@ -3,6 +3,8 @@ package goods.categoris;
 import goods.Goods;
 import goods.components.ExpirationTime;
 
+import java.util.Calendar;
+
 public class Vegetable extends Goods {
     private String type;
     private ExpirationTime expirationTime;
@@ -30,9 +32,11 @@ public class Vegetable extends Goods {
 
     @Override
     public String toString() {
-        return "\nВиготовлено:\t\t" + expirationTime.getProductionDate() +
+        return "\nВиготовлено:\t\t" + expirationTime.getProductionDate().get(Calendar.DAY_OF_MONTH) + "/" +
+                expirationTime.getProductionDate().get(Calendar.MONTH) + "/" + expirationTime.getProductionDate().get(Calendar.YEAR) +
                 "\nТемп. зберігання:\t" + expirationTime.getSaveTemperature() +
-                "\nВжити до:\t\t\t" + expirationTime.getExpirationTime()
-                + '\n';
+                "\nВжити до:\t\t\t" + expirationTime.getExpirationTime().get(Calendar.DAY_OF_MONTH) + "/" +
+                expirationTime.getExpirationTime().get(Calendar.MONTH) + "/" + expirationTime.getExpirationTime().get(Calendar.YEAR) +
+                +'\n';
     }
 }

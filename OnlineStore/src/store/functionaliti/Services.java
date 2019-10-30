@@ -252,21 +252,13 @@ public class Services {
     }
 
     private void addClothes(Store store) {
-        Clothes[] addClothes = new Clothes[store.getPhones().length + 1];
+        Clothes[] addClothes = new Clothes[store.getClothes().length + 1];
         for (int i = 0; i < addClothes.length - 1; i++) {
             addClothes[i] = store.getClothes()[i];
         }
 
         int id = addClothes[addClothes.length - 2].getId() + 1;
         System.out.println("ID нового товару: " + id);
-        System.out.print("Введіть назву одягу ");
-        String name = Utils.getStr();
-        System.out.print("Введіть кількість товару в поставці: ");
-        int amount = Utils.getInt();
-        System.out.print("Введіть опис товару: ");
-        String description = Utils.getStr();
-        System.out.print("Вкажіть вартість товару: ");
-        float price = Utils.getFloat();
         System.out.print("Вкажіть рік заснування бренду: ");
         int brandFoundationYear = Utils.getInt();
         System.out.print("Вкажіть назву бренду: ");
@@ -277,160 +269,71 @@ public class Services {
         int brandSellCountiesNumber = Utils.getInt();
 
         Brend brend = new Brend(brandFoundationYear, brandName, brandEmployeesNumber, brandSellCountiesNumber);
-        addClothes[addClothes.length - 1] = new Clothes(id, name, amount, description, price);
+        addClothes[addClothes.length - 1] = new Clothes(id, getName(), getAmount(), getDescription(), getPrice());
         addClothes[addClothes.length - 1].setBrend(brend);
         store.setClothes(addClothes);
         System.out.println(store.getClothes()[addClothes.length - 1].show());
     }
 
     private void addSweetWater(Store store) {
-        SweetWater[] addSweetWater = new SweetWater[store.getPhones().length + 1];
+        SweetWater[] addSweetWater = new SweetWater[store.getSweetWaters().length + 1];
         for (int i = 0; i < addSweetWater.length - 1; i++) {
             addSweetWater[i] = store.getSweetWaters()[i];
         }
 
         int id = addSweetWater[addSweetWater.length - 2].getId() + 1;
         System.out.println("ID нового товару: " + id);
-        System.out.print("Введіть назву Солодкої води ");
-        String name = Utils.getStr();
-        System.out.print("Введіть кількість товару в поставці: ");
-        int amount = Utils.getInt();
-        System.out.print("Введіть опис товару: ");
-        String description = Utils.getStr();
-        System.out.print("Вкажіть вартість товару: ");
-        float price = Utils.getFloat();
 
-        System.out.print("Вкажіть дату виготовлення день: ");
-        int day = Utils.getInt();
-        System.out.print("місяць: ");
-        int month = Utils.getInt();
-        System.out.print("рік: ");
-        int year = Utils.getInt();
-        Calendar productionDate = Calendar.getInstance();
-        productionDate.set(year, month, day);
-        System.out.print("Вкажіть температуру зберігання: ");
-        int saveTemperature = Utils.getInt();
-        System.out.print("Вкажіть термін придатності день: ");
-        day = Utils.getInt();
-        System.out.print("місяць: ");
-        month = Utils.getInt();
-        System.out.print("рік: ");
-        year = Utils.getInt();
-        Calendar expireDate = Calendar.getInstance();
-        expireDate.set(year, month, day);
-
-        ExpirationTime expirationTime = new ExpirationTime(productionDate, saveTemperature, expireDate);
-        addSweetWater[addSweetWater.length - 1] = new SweetWater(id, name, amount, description, price);
+        ExpirationTime expirationTime = getExpireDate();
+        addSweetWater[addSweetWater.length - 1] = new SweetWater(id, getName(), getAmount(), getDescription(), getPrice());
         addSweetWater[addSweetWater.length - 1].setExpirationTime(expirationTime);
         store.setSweetWaters(addSweetWater);
         System.out.println(store.getSweetWaters()[addSweetWater.length - 1].show());
     }
 
     private void addFreshWater(Store store) {
-        FreshWater[] addFreshWater = new FreshWater[store.getPhones().length + 1];
+        FreshWater[] addFreshWater = new FreshWater[store.getFreshWaters().length + 1];
         for (int i = 0; i < addFreshWater.length - 1; i++) {
             addFreshWater[i] = store.getFreshWaters()[i];
         }
 
         int id = addFreshWater[addFreshWater.length - 2].getId() + 1;
         System.out.println("ID нового товару: " + id);
-        System.out.print("Введіть назву води ");
-        String name = Utils.getStr();
-        System.out.print("Введіть кількість товару в поставці: ");
-        int amount = Utils.getInt();
-        System.out.print("Введіть опис товару: ");
-        String description = Utils.getStr();
-        System.out.print("Вкажіть вартість товару: ");
-        float price = Utils.getFloat();
 
-        addFreshWater[addFreshWater.length - 1] = new FreshWater(id, name, amount, description, price);
+        addFreshWater[addFreshWater.length - 1] = new FreshWater(id, getName(), getAmount(), getDescription(), getPrice());
         store.setFreshWaters(addFreshWater);
         System.out.println(store.getFreshWaters()[addFreshWater.length - 1].show());
     }
 
     private void addSweets(Store store) {
-        Sweets[] addSweets = new Sweets[store.getPhones().length + 1];
+        Sweets[] addSweets = new Sweets[store.getSweets().length + 1];
         for (int i = 0; i < addSweets.length - 1; i++) {
             addSweets[i] = store.getSweets()[i];
         }
 
         int id = addSweets[addSweets.length - 2].getId() + 1;
         System.out.println("ID нового товару: " + id);
-        System.out.print("Введіть назву солодощів ");
-        String name = Utils.getStr();
-        System.out.print("Введіть кількість товару в поставці: ");
-        int amount = Utils.getInt();
-        System.out.print("Введіть опис товару: ");
-        String description = Utils.getStr();
-        System.out.print("Вкажіть вартість товару: ");
-        float price = Utils.getFloat();
 
-        System.out.print("Вкажіть дату виготовлення день: ");
-        int day = Utils.getInt();
-        System.out.print("місяць: ");
-        int month = Utils.getInt();
-        System.out.print("рік: ");
-        int year = Utils.getInt();
-        Calendar productionDate = Calendar.getInstance();
-        productionDate.set(year, month, day);
-        System.out.print("Вкажіть температуру зберігання: ");
-        int saveTemperature = Utils.getInt();
-        System.out.print("Вкажіть термін придатності день: ");
-        day = Utils.getInt();
-        System.out.print("місяць: ");
-        month = Utils.getInt();
-        System.out.print("рік: ");
-        year = Utils.getInt();
-        Calendar expireDate = Calendar.getInstance();
-        expireDate.set(year, month, day);
-
-        ExpirationTime expirationTime = new ExpirationTime(productionDate, saveTemperature, expireDate);
-        addSweets[addSweets.length - 1] = new Sweets(id, name, amount, description, price);
+        ExpirationTime expirationTime = getExpireDate();
+        addSweets[addSweets.length - 1] = new Sweets(id, getName(), getAmount(), getDescription(), getPrice());
         addSweets[addSweets.length - 1].setExpirationTime(expirationTime);
         store.setSweets(addSweets);
         System.out.println(store.getSweets()[addSweets.length - 1].show());
     }
 
     private void addVegetables(Store store) {
-        Vegetable[] addVegetable = new Vegetable[store.getPhones().length + 1];
+        Vegetable[] addVegetable = new Vegetable[store.getVegetables().length + 1];
         for (int i = 0; i < addVegetable.length - 1; i++) {
             addVegetable[i] = store.getVegetables()[i];
         }
 
-        int id = addVegetable[addVegetable.length - 2].getId() + 1;
+        int id = addVegetable[store.getVegetables().length - 1].getId() + 1;
         System.out.println("ID нового товару: " + id);
-        System.out.print("Введіть назву овочів ");
-        String name = Utils.getStr();
-        System.out.print("Введіть кількість товару в поставці: ");
-        int amount = Utils.getInt();
-        System.out.print("Введіть опис товару: ");
-        String description = Utils.getStr();
-        System.out.print("Вкажіть вартість товару: ");
-        float price = Utils.getFloat();
         System.out.print("Вкажіть тип продукту ");
         String type = Utils.getStr();
 
-        System.out.print("Вкажіть дату виготовлення день: ");
-        int day = Utils.getInt();
-        System.out.print("місяць: ");
-        int month = Utils.getInt();
-        System.out.print("рік: ");
-        int year = Utils.getInt();
-        Calendar productionDate = Calendar.getInstance();
-        productionDate.set(year, month, day);
-        System.out.print("Вкажіть температуру зберігання: ");
-        int saveTemperature = Utils.getInt();
-        System.out.print("Вкажіть термін придатності день: ");
-        day = Utils.getInt();
-        System.out.print("місяць: ");
-        month = Utils.getInt();
-        System.out.print("рік: ");
-        year = Utils.getInt();
-        Calendar expireDate = Calendar.getInstance();
-        expireDate.set(year, month, day);
-
-        ExpirationTime expirationTime = new ExpirationTime(productionDate, saveTemperature, expireDate);
-        addVegetable[addVegetable.length - 1] = new Vegetable(id, name, amount, description, price);
+        ExpirationTime expirationTime = getExpireDate();
+        addVegetable[addVegetable.length - 1] = new Vegetable(id, getName(), getAmount(), getDescription(), getPrice());
         addVegetable[addVegetable.length - 1].setType(type);
         addVegetable[addVegetable.length - 1].setExpirationTime(expirationTime);
         store.setVegetables(addVegetable);
@@ -438,61 +341,34 @@ public class Services {
     }
 
     private void addComputer(Store store) {
-        Computer[] addComputer = new Computer[store.getPhones().length + 1];
+        Computer[] addComputer = new Computer[store.getComputers().length + 1];
         for (int i = 0; i < addComputer.length - 1; i++) {
             addComputer[i] = store.getComputers()[i];
         }
 
         int id = addComputer[addComputer.length - 2].getId() + 1;
         System.out.println("ID нового товару: " + id);
-        System.out.print("Введіть назву комп'ютер ");
-        String name = Utils.getStr();
-        System.out.print("Введіть кількість товару в поставці: ");
-        int amount = Utils.getInt();
-        System.out.print("Введіть опис товару: ");
-        String description = Utils.getStr();
-        System.out.print("Вкажіть вартість товару: ");
-        float price = Utils.getFloat();
 
-        System.out.println("Вкажіть характеристики оперативноъ пам'яті: ");
+        System.out.print("Вкажіть характеристики відеокарти: ");
+        System.out.print("Вкажіть кількість ядер GPU: ");
+        int coreNumber = Utils.getInt();
+        System.out.print("Вкажіть частоту процесора GPU (ГГц): ");
+        float frequency = Utils.getFloat();
+        CPU gpu = new CPU(coreNumber, frequency);
+
         System.out.print("Вкажіть розмір мамяті(GB): ");
         float memorySize = Utils.getFloat();
         System.out.print("Вкажіть тип пам'яті(DDRx): ");
         String memoryType = Utils.getStr();
-        RAM ram = new RAM(memorySize, memoryType);
-        System.out.println("Вкажіть характеристики процесора: ");
-        System.out.print("Вкажіть кількість ядер: ");
-        int coreNumber = Utils.getInt();
-        System.out.print("Вкажіть частоту процесора (ГГц): ");
-        float frequency = Utils.getFloat();
-        CPU cpu = new CPU(coreNumber, frequency);
-
-        System.out.print("Вкажіть характеристики відеокарти: ");
-        System.out.print("Вкажіть кількість ядер GPU: ");
-        coreNumber = Utils.getInt();
-        System.out.print("Вкажіть частоту процесора GPU (ГГц): ");
-        frequency = Utils.getFloat();
-        CPU gpu = new CPU(coreNumber, frequency);
-        System.out.print("Вкажіть розмір мамяті(GB): ");
-        memorySize = Utils.getFloat();
-        System.out.print("Вкажіть тип пам'яті(DDRx): ");
-        memoryType = Utils.getStr();
         VideoRAM videoRAM = new VideoRAM(memorySize, memoryType);
         VideoCard videoCard = new VideoCard(gpu, videoRAM);
 
-        System.out.print("Вкажіть гарантыйний термін товару: ");
-        int day = Utils.getInt();
-        System.out.print("місяць: ");
-        int month = Utils.getInt();
-        System.out.print("рік: ");
-        int year = Utils.getInt();
-        Calendar expireDate = Calendar.getInstance();
-        expireDate.set(year, month, day);
-        Warranty warranty = new Warranty(expireDate);
+        System.out.print("Вкажіть гарантійний термін товару: ");
+        Warranty warranty = new Warranty(getDate());
 
-        addComputer[addComputer.length - 1] = new Computer(id, name, amount, description, price);
-        addComputer[addComputer.length - 1].setRam(ram);
-        addComputer[addComputer.length - 1].setCpu(cpu);
+        addComputer[addComputer.length - 1] = new Computer(id, getName(), getAmount(), getDescription(), getPrice());
+        addComputer[addComputer.length - 1].setRam(setRAM());
+        addComputer[addComputer.length - 1].setCpu(setCPU());
         addComputer[addComputer.length - 1].setVideoCard(videoCard);
         addComputer[addComputer.length - 1].setWarranty(warranty);
         store.setComputers(addComputer);
@@ -507,50 +383,22 @@ public class Services {
 
         int id = addPhone[addPhone.length - 2].getId() + 1;
         System.out.println("ID нового товару: " + id);
-        System.out.print("Введіть назву телефону ");
-        String name = Utils.getStr();
-        System.out.print("Введіть кількість товару в поставці: ");
-        int amount = Utils.getInt();
-        System.out.print("Введіть опис товару: ");
-        String description = Utils.getStr();
-        System.out.print("Вкажіть вартість товару: ");
-        float price = Utils.getFloat();
         System.out.println("Вкажіть тип операційної системи: ");
-        String operational=Utils.getStr();
-        OperatingSystem system =new OperatingSystem(operational);
-
-        System.out.println("Вкажіть характеристики оперативноъ пам'яті: ");
-        System.out.print("Вкажіть розмір мамяті(GB): ");
-        float memorySize = Utils.getFloat();
-        System.out.print("Вкажіть тип пам'яті(DDRx): ");
-        String memoryType = Utils.getStr();
-        RAM ram = new RAM(memorySize, memoryType);
-        System.out.println("Вкажіть характеристики процесора: ");
-        System.out.print("Вкажіть кількість ядер: ");
-        int coreNumber = Utils.getInt();
-        System.out.print("Вкажіть частоту процесора (ГГц): ");
-        float frequency = Utils.getFloat();
-        CPU cpu = new CPU(coreNumber, frequency);
+        String operational = Utils.getStr();
+        OperatingSystem system = new OperatingSystem(operational);
 
         System.out.print("Вкажіть діагональ екрану: ");
-        ScreenDiagonal diagonal=new ScreenDiagonal(Utils.getInt());
+        ScreenDiagonal diagonal = new ScreenDiagonal(Utils.getInt());
         System.out.print("Вкажіть ас роботи від батареї (годин): ");
-        WorkingTime workingTime=new WorkingTime(Utils.getFloat());
+        WorkingTime workingTime = new WorkingTime(Utils.getFloat());
 
-        System.out.print("Вкажіть гарантыйний термін товару: ");
-        int day = Utils.getInt();
-        System.out.print("місяць: ");
-        int month = Utils.getInt();
-        System.out.print("рік: ");
-        int year = Utils.getInt();
-        Calendar expireDate = Calendar.getInstance();
-        expireDate.set(year, month, day);
-        Warranty warranty = new Warranty(expireDate);
+        System.out.print("Вкажіть гарантійний термін товару: ");
+        Warranty warranty = new Warranty(getDate());
 
-        addPhone[addPhone.length - 1] = new Phone(id, name, amount, description, price);
+        addPhone[addPhone.length - 1] = new Phone(id, getName(), getAmount(), getDescription(), getPrice());
         addPhone[addPhone.length - 1].setSystem(system);
-        addPhone[addPhone.length - 1].setRam(ram);
-        addPhone[addPhone.length - 1].setCpu(cpu);
+        addPhone[addPhone.length - 1].setRam(setRAM());
+        addPhone[addPhone.length - 1].setCpu(setCPU());
         addPhone[addPhone.length - 1].setDiagonal(diagonal);
         addPhone[addPhone.length - 1].setWorkingTime(workingTime);
         addPhone[addPhone.length - 1].setWarranty(warranty);
@@ -609,5 +457,65 @@ public class Services {
                 System.out.println("Нове значення: " + x.getId() + " " + x.getAmount());
             }
         }
+    }
+
+    private RAM setRAM() {
+        System.out.println("Вкажіть характеристики оперативноъ пам'яті: ");
+        System.out.print("Вкажіть розмір мамяті(GB): ");
+        float memorySize = Utils.getFloat();
+        System.out.print("Вкажіть тип пам'яті(DDRx): ");
+        String memoryType = Utils.getStr();
+        return new RAM(memorySize, memoryType);
+    }
+
+    private CPU setCPU() {
+        System.out.println("Вкажіть характеристики процесора: ");
+        System.out.print("Вкажіть кількість ядер: ");
+        int coreNumber = Utils.getInt();
+        System.out.print("Вкажіть частоту процесора (ГГц): ");
+        float frequency = Utils.getFloat();
+        return new CPU(coreNumber, frequency);
+    }
+
+    private ExpirationTime getExpireDate() {
+        System.out.print("Вкажіть дату виготовлення.");
+        Calendar productionDate = getDate();
+        System.out.print("Вкажіть температуру зберігання: ");
+        int saveTemperature = Utils.getInt();
+        System.out.print("Вкажіть термін придатності.");
+        Calendar expireDate = getDate();
+        return new ExpirationTime(productionDate, saveTemperature, expireDate);
+    }
+
+    private Calendar getDate() {
+        System.out.println("День: ");
+        int day = Utils.getInt();
+        System.out.print("місяць: ");
+        int month = Utils.getInt();
+        System.out.print("рік: ");
+        int year = Utils.getInt();
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(year, month, day);
+        return calendar;
+    }
+
+    private float getPrice() {
+        System.out.print("Вкажіть вартість товару: ");
+        return Utils.getFloat();
+    }
+
+    private String getDescription() {
+        System.out.print("Введіть опис товару: ");
+        return Utils.getStr();
+    }
+
+    private int getAmount() {
+        System.out.print("Введіть кількість товару в поставці: ");
+        return Utils.getInt();
+    }
+
+    private String getName() {
+        System.out.print("Введіть назву товару ");
+        return Utils.getStr();
     }
 }

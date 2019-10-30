@@ -4,6 +4,8 @@ import goods.Goods;
 import goods.components.Warranty;
 import goods.components.tech.*;
 
+import java.util.Calendar;
+
 public class Phone extends Goods {
     private OperatingSystem system;
     private RAM ram;
@@ -63,7 +65,7 @@ public class Phone extends Goods {
                 "\ncpu\t\t" + cpu.getFrequency() + " ГГц" +
                 "\nдіагональ\t" + diagonal.getDiagonal() + " дюймів" +
                 "\nчас роботи\t" + workingTime.getWorkOnButtery() + " годин" +
-                "\nгарантія\t" + warranty.getWarranty() + " місяців" +
+                "\nгарантія\t" + warranty.getWarranty().get(Calendar.MONTH) + " місяців" +
                 '\n';
     }
 }

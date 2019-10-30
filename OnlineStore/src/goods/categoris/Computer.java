@@ -4,6 +4,8 @@ import goods.Goods;
 import goods.components.Warranty;
 import goods.components.tech.*;
 
+import java.util.Calendar;
+
 public class Computer extends Goods {
     private RAM ram;
     private CPU cpu;
@@ -54,7 +56,7 @@ public class Computer extends Goods {
                 "\nGPU\t\t"+videoCard.getGpu().getFrequency() +" ГГц" +
                 "\nвідеопам`ять:"+
                 "\nRAM\t\t" + videoCard.getVideoRAM().getMemorySize() + " GB  " + videoCard.getVideoRAM().getMemoryType() +
-                "\nгарантія\t" + warranty.getWarranty() + " місяців" +
+                "\nгарантія\t" + warranty.getWarranty().get(Calendar.MONTH) + " місяців" +
                 '\n';
     }
 }
