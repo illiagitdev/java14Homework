@@ -30,7 +30,7 @@ public class VTG implements GpsMessages {
     }
 
     @Override
-    public void show() {
-        System.out.println(text);
+    public String toString() {
+        return text;
     }
 }

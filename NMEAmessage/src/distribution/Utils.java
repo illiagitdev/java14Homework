@@ -32,4 +32,8 @@ public class Utils {
     public static LocalDate getDate(String s) {
         return LocalDate.parse(s, DateTimeFormatter.ofPattern("ddMMyy"));
     }
+
+    public static void print(String s){
+        System.out.println(s);
+    }
 }

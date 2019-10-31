@@ -14,37 +14,37 @@ public class Distribution {
                 case "GSV": {
                     ms=new GSV();
                     ms.getDescription(content);
-                    ms.show();
+                    Utils.print(ms.toString());
                     break;
                 }
                 case "GLL": {
                     ms=new GLL();
                     ms.getDescription(content);
-                    ms.show();
+                    Utils.print(ms.toString());
                     break;
                 }
                 case "RMC": {
                     ms=new RMC();
                     ms.getDescription(content);
-                    ms.show();
+                    Utils.print(ms.toString());
                     break;
                 }
                 case "VTG": {
                     ms=new VTG();
                     ms.getDescription(content);
-                    ms.show();
+                    Utils.print(ms.toString());
                     break;
                 }
                 case "GGA": {
                     ms=new GGA();
                     ms.getDescription(content);
-                    ms.show();
+                    Utils.print(ms.toString());
                     break;
                 }
                 case "GSA": {
                     ms=new GSA();
                     ms.getDescription(content);
-                    ms.show();
+                    Utils.print(ms.toString());
                     break;
                 }
                 default: {
