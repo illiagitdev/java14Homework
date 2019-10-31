@@ -7,7 +7,7 @@ public class Frilance extends Employee {
     private float hourPrice;
 
     @Override
-    public double salaryCalc() {
+    public float salaryCalc() {
         return hourPrice*workHours;
     }
 }

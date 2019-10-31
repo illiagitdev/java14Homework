@@ -10,7 +10,7 @@ public class FixedSalary extends Employee {
     }
 
     @Override
-    public double salaryCalc() {
+    public float salaryCalc() {
         return salary;
     }
 }

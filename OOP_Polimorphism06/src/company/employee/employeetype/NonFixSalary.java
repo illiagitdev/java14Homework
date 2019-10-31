@@ -13,7 +13,7 @@ public class NonFixSalary extends Employee {
     }
 
     @Override
-    public double salaryCalc() {
-        return workDays*workHours*hourlyPay;
+    public float salaryCalc() {
+        return workDays * workHours * hourlyPay;
     }
 }
