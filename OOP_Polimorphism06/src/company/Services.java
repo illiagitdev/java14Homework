@@ -83,6 +83,25 @@ public class Services {
             all[i] = frilance[j];
         }
 
+        Employee tmp;
+        for (int i = 0; i < all.length - 1; i++) {
+            for (int j = i; j < all.length - (i + 1); j++) {
+                if (all[j].salaryCalc() > all[j + 1].salaryCalc()) {
+                    tmp = all[j];
+                    all[j] = all[j + 1];
+                    all[j + 1] = tmp;
+                }
+            }
+
+            for (int j = all.length - (i + 2); j > i; j--) {
+                if (all[j - 1].salaryCalc() > all[j].salaryCalc()) {
+                    tmp = all[j];
+                    all[j] = all[j - 1];
+                    all[j - 1] = tmp;
+                }
+            }
+        }
+
         if (b) {//up
             for (Employee x : all) {
                 System.out.println(x.toString());
