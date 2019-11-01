@@ -67,10 +67,30 @@ public class Services {
     }
 
     private void sort(boolean b) {
-        if (b){//up
+        Employee[] fixed = company.getFixedRateEmployee().clone();
+        Employee[] nonFixed = company.getNonFixRateEmployee().clone();
+        Employee[] frilance = company.getFrilanceEmployee().clone();
+        int length = fixed.length + nonFixed.length + frilance.length;
+        Employee[] all = new Employee[length];
 
-        }else {
+        for (int i = 0; i < fixed.length; i++) {
+            all[i] = fixed[i];
+        }
+        for (int i = fixed.length, j = 0; i < (fixed.length + nonFixed.length); i++, j++) {
+            all[i] = nonFixed[j];
+        }
+        for (int i = (fixed.length + nonFixed.length), j = 0; i < length; i++, j++) {
+            all[i] = frilance[j];
+        }
 
+        if (b) {//up
+            for (Employee x : all) {
+                System.out.println(x.toString());
+            }
+        } else {
+            for (int i =length-1;i>=0;i--) {
+                System.out.println(all[i].toString());
+            }
         }
     }
 
