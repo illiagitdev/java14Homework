@@ -1,6 +1,5 @@
 package company;
 
-import com.sun.org.apache.xerces.internal.impl.xpath.XPath;
 import company.employee.Employee;
 
 import java.util.Scanner;
