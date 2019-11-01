@@ -18,15 +18,13 @@ public class Services {
     public void run() {
         boolean leaveCompany = false;
 
-        company = new Company();
+        company = Company.getInstance();
         System.out.println("Loading employees...");
         loadCompany();
 
 
         while (!leaveCompany) {
             whatToDo();
-//            toDo();
-
             leaveCompany = stayOrLeave(leaveCompany);
         }
     }
@@ -36,8 +34,8 @@ public class Services {
         System.out.println("\t 1 - Показати витрати на зарплати.");
         System.out.println("\t 2 - Вивести інформацію про всіх робітників.");
         System.out.println("\t 3 - Додати нового працівника.");
-        System.out.println("\t 4 - ");
-        System.out.println("\t 5 - \n\n");
+        System.out.println("\t 4 - Відсортувати і вивести по зростанні зарплатні.");
+        System.out.println("\t 5 - Відсортувати і вивести по зменшенні зарплатні.\n\n");
 
         System.out.print("\t Ваш вибір: ");
         switch (Utils.getInt()) {
@@ -54,13 +52,25 @@ public class Services {
                 break;
             }
             case 4: {
+                sort(true);
+                break;
             }
             case 5: {
+                sort(false);
+                break;
             }
             default: {
                 System.out.println("Невірний ввід!");
                 break;
             }
+        }
+    }
+
+    private void sort(boolean b) {
+        if (b){//up
+
+        }else {
+
         }
     }
 
@@ -76,11 +86,11 @@ public class Services {
                 break;
             }
             case 2: {
-//                addHourly();
+                addHourly();
                 break;
             }
             case 3: {
-//                addFrilance();
+                addFrilance();
                 break;
             }
             default: {
@@ -90,9 +100,31 @@ public class Services {
         }
     }
 
+    private void addFrilance() {
+        Frilance[] tmp = Arrays.copyOf(company.getFrilanceEmployee(), company.getFrilanceEmployee().length + 1);
+        tmp[tmp.length - 1] = new Frilance(enterName(), enterLastName());
+        System.out.print("Введіть кількість робочих годин за місяць: ");
+        tmp[tmp.length - 1].setWorkHours(Utils.getFloat());
+        System.out.print("Введіть погодинну оплату праці: ");
+        tmp[tmp.length - 1].setHourPrice(Utils.getFloat());
+        company.setFrilanceEmployee(tmp);
+    }
+
+    private void addHourly() {
+        NonFixSalary[] tmp = Arrays.copyOf(company.getNonFixRateEmployee(), company.getNonFixRateEmployee().length + 1);
+        tmp[tmp.length - 1] = new NonFixSalary(enterName(), enterLastName());
+        System.out.print("Введіть кількість робочих годин на добу: ");
+        tmp[tmp.length - 1].setWorkHours(Utils.getFloat());
+        System.out.print("Введіть кількість робочих днів на місяць: ");
+        tmp[tmp.length - 1].setWorkDays(Utils.getFloat());
+        System.out.print("Введіть погодинну оплату праці: ");
+        tmp[tmp.length - 1].setHourlyPay(Utils.getFloat());
+        company.setNonFixRateEmployee(tmp);
+    }
+
     private void addFixed() {
-        Employee[] tmp = Arrays.copyOf(company.getFixedRateEmployee(),company.getFixedRateEmployee().length+1);
-        tmp[tmp.length-1]=new FixedSalary(enterName(), enterLastName(), enterSalary());
+        Employee[] tmp = Arrays.copyOf(company.getFixedRateEmployee(), company.getFixedRateEmployee().length + 1);
+        tmp[tmp.length - 1] = new FixedSalary(enterName(), enterLastName(), enterSalary());
         company.setFixedRateEmployee((FixedSalary[]) tmp);
     }
 
@@ -114,7 +146,7 @@ public class Services {
     private String showInfoAll() {
         String text;
         Employee[] w = company.getFixedRateEmployee();
-        text=Utils.employeesInfo(w);
+        text = Utils.employeesInfo(w);
         w = company.getNonFixRateEmployee();
         text += Utils.employeesInfo(w);
         w = company.getFrilanceEmployee();
@@ -138,33 +170,74 @@ public class Services {
         company.setFrilanceEmployee(readFrilance(new File(Files.FRILANCE_SALARY_EMPLOEE)));
     }
 
-    private Frilance[] readFrilance(File path) {//todo:
-        return new Frilance[0];
+    private Frilance[] readFrilance(File path) {
+        Frilance[] fromFile = null;
+        if (path.exists()) {
+            try {
+                Scanner scan = new Scanner(path);
+                int length = scan.hasNextInt() ? scan.nextInt() : 0;
+                String[] employee;
+                if (length != 0) {
+                    fromFile = new Frilance[length];
+                    for (int i = 0; i < length; i++) {
+                        employee = scan.next().split(",");
+                        fromFile[i] = new Frilance(employee[0], employee[1]);
+                        fromFile[i].setWorkHours(Float.valueOf(employee[2]));
+                        fromFile[i].setHourPrice(Float.valueOf(employee[3]));
+                    }
+                }
+            } catch (FileNotFoundException | NumberFormatException e) {
+                System.out.println("File not found. " + e.fillInStackTrace());
+                return new Frilance[0];
+            }
+        }
+        return fromFile;
     }
 
-    private NonFixSalary[] readNonFixed(File path) {//todo:
-        return new NonFixSalary[0];
+    private NonFixSalary[] readNonFixed(File path) {
+        NonFixSalary[] fromFile = null;
+        if (path.exists()) {
+            try {
+                Scanner scan = new Scanner(path);
+                int length = scan.hasNextInt() ? scan.nextInt() : 0;
+                String[] employee;
+                if (length != 0) {
+                    fromFile = new NonFixSalary[length];
+                    for (int i = 0; i < length; i++) {
+                        employee = scan.next().split(",");
+                        fromFile[i] = new NonFixSalary(employee[0], employee[1]);
+                        fromFile[i].setWorkHours(Float.valueOf(employee[2]));
+                        fromFile[i].setWorkDays(Float.valueOf(employee[3]));
+                        fromFile[i].setHourlyPay(Float.valueOf(employee[4]));
+                    }
+                }
+            } catch (FileNotFoundException | NumberFormatException e) {
+                System.out.println("File not found. " + e.fillInStackTrace());
+                return new NonFixSalary[0];
+            }
+        }
+        return fromFile;
     }
 
     private FixedSalary[] readFixed(File path) {
         FixedSalary[] fromFile = null;
-        try {
-            Scanner scan = new Scanner(path);
-            int length = scan.hasNextInt() ? scan.nextInt() : 0;
-            String[] employee;
-            if (length != 0) {
-                fromFile = new FixedSalary[length];
-                for (int i = 0; i < length; i++) {
-                    employee = scan.next().split(",");
+        if (path.exists()) {
+            try {
+                Scanner scan = new Scanner(path);
+                int length = scan.hasNextInt() ? scan.nextInt() : 0;
+                String[] employee;
+                if (length != 0) {
+                    fromFile = new FixedSalary[length];
+                    for (int i = 0; i < length; i++) {
+                        employee = scan.next().split(",");
 
-                    fromFile[i] = new FixedSalary(employee[0], employee[1], Float.valueOf(employee[2]));
-                    Utils.print(fromFile[i].toString());
+                        fromFile[i] = new FixedSalary(employee[0], employee[1], Float.valueOf(employee[2]));
+                    }
                 }
+            } catch (FileNotFoundException | NumberFormatException e) {
+                System.out.println("File not found. " + e.fillInStackTrace());
+                return new FixedSalary[0];
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            System.out.println("File not found. " + e.fillInStackTrace());
-            return new FixedSalary[0];
         }
         return fromFile;
     }
@@ -191,19 +264,60 @@ public class Services {
         return leaveStore;
     }
 
-    private void saveCompany() {//todo:
-        saveFixed(company.getFixedRateEmployee(),new File(Files.FIXED_SALARY_EMPLOEE));
-//        company.getNonFixRateEmployee(saveNonFixed(new File(Files.NON_FIXED_SALARY_EMPLOEE)));
-//        company.getFrilanceEmployee(saveFrilance(new File(Files.FRILANCE_SALARY_EMPLOEE)));
+    private void saveCompany() {
+        saveFixed(company.getFixedRateEmployee(), new File(Files.FIXED_SALARY_EMPLOEE));
+        saveNonFixed(company.getNonFixRateEmployee(), new File(Files.NON_FIXED_SALARY_EMPLOEE));
+        saveFrilance(company.getFrilanceEmployee(), new File(Files.FRILANCE_SALARY_EMPLOEE));
+    }
+
+    private void saveFrilance(Frilance[] frilanceEmployee, File path) {
+        exists(path);
+        try {
+            FileWriter writer = new FileWriter(path);
+            writer.flush();
+            writer.write(frilanceEmployee.length + "\n");
+            for (Frilance w : frilanceEmployee) {
+                writer.write(w.getFirstName() + "," + w.getLastName() + "," + w.getWorkHours() + ","
+                        + w.getHourPrice() + "\n");
+            }
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("Error: file hasn't been written!" + e.toString());
+        }
+    }
+
+    private void saveNonFixed(NonFixSalary[] nonFixRateEmployee, File path) {
+        exists(path);
+        try {
+            FileWriter writer = new FileWriter(path);
+            writer.flush();
+            writer.write(nonFixRateEmployee.length + "\n");
+            for (NonFixSalary w : nonFixRateEmployee) {
+                writer.write(w.getFirstName() + "," + w.getLastName() + "," + w.getWorkHours() + ","
+                        + w.getWorkDays() + "," + w.getHourlyPay() + "\n");
+            }
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("Error: file hasn't been written!" + e.toString());
+        }
+    }
+
+    private void exists(File path) {
+        try {
+            path.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void saveFixed(FixedSalary[] fixedRateEmployee, File path) {
+        exists(path);
         try {
             FileWriter writer = new FileWriter(path);
             writer.flush();
             writer.write(fixedRateEmployee.length + "\n");
-            for (FixedSalary w: fixedRateEmployee) {
-                writer.write(w.getFirstName()+","+w.getLastName()+","+w.getSalary() + "\n");
+            for (FixedSalary w : fixedRateEmployee) {
+                writer.write(w.getFirstName() + "," + w.getLastName() + "," + w.getSalary() + "\n");
             }
             writer.close();
         } catch (IOException e) {
