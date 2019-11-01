@@ -5,9 +5,18 @@ import company.employee.employeetype.Frilance;
 import company.employee.employeetype.NonFixSalary;
 
 public class Company {
+    public static Company company;
+
     private FixedSalary[] fixedRateEmployee;
     private NonFixSalary[] nonFixRateEmployee;
     private Frilance[] frilanceEmployee;
+
+    public static Company getInstance() {
+        if (company==null){
+            company=new Company();
+        }
+        return company;
+    }
 
     public FixedSalary[] getFixedRateEmployee() {
         return fixedRateEmployee;
