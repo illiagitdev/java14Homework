@@ -4,6 +4,7 @@ import goods.components.ExpirationTime;
 import goods.components.Warranty;
 import goods.components.tech.*;
 import store.Store;
+import storeX.Services;
 
 import java.util.Calendar;
 
@@ -242,6 +243,16 @@ public class Main {
         // - поле “кол-во” у соответствующего объекта должно отнять столько единиц товара, сколько было продано
         // - при продаже “кошелек магазина” пополняется на сумму проданных товаров
         // - нельзя продать больше товаров чем есть в наличии
-        store.run();
+//        store.run();
+
+
+        /* --------------------------------
+        *
+        *       нова реалізація
+        *
+        * */
+
+        Services storeX=new Services();
+        storeX.open();
     }
 }
