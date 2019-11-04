@@ -42,6 +42,9 @@ public class Goods {
         return price;
     }
 
+    public String getDescription() {
+        return description;
+    }
 
     public String show() {
         return "\nID\t\t\t" + id + "\n" +

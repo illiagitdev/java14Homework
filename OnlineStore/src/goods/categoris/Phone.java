@@ -48,6 +48,30 @@ public class Phone extends Goods {
         this.warranty = warranty;
     }
 
+    public OperatingSystem getSystem() {
+        return system;
+    }
+
+    public RAM getRam() {
+        return ram;
+    }
+
+    public CPU getCpu() {
+        return cpu;
+    }
+
+    public ScreenDiagonal getDiagonal() {
+        return diagonal;
+    }
+
+    public WorkingTime getWorkingTime() {
+        return workingTime;
+    }
+
+    public Warranty getWarranty() {
+        return warranty;
+    }
+
     public Phone() {
     }
 
