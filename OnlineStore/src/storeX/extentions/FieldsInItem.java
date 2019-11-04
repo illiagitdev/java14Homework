@@ -1,4 +1,4 @@
-package store.functionaliti;
+package storeX.extentions;
 
 public enum FieldsInItem {
     PHONE(15),COMPUTER(8),VEGETABLES(4),SWEETS(4),FRESHWATER(5),SWEETWATER(4),CLOTHES(6);

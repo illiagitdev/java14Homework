@@ -1,12 +1,17 @@
 package storeX;
 
+import goods.categoris.Phone;
+import goods.components.Warranty;
+import goods.components.tech.*;
 import logger.LogType;
 import logger.Logger;
+import storeX.extentions.FieldsInItem;
 import storeX.extentions.Operational;
 import storeX.extentions.Pathes;
 import storeX.extentions.Utils;
 
 import java.io.*;
+import java.util.Calendar;
 import java.util.Scanner;
 
 public class Services {
@@ -117,18 +122,41 @@ public class Services {
      */
     private void initializeStore() {
         storeX.setBalance(readBalance(new File(Pathes.BALANCE)));
+        storeX.setPhones(readPhones(new File(Pathes.PHONES)));
 
     }
 
-    private double readBalance(File file) {
-        int balance = 0;
-        if (!file.exists()) {
+    private Phone[] readPhones(File path) {
+        String[] content = fileContent(path, FieldsInItem.PHONE.index);
+        for (int i = 0; i < content.length; i++) {
+            System.out.println("i = " + i + "  ::  " + content[i]);
+        }
+        Phone[] fromFile = new Phone[Integer.valueOf(content[0])];
+        for (int i = 0, j; i < fromFile.length; i++) {
+            j = !(i == 0) ? (FieldsInItem.PHONE.index * i + 1) : 1;
+            fromFile[i] = new Phone(Integer.valueOf(content[j]), content[1 + j], Integer.valueOf(content[2 + j]),
+                    content[3 + j], Float.valueOf(content[4 + j]));
+            fromFile[i].setSystem(new OperatingSystem(content[5 + j]));
+            fromFile[i].setRam(new RAM(Float.valueOf(content[6 + j]), content[7 + j]));
+            fromFile[i].setCpu(new CPU(Integer.valueOf(content[8 + j]), Float.valueOf(content[9 + j])));
+            fromFile[i].setDiagonal(new ScreenDiagonal(Float.valueOf(content[10 + j])));
+            fromFile[i].setWorkingTime(new WorkingTime(Float.valueOf(content[11 + j])));
+            Calendar warranty = Calendar.getInstance();
+            warranty.set(Integer.valueOf(content[12 + j]), Integer.valueOf(content[13 + j]), Integer.valueOf(content[14 + j]));
+            fromFile[i].setWarranty(new Warranty(warranty));
+        }
+        return fromFile;
+    }
+
+    private double readBalance(File path) {
+        double balance = 0;
+        if (!path.exists()) {
             Logger.INSTANCE.log(LogType.WARNING, "Файл не знайдено!");
             System.out.println("Файл не знайдено!");
         } else {
             try {
-                Scanner input = new Scanner(file);
-                balance = input.hasNextInt() ? input.nextInt() : 0;
+                Scanner input = new Scanner(path);
+                balance = input.hasNextDouble() ? input.nextDouble() : 0;
             } catch (FileNotFoundException e) {
                 Logger.INSTANCE.log(LogType.WARNING, "Exception: Файл не знайдено! " + e);
                 e.printStackTrace();
@@ -137,28 +165,30 @@ public class Services {
         return balance;
     }
 
-    private String[] fileContent(File file, int index) {
-        String[] str = new String[0];
+    private String[] fileContent(File file, int fields) {
+        String[] content = new String[0];
+        int length = 0;
         if (!file.exists()) {
             Logger.INSTANCE.log(LogType.WARNING, "Файл не знайдено!");
             System.out.println("Файл не знайдено!");
         } else {
             try {
                 Scanner input = new Scanner(file);
-                int length = input.hasNextInt() ? input.nextInt() : 0;
-                str = new String[1 + index * length];
-                for (int i = 1; i < str.length; i++) {
-                    str[i] = input.nextLine();
+                length = input.hasNextInt() ? (Integer.valueOf(input.nextLine())) : 0;
+                content = new String[1 + fields * length];
+                content[0] = Integer.toString(length);
+                for (int i = 1; i < content.length; i++) {
+                    content[i] = input.nextLine();
                 }
             } catch (FileNotFoundException e) {
                 Logger.INSTANCE.log(LogType.WARNING, "Exception: Файл не знайдено! " + e);
                 e.printStackTrace();
-            } catch (IndexOutOfBoundsException ignored) {
-                Logger.INSTANCE.log(LogType.WARNING, "IndexOutOfBoundsException! " + ignored);
-                ignored.printStackTrace();
+            } catch (IndexOutOfBoundsException e) {
+                Logger.INSTANCE.log(LogType.WARNING, "IndexOutOfBoundsException! " + e);
+                e.printStackTrace();
             }
         }
-        return str;
+        return content;
     }
 
     /**
@@ -166,6 +196,11 @@ public class Services {
      */
     private void close() {
         wrightBalance(storeX.getBalance(), new File(Pathes.BALANCE));
+        wrightPhones(storeX.getPhones(), new File(Pathes.PHONES));
+    }
+
+    private void wrightPhones(Phone[] phones, File path) {
+
     }
 
     private void wrightBalance(double balance, File file) {

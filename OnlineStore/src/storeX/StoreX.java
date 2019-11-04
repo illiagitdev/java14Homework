@@ -55,4 +55,8 @@ public class StoreX {
             Logger.INSTANCE.log(LogType.SYSTEM, this.getClass().getSimpleName()+" balance "+this.balance);
             this.balance = balance;
     }
+
+    public void setPhones(Phone[] phones) {
+        this.phones = phones;
+    }
 }
