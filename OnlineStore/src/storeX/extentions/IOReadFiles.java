@@ -47,7 +47,7 @@ public class IOReadFiles {
             fromFile[i].setDiagonal(new ScreenDiagonal(Float.parseFloat(content[10 + j])));
             fromFile[i].setWorkingTime(new WorkingTime(Float.parseFloat(content[11 + j])));
             Calendar warranty = Calendar.getInstance();
-            warranty.set(Integer.parseInt(content[12 + j]), Integer.parseInt(content[13 + j]), Integer.parseInt(content[14 + j]));
+            warranty.set(Integer.parseInt(content[14 + j]), Integer.parseInt(content[13 + j]), Integer.parseInt(content[12 + j]));
             fromFile[i].setWarranty(new Warranty(warranty));
         }
         return fromFile;

@@ -3,44 +3,44 @@
 Samsung Galaxy M30s 4/64GB Gradation Blue
 15
 Экран (6.4\", Super AMOLED, 2340х1080) / Samsung Exynos 9611 (4 x 2.3 ГГц + 4 x 1.7 ГГц)
-7299
+7299.0
 Android 9.0 (Pie)
-4
+4.0
 DDR5
 8
 2.3
 6.3
-12
-2021
-1
-1
+12.0
+20
+5
+5
 12
 Motorola One Vision 4/128GB Bronze
 31
 Экран (6.3\", IPS, 2520x1080)/ Samsung Exynos 9609 (2.2 ГГц)/ двойная основная
-7999
+7999.0
 Android 9.0 (Pie)
-4
+4.0
 DDR5
 8
 2.2
 6.3
-15
-2021
-1
-1
+15.0
+20
+5
+5
 13
 Xiaomi Mi 9 Lite 6/128GB Grey
 22
 Экран (6.39\", AMOLED, 2340x1080)/ Qualcomm Snapdragon 710 (2.2 ГГц)
-8499
+8499.0
 Android 9.0 (Pie)
-6
+6.0
 DDR5
 8
 2.2
 6.39
-17
-2021
-1
-1
+17.0
+20
+5
+5

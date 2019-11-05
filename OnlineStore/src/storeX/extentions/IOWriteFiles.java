@@ -48,16 +48,16 @@ public class IOWriteFiles {
                 writer.write(phones[i].getAmount() + "\n");
                 writer.write(phones[i].getDescription() + "\n");
                 writer.write(phones[i].getPrice() + "\n");
-                writer.write(phones[i].getSystem() + "\n");
+                writer.write(phones[i].getSystem().getOperatingSystem() + "\n");
                 writer.write(phones[i].getRam().getMemorySize() + "\n");
                 writer.write(phones[i].getRam().getMemoryType() + "\n");
                 writer.write(phones[i].getCpu().getCoreNumber() + "\n");
                 writer.write(phones[i].getCpu().getFrequency() + "\n");
                 writer.write(phones[i].getDiagonal().getDiagonal() + "\n");
                 writer.write(phones[i].getWorkingTime().getWorkOnButtery() + "\n");
-                 writer.write(phones[i].getWarranty().getWarranty().get(Calendar.DAY_OF_MONTH) + "\n");
+                 writer.write(phones[i].getWarranty().getWarranty().get(Calendar.YEAR) + "\n");
                 writer.write(phones[i].getWarranty().getWarranty().get(Calendar.MONTH) + "\n");
-                writer.write(phones[i].getWarranty().getWarranty().get(Calendar.YEAR) + "\n");
+                writer.write(phones[i].getWarranty().getWarranty().get(Calendar.DAY_OF_MONTH) + "\n");
             }
             writer.close();
         } catch (IOException e) {
