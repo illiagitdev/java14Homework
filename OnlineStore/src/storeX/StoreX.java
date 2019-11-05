@@ -59,4 +59,8 @@ public class StoreX {
     public void setPhones(Phone[] phones) {
         this.phones = phones;
     }
+
+    public void setComputers(Computer[] computers) {
+        this.computers = computers;
+    }
 }
