@@ -3,6 +3,8 @@ package storeX.extentions;
 import goods.Goods;
 import goods.categoris.Computer;
 import goods.categoris.Phone;
+import goods.categoris.Vegetable;
+import goods.components.ExpirationTime;
 import goods.components.Warranty;
 import goods.components.tech.*;
 import logger.LogType;
@@ -32,18 +34,51 @@ public class IOReadFiles {
         storeX.setBalance(readBalance(new File(Pathes.BALANCE)));
         storeX.setPhones(readPhones(new File(Pathes.PHONES)));
         storeX.setComputers(readComputers(new File(Pathes.COMPUTERS)));
+        storeX.setVegetables(readVegetables(new File(Pathes.VEGETABLES)));
+
+    }
+
+    private Vegetable[] readVegetables(File path) {
+        content = fileContent(path, FieldsInItem.VEGETABLES.index);
+        for (int i = 0; i < content.length; i++) {
+            System.out.println("i = " + i + "  ::  " + content[i]);
+        }
+        Vegetable[] fromFile = new Vegetable[Integer.parseInt(content[0])];
+        Calendar terms1 = Calendar.getInstance();
+        Calendar terms2 = Calendar.getInstance();
+        ExpirationTime expTime;
+        for (int i = 0, j; i < fromFile.length; i++) {
+            j = !(i == 0) ? (FieldsInItem.VEGETABLES.index * i + 1) : 1;
+            Logger.INSTANCE.log(LogType.SYSTEM, "read file: new Vegetable(Integer.parseInt(content[j]), content" +
+                    "[1 + j], Integer.parseInt(content[2 + j]),content[3 + j], Float.parseFloat(content[4 + j])):\t\t"
+                    + content[j] + ", " + content[1 + j] + ", " + content[2 + j] + ", " + content[3 + j] + ", " + content[4 + j]);
+            fromFile[i] = new Vegetable(Integer.parseInt(content[j]), content[1 + j], Integer.parseInt(content[2 + j]),
+                    content[3 + j], Float.parseFloat(content[4 + j]));
+
+            Logger.INSTANCE.log(LogType.SYSTEM, "read file: terms1.set(Integer.parseInt(content[8 + j]), " +
+                    "Integer.parseInt(content[7 + j]), Integer.parseInt(content[6 + j])):\t\t" + content[8 + j] + ", " +
+                    content[7 + j] + ", " + content[6 + j]);
+            terms1.set(Integer.parseInt(content[8 + j]), Integer.parseInt(content[7 + j]), Integer.parseInt(content[6 + j]));
+            Logger.INSTANCE.log(LogType.SYSTEM, "read file: terms2.set(Integer.parseInt(content[12 + j]), " +
+                    "Integer.parseInt(content[11 + j]), Integer.parseInt(content[10 + j])):\t\t" + content[12 + j] + ", " +
+                    content[11 + j] + ", " + content[10 + j]);
+            terms2.set(Integer.parseInt(content[12 + j]), Integer.parseInt(content[11 + j]), Integer.parseInt(content[10 + j]));
+            Logger.INSTANCE.log(LogType.SYSTEM, "read file: Integer.parseInt(content[10 + j]):\t\t" + content[9 + j]);
+            expTime=new ExpirationTime(terms1,Integer.parseInt(content[9 + j]),terms2);
+            fromFile[i].setExpirationTime(expTime);
+        }
+        return fromFile;
+
     }
 
     private Computer[] readComputers(File path) {
         content = fileContent(path, FieldsInItem.COMPUTER.index);
-        for (int i = 0; i < content.length; i++) {
-            System.out.println("i = " + i + "  ::  " + content[i]);
-        }
         Computer[] fromFile = new Computer[Integer.parseInt(content[0])];
         VideoCard videoCard;
+        Calendar warranty = Calendar.getInstance();
         for (int i = 0, j; i < fromFile.length; i++) {
             j = !(i == 0) ? (FieldsInItem.COMPUTER.index * i + 1) : 1;
-            Logger.INSTANCE.log(LogType.SYSTEM, "read file: new Phone(Integer.parseInt(content[j]), content" +
+            Logger.INSTANCE.log(LogType.SYSTEM, "read file: new Computer(Integer.parseInt(content[j]), content" +
                     "[1 + j], Integer.parseInt(content[2 + j]),content[3 + j], Float.parseFloat(content[4 + j])):\t\t"
                     + content[j] + ", " + content[1 + j] + ", " + content[2 + j] + ", " + content[3 + j] + ", " + content[4 + j]);
             fromFile[i] = new Computer(Integer.parseInt(content[j]), content[1 + j], Integer.parseInt(content[2 + j]),
@@ -54,14 +89,12 @@ public class IOReadFiles {
             Logger.INSTANCE.log(LogType.SYSTEM, "read file: new CPU(Integer.parseInt(content[7 + j]), Float.parseFloat(content[8 + j])):\t\t"
                     + content[7 + j] + ", " + content[8 + j]);
             fromFile[i].setCpu(new CPU(Integer.parseInt(content[7 + j]), Float.parseFloat(content[8 + j])));
-
             Logger.INSTANCE.log(LogType.SYSTEM, "read file: new CPU(Integer.parseInt(content[9 + j]), Float." +
                     "parseFloat(content[10 + j])),new VideoRAM(Float.parseFloat(content[11 + j]), content[12 + j]):\t\t"
                     + content[9 + j] + ", " + content[10 + j]+ ", " + content[11 + j]+ ", " + content[12 + j]);
             videoCard = new VideoCard(new CPU(Integer.parseInt(content[9 + j]), Float.parseFloat(content[10 + j])),
                     new VideoRAM(Float.parseFloat(content[11 + j]), content[12 + j]));
             fromFile[i].setVideoCard(videoCard);
-            Calendar warranty = Calendar.getInstance();
             Logger.INSTANCE.log(LogType.SYSTEM, "read file:warranty.set(Integer.parseInt(content[15 + j]), " +
                     "Integer.parseInt(content[14 + j]), Integer.parseInt(content[13 + j])):\t\t" + content[15 + j] + ", " +
                     content[14 + j] + ", " + content[13 + j]);
