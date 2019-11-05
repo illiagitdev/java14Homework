@@ -72,9 +72,6 @@ public class Phone extends Goods {
         return warranty;
     }
 
-    public Phone() {
-    }
-
     @Override
     public String show() {
         return "Телефон:" + super.show() + toString();
