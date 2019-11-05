@@ -1,19 +1,49 @@
 3
-$body,21,"IT-Blok Прогрессивный i9 7980XE B",19,"Intel Core i9-7980XE — топовый процессор для настольной платформы Intel LGA 2066.",157486
-ram,128,"DDR4-3000 MHz"
-cpu,18,4.2
-gpu,3584,1582
-videoRAM,11,"DDR5"
-expireDate,2021,1,1
-$body,22,"ARTLINE Gaming X48 v09", 41, "AMD Ryzen 5 1600 (3.2 - 3.6 ГГц) / RAM 16 ГБ / HDD 1 ТБ + SSD 240 ГБ / AMD Radeon RX 580, 8 ГБ / без ОД / LAN / без ОС",18360
-ram,16,"DDR4-2666 МГц"
-cpu,6,3.6
-gpu,36,1257
-videoRAM,8,"DDR5"
-expireDate,2022,1,1
-$body,23,"Lenovo IdeaCentre A340-22IGM", 32, "Экран 21.5\" (1920x1080) Full HD / Intel Pentium Silver J5005 (1.5 - 2.8 ГГц) / RAM 4 ГБ / SSD 128 ГБ / Intel UHD Graphics 605",11355
-ram,4,"DDR4-2666 МГц"
-cpu,4,2.8
-gpu,17,750
-videoRAM,1,"Intel UHD Graphics 605"
-expireDate,2020,1,1
+21
+IT-Blok Прогрессивный i9 7980XE B
+19
+Intel Core i9-7980XE — топовый процессор для настольной платформы Intel LGA 2066.
+157486
+128
+DDR4-3000 MHz
+18
+4.2
+3584
+1582
+11
+DDR5
+2021
+1
+1
+22
+ARTLINE Gaming X48 v09
+41
+AMD Ryzen 5 1600 (3.2 - 3.6 ГГц) / RAM 16 ГБ / HDD 1 ТБ + SSD 240 ГБ / AMD Radeon RX 580, 8 ГБ / без ОД / LAN / без ОС
+18360
+16
+DDR4-2666 МГц
+6
+3.6
+36
+1257
+8
+DDR5
+2022
+1
+1
+23
+Lenovo IdeaCentre A340-22IGM
+32
+Экран 21.5\" (1920x1080) Full HD / Intel Pentium Silver J5005 (1.5 - 2.8 ГГц) / RAM 4 ГБ / SSD 128 ГБ / Intel UHD Graphics 605
+11355
+4
+DDR4-2666 МГц
+4
+2.8
+17
+750
+1
+Intel UHD Graphics 605
+2020
+1
+1
