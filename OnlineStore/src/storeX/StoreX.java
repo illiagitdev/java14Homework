@@ -60,6 +60,10 @@ public class StoreX {
         this.phones = phones;
     }
 
+    public void setVegetables(Vegetable[] vegetables) {
+        this.vegetables = vegetables;
+    }
+
     public void setComputers(Computer[] computers) {
         this.computers = computers;
     }
