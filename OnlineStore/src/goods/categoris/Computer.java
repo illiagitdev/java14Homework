@@ -20,9 +20,6 @@ public class Computer extends Goods {
         warranty = new Warranty();
     }
 
-    public Computer() {
-    }
-
     public void setRam(RAM ram) {
         this.ram = ram;
     }
@@ -37,6 +34,22 @@ public class Computer extends Goods {
 
     public void setWarranty(Warranty warranty) {
         this.warranty = warranty;
+    }
+
+    public RAM getRam() {
+        return ram;
+    }
+
+    public CPU getCpu() {
+        return cpu;
+    }
+
+    public VideoCard getVideoCard() {
+        return videoCard;
+    }
+
+    public Warranty getWarranty() {
+        return warranty;
     }
 
     @Override
