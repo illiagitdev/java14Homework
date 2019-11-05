@@ -29,4 +29,16 @@ public class ExpirationTime {
     public Calendar getExpirationTime() {
         return expirationTime;
     }
+
+    public void setProductionDate(Calendar productionDate) {
+        this.productionDate = productionDate;
+    }
+
+    public void setSaveTemperature(int saveTemperature) {
+        this.saveTemperature = saveTemperature;
+    }
+
+    public void setExpirationTime(Calendar expirationTime) {
+        this.expirationTime = expirationTime;
+    }
 }
