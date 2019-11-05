@@ -14,9 +14,6 @@ public class Vegetable extends Goods {
         expirationTime = new ExpirationTime();
     }
 
-    public Vegetable() {
-    }
-
     public void setType(String type) {
         this.type = type;
     }
