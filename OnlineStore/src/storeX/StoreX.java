@@ -64,7 +64,23 @@ public class StoreX {
         this.vegetables = vegetables;
     }
 
+    public void setSweets(Sweets[] sweets) {
+        this.sweets = sweets;
+    }
+
+    public void setFreshWaters(FreshWater[] freshWaters) {
+        this.freshWaters = freshWaters;
+    }
+
+    public void setSweetWaters(SweetWater[] sweetWaters) {
+        this.sweetWaters = sweetWaters;
+    }
+
     public void setComputers(Computer[] computers) {
         this.computers = computers;
+    }
+
+    public void setClothes(Clothes[] clothes) {
+        this.clothes = clothes;
     }
 }
