@@ -22,6 +22,14 @@ public class Vegetable extends Goods {
         this.expirationTime = expirationTime;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public ExpirationTime getExpirationTime() {
+        return expirationTime;
+    }
+
     @Override
     public String show() {
         return "Овочі:" + super.show() + toString();

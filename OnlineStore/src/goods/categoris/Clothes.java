@@ -11,11 +11,12 @@ public class Clothes extends Goods {
         brend = new Brend();
     }
 
-    public Clothes() {
-    }
-
     public void setBrend(Brend brend) {
         this.brend = brend;
+    }
+
+    public Brend getBrend() {
+        return brend;
     }
 
     @Override

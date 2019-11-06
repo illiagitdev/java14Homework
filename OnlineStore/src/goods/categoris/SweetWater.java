@@ -13,11 +13,12 @@ public class SweetWater extends Goods {
         expirationTime=new ExpirationTime();
     }
 
-    public SweetWater() {
-    }
-
     public void setExpirationTime(ExpirationTime expirationTime) {
         this.expirationTime = expirationTime;
+    }
+
+    public ExpirationTime getExpirationTime() {
+        return expirationTime;
     }
 
     @Override
