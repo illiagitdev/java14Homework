@@ -37,6 +37,7 @@ gradle-app.setting
 ## IntelliJ
 ##############################
 out/
+log/
 files/output/
 .idea/
 /.idea/
