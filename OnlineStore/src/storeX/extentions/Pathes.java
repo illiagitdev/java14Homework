@@ -7,6 +7,6 @@ public interface Pathes {
     String VEGETABLES = "files/vegetables.txt";
     String SWEETS = "files/sweets.txt";
     String FRESHWATER = "files/freshWater.txt";
-    String SWEETWATER = "files/sweetWater.txt";
+    String SWEETWATER = "files/sweetWaters.txt";
     String CLOTHES = "files/clothes.txt";
 }
