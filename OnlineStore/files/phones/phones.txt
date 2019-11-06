@@ -1,5 +1,5 @@
 3
-11
+101
 Samsung Galaxy M30s 4/64GB Gradation Blue
 15
 Экран (6.4\", Super AMOLED, 2340х1080) / Samsung Exynos 9611 (4 x 2.3 ГГц + 4 x 1.7 ГГц)
@@ -14,7 +14,7 @@ DDR5
 2021
 1
 1
-12
+102
 Motorola One Vision 4/128GB Bronze
 31
 Экран (6.3\", IPS, 2520x1080)/ Samsung Exynos 9609 (2.2 ГГц)/ двойная основная
@@ -29,7 +29,7 @@ DDR5
 2021
 1
 1
-13
+103
 Xiaomi Mi 9 Lite 6/128GB Grey
 22
 Экран (6.39\", AMOLED, 2340x1080)/ Qualcomm Snapdragon 710 (2.2 ГГц)

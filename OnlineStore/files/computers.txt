@@ -1,5 +1,5 @@
 3
-21
+201
 IT-Blok Прогрессивный i9 7980XE B
 19
 Intel Core i9-7980XE — топовый процессор для настольной платформы Intel LGA 2066.
@@ -12,10 +12,10 @@ DDR4-3000 MHz
 1582.0
 11.0
 DDR5
-6
-7
 13
-22
+7
+6
+202
 ARTLINE Gaming X48 v09
 41
 AMD Ryzen 5 1600 (3.2 - 3.6 ГГц) / RAM 16 ГБ / HDD 1 ТБ + SSD 240 ГБ / AMD Radeon RX 580, 8 ГБ / без ОД / LAN / без ОС
@@ -28,10 +28,10 @@ DDR4-2666 МГц
 1257.0
 8.0
 DDR5
-6
-7
 13
-23
+7
+6
+203
 Lenovo IdeaCentre A340-22IGM
 32
 Экран 21.5\" (1920x1080) Full HD / Intel Pentium Silver J5005 (1.5 - 2.8 ГГц) / RAM 4 ГБ / SSD 128 ГБ / Intel UHD Graphics 605
@@ -44,6 +44,6 @@ DDR4-2666 МГц
 750.0
 1.0
 Intel UHD Graphics 605
-6
-7
 13
+7
+6
