@@ -11,7 +11,7 @@ public class Utils {
 
     public static String getStr() {
         Scanner scan=new Scanner(System.in);
-        return scan.next();
+        return scan.nextLine();
     }
 
     public static float getFloat() {
