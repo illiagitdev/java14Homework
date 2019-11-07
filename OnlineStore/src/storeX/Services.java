@@ -1,21 +1,18 @@
 package storeX;
 
-import goods.categoris.Phone;
 import logger.LogType;
 import logger.Logger;
 import storeX.extentions.*;
 
-import java.io.*;
-import java.util.Calendar;
-
 public class Services {
     private StoreX storeX;
-    private Operational operate = new Operational();
+    private Operational operate;
 
     public Services() {
         storeX = new StoreX();
         Logger.INSTANCE.log(LogType.INFO, "Initialising...");
         IOReadFiles.getInstance().initializeStore(storeX);
+        operate = new Operational(storeX);
     }
 
     public void open() {
@@ -39,23 +36,19 @@ public class Services {
             case 1: {
                 Logger.INSTANCE.log(LogType.INFO, "Вибрано: 1 - Переглянути наявні товари по категорії.");
                 System.out.println("Вибрано: 1 - Переглянути наявні товари по категорії.");
-                operate.showCategory(storeX);
+                operate.showCategory();
                 break;
             }
             case 2: {
                 Logger.INSTANCE.log(LogType.INFO, "Вибрано: 2 - Пошук товару по назві в категорії.");
                 System.out.println("Вибрано: 2 - Пошук товару по назві в категорії.");
-
-                System.out.println("change balance");
-                storeX.setBalance(Utils.getDouble());
-
-//                    services.getByName(store);
+                operate.getByName();
                 break;
             }
             case 3: {
                 Logger.INSTANCE.log(LogType.INFO, "Вибрано: 3 - Отримати нову поставку.");
                 System.out.println("Вибрано: 3 - Отримати нову поставку.");
-//                    services.addGoods(store);
+                operate.addGoods();
                 break;
             }
             case 4: {
@@ -110,9 +103,6 @@ public class Services {
         }
         return false;
     }
-
-
-
 
 
 }
