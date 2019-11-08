@@ -9,7 +9,7 @@ public class Services {
     private Operational operate;
 
     public Services() {
-        storeX = new StoreX();
+        storeX = StoreX.getInstance();
         Logger.INSTANCE.log(LogType.INFO, "Initialising...");
         IOReadFiles.getInstance().initializeStore(storeX);
         operate = new Operational(storeX);

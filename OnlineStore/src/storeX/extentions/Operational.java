@@ -161,11 +161,11 @@ public class Operational {
     }
 
     private void addClothes(Clothes[] goods) {
-        goods = Arrays.copyOf(goods,goods.length+1);
-        int id = goods[goods.length - 2].getId() + 1;
+        Clothes[] tempGoods = Arrays.copyOf(goods,goods.length+1);
+        int id = tempGoods[tempGoods.length - 2].getId() + 1;
         Logger.INSTANCE.log(LogType.INFO, "ID нового товару: " + id);
         System.out.println("ID нового товару: " + id);
-        goods[goods.length - 1] = new Clothes(id, getName(), getAmount(), getDescription(), getPrice());
+        tempGoods[tempGoods.length - 1] = new Clothes(id, getName(), getAmount(), getDescription(), getPrice());
 
         System.out.print("Вкажіть рік заснування бренду: ");
         int brandFoundationYear = store.functionaliti.Utils.getInt();
@@ -176,9 +176,12 @@ public class Operational {
         System.out.print("Вкажіть кількість країн в яких продається бренд: ");
         int brandSellCountiesNumber = store.functionaliti.Utils.getInt();
         Brend brend = new Brend(brandFoundationYear, brandName, brandEmployeesNumber, brandSellCountiesNumber);
-        goods[goods.length - 1].setBrend(brend);
-        storeX.setClothes(goods);
-        System.out.println(goods[goods.length - 1].show());
+        tempGoods[tempGoods.length - 1].setBrend(brend);
+//        storeX.setClothes(tempGoods);
+        goods=tempGoods;
+        for (Goods x:goods             ) {
+            x.show();
+        }
     }
 
 //    private void addSweetWater(Store store) {
@@ -324,21 +327,21 @@ public class Operational {
 
     private float getPrice() {
         System.out.print("Вкажіть вартість товару: ");
-        return store.functionaliti.Utils.getFloat();
+        return Utils.getFloat();
     }
 
     private String getDescription() {
         System.out.print("Введіть опис товару: ");
-        return store.functionaliti.Utils.getStr();
+        return Utils.getStrLine();
     }
 
     private int getAmount() {
         System.out.print("Введіть кількість товару в поставці: ");
-        return store.functionaliti.Utils.getInt();
+        return Utils.getInt();
     }
 
     private String getName() {
         System.out.print("Введіть назву товару ");
-        return store.functionaliti.Utils.getStr();
+        return Utils.getStrLine();
     }
 }

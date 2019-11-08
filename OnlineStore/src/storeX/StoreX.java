@@ -5,6 +5,7 @@ import logger.LogType;
 import logger.Logger;
 
 public class StoreX {
+    private static StoreX storeX;
     private double balance;
     private Phone[] phones;
     private Computer[] computers;
@@ -13,6 +14,13 @@ public class StoreX {
     private FreshWater[] freshWaters;
     private SweetWater[] sweetWaters;
     private Clothes[] clothes;
+
+    public static StoreX getInstance() {
+        if (storeX==null){
+            return new StoreX();
+        }
+        return storeX;
+    }
 
     public double getBalance() {
         return balance;
