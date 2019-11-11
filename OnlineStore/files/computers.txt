@@ -1,4 +1,4 @@
-3
+4
 201
 IT-Blok Прогрессивный i9 7980XE B
 19
@@ -47,3 +47,19 @@ Intel UHD Graphics 605
 13
 7
 6
+204
+Artline
+5
+Artline Gaming Edition
+28020.0
+4.0
+DDR5
+25
+342.0
+4
+2.3
+16.0
+DDR4
+1212
+3
+4

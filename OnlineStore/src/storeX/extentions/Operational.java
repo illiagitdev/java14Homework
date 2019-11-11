@@ -11,6 +11,7 @@ import logger.Logger;
 import storeX.StoreX;
 
 import java.util.Arrays;
+import java.util.Calendar;
 
 public class Operational {
     private StoreX storeX;
@@ -19,7 +20,7 @@ public class Operational {
     private Goods[][] list = new Goods[7][];
 
     public Operational(StoreX store) {
-        this.storeX=store;
+        this.storeX = store;
         list[0] = storeX.getPhones();
         list[1] = storeX.getComputers();
         list[2] = storeX.getVegetables();
@@ -85,7 +86,7 @@ public class Operational {
             switch (Utils.getInt()) {
                 case 1: {
                     for (Goods x : list[index - 1]) {
-                        System.out.println("ID: " + x.getId()+x.getName());
+                        System.out.println("ID: " + x.getId() + x.getName());
                     }
                     setNewAmount(list[index - 1]);
                     break;
@@ -130,27 +131,27 @@ public class Operational {
                 break;
             }
             case 2: {
-//                addComputer(goods);
+                storeX.setComputers(addComputer((Computer[])goods,index));
                 break;
             }
             case 3: {
-//                addVegetables(goods);
+                storeX.setVegetables(addVegetables((Vegetable[]) goods, index));
                 break;
             }
             case 4: {
-//                addSweets(goods);
+                storeX.setSweets(addSweets((Sweets[]) goods, index));
                 break;
             }
             case 5: {
-//                addFreshWater(goods);
+                storeX.setFreshWaters(addFreshWater((FreshWater[]) goods, index));
                 break;
             }
             case 6: {
-//                addSweetWater(goods);
+                storeX.setSweetWaters(addSweetWater((SweetWater[]) goods, index));
                 break;
             }
             case 7: {
-                addClothes((Clothes[]) goods);
+                storeX.setClothes(addClothes((Clothes[]) goods, index));
                 break;
             }
             default: {
@@ -160,12 +161,12 @@ public class Operational {
         }
     }
 
-    private void addClothes(Clothes[] goods) {
-        Clothes[] tempGoods = Arrays.copyOf(goods,goods.length+1);
-        int id = tempGoods[tempGoods.length - 2].getId() + 1;
+    private Clothes[] addClothes(Clothes[] goods, int index) {
+        Clothes[] addClothes = Arrays.copyOf(goods, goods.length + 1);
+        int id = addClothes[addClothes.length - 2].getId() + 1;
         Logger.INSTANCE.log(LogType.INFO, "ID нового товару: " + id);
         System.out.println("ID нового товару: " + id);
-        tempGoods[tempGoods.length - 1] = new Clothes(id, getName(), getAmount(), getDescription(), getPrice());
+        addClothes[addClothes.length - 1] = new Clothes(id, getName(), getAmount(), getDescription(), getPrice());
 
         System.out.print("Вкажіть рік заснування бренду: ");
         int brandFoundationYear = store.functionaliti.Utils.getInt();
@@ -176,90 +177,92 @@ public class Operational {
         System.out.print("Вкажіть кількість країн в яких продається бренд: ");
         int brandSellCountiesNumber = store.functionaliti.Utils.getInt();
         Brend brend = new Brend(brandFoundationYear, brandName, brandEmployeesNumber, brandSellCountiesNumber);
-        tempGoods[tempGoods.length - 1].setBrend(brend);
-//        storeX.setClothes(tempGoods);
-        goods=tempGoods;
-        for (Goods x:goods             ) {
-            x.show();
-        }
+        addClothes[addClothes.length - 1].setBrend(brend);
+        list[index - 1] = Arrays.copyOf(addClothes, addClothes.length);
+        return addClothes;
     }
 
-//    private void addSweetWater(Store store) {
-//        SweetWater[] addSweetWater = Arrays.copyOf(store.getSweetWaters(),store.getSweetWaters().length+1);
-//        int id = addSweetWater[addSweetWater.length - 2].getId() + 1;
-//        System.out.println("ID нового товару: " + id);
-//        addSweetWater[addSweetWater.length - 1] = new SweetWater(id, getName(), getAmount(), getDescription(), getPrice());
-//
-//        ExpirationTime expirationTime = getExpireDate();
-//        addSweetWater[addSweetWater.length - 1].setExpirationTime(expirationTime);
-//        store.setSweetWaters(addSweetWater);
-//        System.out.println(store.getSweetWaters()[addSweetWater.length - 1].show());
-//    }
-//
-//    private void addFreshWater(Store store) {
-//        FreshWater[] addFreshWater = Arrays.copyOf(store.getFreshWaters(),store.getFreshWaters().length+1);
-//        int id = addFreshWater[addFreshWater.length - 2].getId() + 1;
-//        System.out.println("ID нового товару: " + id);
-//        addFreshWater[addFreshWater.length - 1] = new FreshWater(id, getName(), getAmount(), getDescription(), getPrice());
-//        store.setFreshWaters(addFreshWater);
-//        System.out.println(store.getFreshWaters()[addFreshWater.length - 1].show());
-//    }
-//
-//    private void addSweets(Store store) {
-//        Sweets[] addSweets = Arrays.copyOf(store.getSweets(),store.getSweets().length+1);
-//        int id = addSweets[addSweets.length - 2].getId() + 1;
-//        System.out.println("ID нового товару: " + id);
-//        addSweets[addSweets.length - 1] = new Sweets(id, getName(), getAmount(), getDescription(), getPrice());
-//
-//        ExpirationTime expirationTime = getExpireDate();
-//        addSweets[addSweets.length - 1].setExpirationTime(expirationTime);
-//        store.setSweets(addSweets);
-//        System.out.println(store.getSweets()[addSweets.length - 1].show());
-//    }
-//
-//    private void addVegetables(Store store) {
-//        Vegetable[] addVegetable = Arrays.copyOf(store.getVegetables(),store.getVegetables().length+1);
-//        int id = addVegetable[store.getVegetables().length - 1].getId() + 1;
-//        System.out.println("ID нового товару: " + id);
-//        addVegetable[addVegetable.length - 1] = new Vegetable(id, getName(), getAmount(), getDescription(), getPrice());
-//
-//        System.out.print("Вкажіть тип продукту ");
-//        String type = store.functionaliti.Utils.getStr();
-//        ExpirationTime expirationTime = getExpireDate();
-//        addVegetable[addVegetable.length - 1].setType(type);
-//        addVegetable[addVegetable.length - 1].setExpirationTime(expirationTime);
-//        store.setVegetables(addVegetable);
-//        System.out.println(store.getVegetables()[addVegetable.length - 1].show());
-//    }
-//
-//    private void addComputer(Store store) {
-//        Computer[] addComputer = Arrays.copyOf(store.getComputers(),store.getComputers().length+1);
-//        int id = addComputer[addComputer.length - 2].getId() + 1;
-//        System.out.println("ID нового товару: " + id);
-//        addComputer[addComputer.length - 1] = new Computer(id, getName(), getAmount(), getDescription(), getPrice());
-//
-//        System.out.print("Вкажіть характеристики відеокарти: ");
-//        System.out.print("Вкажіть кількість ядер GPU: ");
-//        int coreNumber = store.functionaliti.Utils.getInt();
-//        System.out.print("Вкажіть частоту процесора GPU (ГГц): ");
-//        float frequency = store.functionaliti.Utils.getFloat();
-//        CPU gpu = new CPU(coreNumber, frequency);
-//        System.out.print("Вкажіть розмір мамяті(GB): ");
-//        float memorySize = store.functionaliti.Utils.getFloat();
-//        System.out.print("Вкажіть тип пам'яті(DDRx): ");
-//        String memoryType = store.functionaliti.Utils.getStr();
-//        VideoRAM videoRAM = new VideoRAM(memorySize, memoryType);
-//        VideoCard videoCard = new VideoCard(gpu, videoRAM);
-//        System.out.print("Вкажіть гарантійний термін товару: ");
-//        Warranty warranty = new Warranty(getDate());
-//        addComputer[addComputer.length - 1].setRam(setRAM());
-//        addComputer[addComputer.length - 1].setCpu(setCPU());
-//        addComputer[addComputer.length - 1].setVideoCard(videoCard);
-//        addComputer[addComputer.length - 1].setWarranty(warranty);
-//        store.setComputers(addComputer);
-//        System.out.println(store.getComputers()[addComputer.length - 1].show());
-//    }
-//
+    private SweetWater[] addSweetWater(SweetWater[] goods, int index) {
+        SweetWater[] addSweetWater = Arrays.copyOf(goods, goods.length + 1);
+        int id = addSweetWater[addSweetWater.length - 2].getId() + 1;
+        Logger.INSTANCE.log(LogType.INFO, "ID нового товару: " + id);
+        System.out.println("ID нового товару: " + id);
+        addSweetWater[addSweetWater.length - 1] = new SweetWater(id, getName(), getAmount(), getDescription(), getPrice());
+
+        ExpirationTime expirationTime = getExpireDate();
+        addSweetWater[addSweetWater.length - 1].setExpirationTime(expirationTime);
+        list[index - 1] = Arrays.copyOf(addSweetWater, addSweetWater.length);
+        return addSweetWater;
+    }
+
+    private FreshWater[] addFreshWater(FreshWater[] goods, int index) {
+        FreshWater[] addFreshWater = Arrays.copyOf(goods, goods.length + 1);
+        int id = addFreshWater[addFreshWater.length - 2].getId() + 1;
+        Logger.INSTANCE.log(LogType.INFO, "ID нового товару: " + id);
+        System.out.println("ID нового товару: " + id);
+        addFreshWater[addFreshWater.length - 1] = new FreshWater(id, getName(), getAmount(), getDescription(), getPrice());
+        list[index - 1] = Arrays.copyOf(addFreshWater, addFreshWater.length);
+        return addFreshWater;
+    }
+
+    private Sweets[] addSweets(Sweets[] goods, int index) {
+        Sweets[] addSweets = Arrays.copyOf(goods, goods.length + 1);
+        int id = addSweets[addSweets.length - 2].getId() + 1;
+        Logger.INSTANCE.log(LogType.INFO, "ID нового товару: " + id);
+        System.out.println("ID нового товару: " + id);
+        addSweets[addSweets.length - 1] = new Sweets(id, getName(), getAmount(), getDescription(), getPrice());
+
+        ExpirationTime expirationTime = getExpireDate();
+        addSweets[addSweets.length - 1].setExpirationTime(expirationTime);
+        list[index - 1] = Arrays.copyOf(addSweets, addSweets.length);
+        return addSweets;
+    }
+
+    private Vegetable[] addVegetables(Vegetable[] goods, int index) {
+        Vegetable[] addVegetable = Arrays.copyOf(goods, goods.length + 1);
+        int id = addVegetable[goods.length - 1].getId() + 1;
+        Logger.INSTANCE.log(LogType.INFO, "ID нового товару: " + id);
+        System.out.println("ID нового товару: " + id);
+        addVegetable[addVegetable.length - 1] = new Vegetable(id, getName(), getAmount(), getDescription(), getPrice());
+
+        System.out.print("Вкажіть тип продукту ");
+        String type = Utils.getStrLine();
+        ExpirationTime expirationTime = getExpireDate();
+        addVegetable[addVegetable.length - 1].setType(type);
+        addVegetable[addVegetable.length - 1].setExpirationTime(expirationTime);
+        list[index - 1] = Arrays.copyOf(addVegetable, addVegetable.length);
+        return addVegetable;
+    }
+
+    private Computer[] addComputer(Computer[] goods,int index) {
+        Computer[] addComputer = Arrays.copyOf(goods,goods.length+1);
+        int id = addComputer[addComputer.length - 2].getId() + 1;
+        Logger.INSTANCE.log(LogType.INFO, "ID нового товару: " + id);
+        System.out.println("ID нового товару: " + id);
+        addComputer[addComputer.length - 1] = new Computer(id, getName(), getAmount(), getDescription(), getPrice());
+
+        System.out.print("Вкажіть характеристики відеокарти: ");
+        System.out.print("Вкажіть кількість ядер GPU: ");
+        int coreNumber = Utils.getInt();
+        System.out.print("Вкажіть частоту процесора GPU (ГГц): ");
+        float frequency = Utils.getFloat();
+        CPU gpu = new CPU(coreNumber, frequency);
+        System.out.print("Вкажіть розмір мамяті(GB): ");
+        float memorySize = Utils.getFloat();
+        System.out.print("Вкажіть тип пам'яті(DDRx): ");
+        String memoryType = Utils.getStr();
+        VideoRAM videoRAM = new VideoRAM(memorySize, memoryType);
+        VideoCard videoCard = new VideoCard(gpu, videoRAM);
+        System.out.print("Вкажіть гарантійний термін товару: ");
+        Warranty warranty = new Warranty(getDate());
+        addComputer[addComputer.length - 1].setRam(setRAM());
+        addComputer[addComputer.length - 1].setCpu(setCPU());
+        addComputer[addComputer.length - 1].setVideoCard(videoCard);
+        addComputer[addComputer.length - 1].setWarranty(warranty);
+        list[index - 1] = Arrays.copyOf(addComputer, addComputer.length);
+        return addComputer;
+    }
+
 //    private void addPhone(Store store) {
 //        Phone[] addPhone = Arrays.copyOf(store.getPhones(),store.getPhones().length+1);
 //        int id = addPhone[addPhone.length - 2].getId() + 1;
@@ -284,46 +287,46 @@ public class Operational {
 //        store.setPhones(addPhone);
 //        System.out.println(store.getPhones()[addPhone.length - 1].show());
 //    }
-//
-//    private RAM setRAM() {
-//        System.out.println("Вкажіть характеристики оперативноъ пам'яті: ");
-//        System.out.print("Вкажіть розмір мамяті(GB): ");
-//        float memorySize = store.functionaliti.Utils.getFloat();
-//        System.out.print("Вкажіть тип пам'яті(DDRx): ");
-//        String memoryType = store.functionaliti.Utils.getStr();
-//        return new RAM(memorySize, memoryType);
-//    }
-//
-//    private CPU setCPU() {
-//        System.out.println("Вкажіть характеристики процесора: ");
-//        System.out.print("Вкажіть кількість ядер: ");
-//        int coreNumber = store.functionaliti.Utils.getInt();
-//        System.out.print("Вкажіть частоту процесора (ГГц): ");
-//        float frequency = store.functionaliti.Utils.getFloat();
-//        return new CPU(coreNumber, frequency);
-//    }
-//
-//    private ExpirationTime getExpireDate() {
-//        System.out.print("Вкажіть дату виготовлення.");
-//        Calendar productionDate = getDate();
-//        System.out.print("Вкажіть температуру зберігання: ");
-//        int saveTemperature = store.functionaliti.Utils.getInt();
-//        System.out.print("Вкажіть термін придатності.");
-//        Calendar expireDate = getDate();
-//        return new ExpirationTime(productionDate, saveTemperature, expireDate);
-//    }
-//
-//    private Calendar getDate() {
-//        System.out.println("День: ");
-//        int day = store.functionaliti.Utils.getInt();
-//        System.out.print("місяць: ");
-//        int month = store.functionaliti.Utils.getInt();
-//        System.out.print("рік: ");
-//        int year = store.functionaliti.Utils.getInt();
-//        Calendar calendar = Calendar.getInstance();
-//        calendar.set(year, month, day);
-//        return calendar;
-//    }
+
+    private RAM setRAM() {
+        System.out.println("Вкажіть характеристики оперативноъ пам'яті: ");
+        System.out.print("Вкажіть розмір мамяті(GB): ");
+        float memorySize = store.functionaliti.Utils.getFloat();
+        System.out.print("Вкажіть тип пам'яті(DDRx): ");
+        String memoryType = store.functionaliti.Utils.getStr();
+        return new RAM(memorySize, memoryType);
+    }
+
+    private CPU setCPU() {
+        System.out.println("Вкажіть характеристики процесора: ");
+        System.out.print("Вкажіть кількість ядер: ");
+        int coreNumber = store.functionaliti.Utils.getInt();
+        System.out.print("Вкажіть частоту процесора (ГГц): ");
+        float frequency = store.functionaliti.Utils.getFloat();
+        return new CPU(coreNumber, frequency);
+    }
+
+    private ExpirationTime getExpireDate() {
+        System.out.print("Вкажіть дату виготовлення.");
+        Calendar productionDate = getDate();
+        System.out.print("Вкажіть температуру зберігання: ");
+        int saveTemperature = store.functionaliti.Utils.getInt();
+        System.out.print("Вкажіть термін придатності.");
+        Calendar expireDate = getDate();
+        return new ExpirationTime(productionDate, saveTemperature, expireDate);
+    }
+
+    private Calendar getDate() {
+        System.out.println("День: ");
+        int day = store.functionaliti.Utils.getInt();
+        System.out.print("місяць: ");
+        int month = store.functionaliti.Utils.getInt();
+        System.out.print("рік: ");
+        int year = store.functionaliti.Utils.getInt();
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(year, month, day);
+        return calendar;
+    }
 
     private float getPrice() {
         System.out.print("Вкажіть вартість товару: ");
