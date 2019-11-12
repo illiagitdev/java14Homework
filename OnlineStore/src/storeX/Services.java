@@ -3,6 +3,7 @@ package storeX;
 import logger.LogType;
 import logger.Logger;
 import storeX.extentions.*;
+import subscription.SubscriptionManager;
 
 public class Services {
     private StoreX storeX;
@@ -58,7 +59,12 @@ public class Services {
                     selling.sell(storeX,operate);
                 break;
             }
-            default: {
+            case 5: {
+                Logger.INSTANCE.log(LogType.INFO, "Вибрано: 4 - Продати товар.");
+                System.out.println("Вибрано: 5 - Додати користувача.");
+                SubscriptionManager
+                break;
+            }default: {
                 Logger.INSTANCE.log(LogType.INFO, "Невірний ввід(");
                 System.out.println("Невірний ввід(");
                 break;
@@ -79,6 +85,8 @@ public class Services {
         System.out.println("3 - Отримати нову поставку.");
         Logger.INSTANCE.log(LogType.INFO, "4 - Продати товар.");
         System.out.println("4 - Продати товар.");
+        Logger.INSTANCE.log(LogType.INFO, "5 - Додати користувача.");
+        System.out.println("5 - Додати користувача.");
     }
 
     private boolean stayOrLeave() {

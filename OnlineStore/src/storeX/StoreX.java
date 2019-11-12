@@ -3,6 +3,7 @@ package storeX;
 import goods.categoris.*;
 import logger.LogType;
 import logger.Logger;
+import subscription.SubscriptionManager;
 
 public class StoreX {
     private static StoreX storeX;
@@ -14,9 +15,13 @@ public class StoreX {
     private FreshWater[] freshWaters;
     private SweetWater[] sweetWaters;
     private Clothes[] clothes;
+    SubscriptionManager subscribers;
+    /*Добавить объект класса SubscriptionManager в класс Store.
+Создать в главном классе приложения объект класса Store и продемонстрировать
+ работу SubscriptionManager обращаясь к нему через объект класса Store.*/
 
     public static StoreX getInstance() {
-        if (storeX==null){
+        if (storeX == null) {
             return new StoreX();
         }
         return storeX;
@@ -55,13 +60,13 @@ public class StoreX {
     }
 
     public void setBalance(double balance) {
-        if (balance<0){
+        if (balance < 0) {
             Logger.INSTANCE.log(LogType.ERROR, "Баланс не може бути від'ємний!\nПеревірте введені данію");
             System.out.println("Баланс не може бути від'ємний!\nПеревірте введені данію");
-            this.balance=0;
-        }else
-            Logger.INSTANCE.log(LogType.SYSTEM, this.getClass().getSimpleName()+" balance "+this.balance);
-            this.balance = balance;
+            this.balance = 0;
+        } else
+            Logger.INSTANCE.log(LogType.SYSTEM, this.getClass().getSimpleName() + " balance " + this.balance);
+        this.balance = balance;
     }
 
     public void setPhones(Phone[] phones) {
@@ -90,5 +95,13 @@ public class StoreX {
 
     public void setClothes(Clothes[] clothes) {
         this.clothes = clothes;
+    }
+
+    public SubscriptionManager getSubscribers() {
+        return subscribers;
+    }
+
+    public void setSubscribers(SubscriptionManager subscribers) {
+        this.subscribers = subscribers;
     }
 }
