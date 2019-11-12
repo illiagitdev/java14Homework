@@ -1,4 +1,4 @@
-3
+4
 101
 Samsung Galaxy M30s 4/64GB Gradation Blue
 15
@@ -11,9 +11,9 @@ DDR5
 2.3
 6.3
 12.0
-14
-7
-6
+8
+2
+2
 102
 Motorola One Vision 4/128GB Bronze
 31
@@ -26,9 +26,9 @@ DDR5
 2.2
 6.3
 15.0
-14
-7
-6
+8
+2
+2
 103
 Xiaomi Mi 9 Lite 6/128GB Grey
 22
@@ -41,6 +41,21 @@ DDR5
 2.2
 6.39
 17.0
-14
-7
-6
+8
+2
+2
+104
+Alcatel
+332
+Alcatel phone 212
+2344.0
+Simon
+1.0
+wdddw
+1
+1.1
+5.0
+12.0
+8
+2
+2

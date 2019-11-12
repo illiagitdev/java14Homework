@@ -44,7 +44,7 @@ public class Operational {
         }
     }
 
-    private int displayCategories() {
+    public int displayCategories() {
         System.out.println("Категорії:\n\t1 - Смартфони\t\t2 - Комп'ютери\n\t3 - Овочі\t\t4 - Солодощі" +
                 "\n\t5 - Вода\t\t6 - Солодка вода\n\t7 - Одяг");
         Logger.INSTANCE.log(LogType.INFO, "Категорії:\n\t1 - Смартфони\t\t2 - Комп'ютери" +
@@ -127,11 +127,11 @@ public class Operational {
     private void addNewElement(Goods[] goods, int index) {
         switch (index) {
             case 1: {
-//                addPhone(goods);
+                storeX.setPhones(addPhone((Phone[]) goods, index));
                 break;
             }
             case 2: {
-                storeX.setComputers(addComputer((Computer[])goods,index));
+                storeX.setComputers(addComputer((Computer[]) goods, index));
                 break;
             }
             case 3: {
@@ -169,13 +169,13 @@ public class Operational {
         addClothes[addClothes.length - 1] = new Clothes(id, getName(), getAmount(), getDescription(), getPrice());
 
         System.out.print("Вкажіть рік заснування бренду: ");
-        int brandFoundationYear = store.functionaliti.Utils.getInt();
+        int brandFoundationYear = Utils.getInt();
         System.out.print("Вкажіть назву бренду: ");
-        String brandName = store.functionaliti.Utils.getStr();
+        String brandName = Utils.getStrLine();
         System.out.print("Вкажіть кількість працівників: ");
-        int brandEmployeesNumber = store.functionaliti.Utils.getInt();
+        int brandEmployeesNumber =Utils.getInt();
         System.out.print("Вкажіть кількість країн в яких продається бренд: ");
-        int brandSellCountiesNumber = store.functionaliti.Utils.getInt();
+        int brandSellCountiesNumber = Utils.getInt();
         Brend brend = new Brend(brandFoundationYear, brandName, brandEmployeesNumber, brandSellCountiesNumber);
         addClothes[addClothes.length - 1].setBrend(brend);
         list[index - 1] = Arrays.copyOf(addClothes, addClothes.length);
@@ -234,8 +234,8 @@ public class Operational {
         return addVegetable;
     }
 
-    private Computer[] addComputer(Computer[] goods,int index) {
-        Computer[] addComputer = Arrays.copyOf(goods,goods.length+1);
+    private Computer[] addComputer(Computer[] goods, int index) {
+        Computer[] addComputer = Arrays.copyOf(goods, goods.length + 1);
         int id = addComputer[addComputer.length - 2].getId() + 1;
         Logger.INSTANCE.log(LogType.INFO, "ID нового товару: " + id);
         System.out.println("ID нового товару: " + id);
@@ -263,46 +263,47 @@ public class Operational {
         return addComputer;
     }
 
-//    private void addPhone(Store store) {
-//        Phone[] addPhone = Arrays.copyOf(store.getPhones(),store.getPhones().length+1);
-//        int id = addPhone[addPhone.length - 2].getId() + 1;
-//        System.out.println("ID нового товару: " + id);
-//        addPhone[addPhone.length - 1] = new Phone(id, getName(), getAmount(), getDescription(), getPrice());
-//
-//        System.out.println("Вкажіть тип операційної системи: ");
-//        String operational = store.functionaliti.Utils.getStr();
-//        OperatingSystem system = new OperatingSystem(operational);
-//        System.out.print("Вкажіть діагональ екрану: ");
-//        ScreenDiagonal diagonal = new ScreenDiagonal(store.functionaliti.Utils.getInt());
-//        System.out.print("Вкажіть ас роботи від батареї (годин): ");
-//        WorkingTime workingTime = new WorkingTime(store.functionaliti.Utils.getFloat());
-//        System.out.print("Вкажіть гарантійний термін товару: ");
-//        Warranty warranty = new Warranty(getDate());
-//        addPhone[addPhone.length - 1].setSystem(system);
-//        addPhone[addPhone.length - 1].setRam(setRAM());
-//        addPhone[addPhone.length - 1].setCpu(setCPU());
-//        addPhone[addPhone.length - 1].setDiagonal(diagonal);
-//        addPhone[addPhone.length - 1].setWorkingTime(workingTime);
-//        addPhone[addPhone.length - 1].setWarranty(warranty);
-//        store.setPhones(addPhone);
-//        System.out.println(store.getPhones()[addPhone.length - 1].show());
-//    }
+    private Phone[] addPhone(Phone[] goods, int index) {
+        Phone[] addPhone = Arrays.copyOf(goods, goods.length + 1);
+        int id = addPhone[addPhone.length - 2].getId() + 1;
+        Logger.INSTANCE.log(LogType.INFO, "ID нового товару: " + id);
+        System.out.println("ID нового товару: " + id);
+        addPhone[addPhone.length - 1] = new Phone(id, getName(), getAmount(), getDescription(), getPrice());
+
+        System.out.println("Вкажіть тип операційної системи: ");
+        String operational = Utils.getStr();
+        OperatingSystem system = new OperatingSystem(operational);
+        System.out.print("Вкажіть діагональ екрану: ");
+        ScreenDiagonal diagonal = new ScreenDiagonal(Utils.getFloat());
+        System.out.print("Вкажіть ас роботи від батареї (годин): ");
+        WorkingTime workingTime = new WorkingTime(Utils.getFloat());
+        System.out.print("Вкажіть гарантійний термін товару: ");
+        Warranty warranty = new Warranty(getDate());
+        addPhone[addPhone.length - 1].setSystem(system);
+        addPhone[addPhone.length - 1].setRam(setRAM());
+        addPhone[addPhone.length - 1].setCpu(setCPU());
+        addPhone[addPhone.length - 1].setDiagonal(diagonal);
+        addPhone[addPhone.length - 1].setWorkingTime(workingTime);
+        addPhone[addPhone.length - 1].setWarranty(warranty);
+        list[index - 1] = Arrays.copyOf(addPhone, addPhone.length);
+        return addPhone;
+    }
 
     private RAM setRAM() {
         System.out.println("Вкажіть характеристики оперативноъ пам'яті: ");
         System.out.print("Вкажіть розмір мамяті(GB): ");
-        float memorySize = store.functionaliti.Utils.getFloat();
+        float memorySize = Utils.getFloat();
         System.out.print("Вкажіть тип пам'яті(DDRx): ");
-        String memoryType = store.functionaliti.Utils.getStr();
+        String memoryType = Utils.getStr();
         return new RAM(memorySize, memoryType);
     }
 
     private CPU setCPU() {
         System.out.println("Вкажіть характеристики процесора: ");
         System.out.print("Вкажіть кількість ядер: ");
-        int coreNumber = store.functionaliti.Utils.getInt();
+        int coreNumber = Utils.getInt();
         System.out.print("Вкажіть частоту процесора (ГГц): ");
-        float frequency = store.functionaliti.Utils.getFloat();
+        float frequency = Utils.getFloat();
         return new CPU(coreNumber, frequency);
     }
 
@@ -310,7 +311,7 @@ public class Operational {
         System.out.print("Вкажіть дату виготовлення.");
         Calendar productionDate = getDate();
         System.out.print("Вкажіть температуру зберігання: ");
-        int saveTemperature = store.functionaliti.Utils.getInt();
+        int saveTemperature = Utils.getInt();
         System.out.print("Вкажіть термін придатності.");
         Calendar expireDate = getDate();
         return new ExpirationTime(productionDate, saveTemperature, expireDate);
@@ -318,11 +319,11 @@ public class Operational {
 
     private Calendar getDate() {
         System.out.println("День: ");
-        int day = store.functionaliti.Utils.getInt();
+        int day = Utils.getInt();
         System.out.print("місяць: ");
-        int month = store.functionaliti.Utils.getInt();
+        int month = Utils.getInt();
         System.out.print("рік: ");
-        int year = store.functionaliti.Utils.getInt();
+        int year = Utils.getInt();
         Calendar calendar = Calendar.getInstance();
         calendar.set(year, month, day);
         return calendar;
