@@ -54,8 +54,8 @@ public class Services {
             case 4: {
                 Logger.INSTANCE.log(LogType.INFO, "Вибрано: 4 - Продати товар.");
                 System.out.println("Вибрано: 4 - Продати товар.");
-//                    Selling selling = new Selling();
-//                    selling.sell(store);
+                    Selling selling = new Selling();
+                    selling.sell(storeX,operate);
                 break;
             }
             default: {
