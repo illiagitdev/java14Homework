@@ -11,6 +11,9 @@ public class Company {
     private NonFixSalary[] nonFixRateEmployee;
     private Frilance[] frilanceEmployee;
 
+    private Company() {
+    }
+
     public static Company getInstance() {
         if (company==null){
             company=new Company();

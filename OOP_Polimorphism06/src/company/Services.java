@@ -19,6 +19,7 @@ public class Services {
         boolean leaveCompany = false;
 
         company = Company.getInstance();
+
         System.out.println("Loading employees...");
         loadCompany();
 
