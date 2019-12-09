@@ -1,10 +1,8 @@
-package task1;
+package task2;
 
-import java.sql.Time;
-import java.util.Date;
-import java.util.Random;
+import services.Utylits;
+
 import java.util.concurrent.Semaphore;
-import java.util.concurrent.TimeUnit;
 
 public class Visitors implements Runnable {
     /*
@@ -37,9 +35,11 @@ public class Visitors implements Runnable {
                 System.out.printf("Очікує входу в бібліотеку. Відвідувач № %d %s\n", id, System.currentTimeMillis() - now);
             }
             semaphore.acquire();
+            PassDoor.enterLibrary(0.5);
             System.out.printf("Зайшов у бібліотеку. Відвідувач № %d %s\n", id, System.currentTimeMillis() - now);
             System.out.printf("Читає книгу. Відвідувач № %d %s\n", id, System.currentTimeMillis() - now);
-            reading();
+            Utylits.randomWaitTime(5);
+            PassDoor.exitLibrary(0.5);
             semaphore.release();
             System.out.printf("Відвідувач вийшов з бібліотеки. Відвідувач № %d %s\n", id, System.currentTimeMillis() - now);
         } catch (InterruptedException e) {
@@ -48,13 +48,6 @@ public class Visitors implements Runnable {
 
     }
 
-    private void reading() {
-        Random random = new Random();
-        int result = random.nextInt(5) + 1;
-        try {
-            TimeUnit.SECONDS.sleep(result);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
+
+
 }

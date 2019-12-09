@@ -1,14 +1,14 @@
-package task1;
+package task2;
+
+import services.Utylits;
 
 import java.util.concurrent.Semaphore;
 
 public class Library {
     private static Library library = null;
     private Visitors[] visitors;
-    private static int capacity;
     private static int visitorsAmount;
     private static Semaphore semaphore;
-    private boolean[] libraryCapacity;
 
     private Library() {}
 
@@ -34,11 +34,10 @@ public class Library {
 
     private void initialize() {
         System.out.print("Визначте скільки людей може перебувати в бібліотеці одночасно: ");
-        capacity = Utylits.getInt();
+        int capacity = Utylits.getInt();
         System.out.print("Визначте скфльки людей хоче відвідати бібліотеку бібліотеці: ");
         visitorsAmount = Utylits.getInt();
         visitors=new Visitors[visitorsAmount];
-        libraryCapacity = new boolean[capacity];
         semaphore = new Semaphore(capacity);
     }
 }
