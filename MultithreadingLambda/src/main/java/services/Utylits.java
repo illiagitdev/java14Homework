@@ -1,4 +1,4 @@
-package services;
+package main.java.services;
 
 import java.util.Random;
 import java.util.Scanner;

@@ -1,12 +1,8 @@
-package task1;
+package main.java.task1;
 
-import services.Utylits;
+import main.java.services.Utylits;
 
-import java.sql.Time;
-import java.util.Date;
-import java.util.Random;
 import java.util.concurrent.Semaphore;
-import java.util.concurrent.TimeUnit;
 
 public class Visitors implements Runnable {
     /*

@@ -1,6 +1,6 @@
-package task1;
+package main.java.task2;
 
-import services.Utylits;
+import main.java.services.Utylits;
 
 import java.util.concurrent.Semaphore;
 
