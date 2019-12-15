@@ -1,11 +1,16 @@
 package main.java;
 
+import main.java.task1.Library;
+import main.java.task2.LibraryDoor;
+
 public class Main {
     public static void main(String[] args) {
-//        main.java.task1.Operational library=new main.java.task1.Operational();
-//        library.run();
+        //перша частина завдання
+//        Library library1 = Library.getInstance();
+//        library1.run();
 
-        main.java.task2.Operational library2=new main.java.task2.Operational();
+        //друга частина завдання з дверима
+        LibraryDoor library2 = LibraryDoor.getInstance();
         library2.run();
     }
 }
