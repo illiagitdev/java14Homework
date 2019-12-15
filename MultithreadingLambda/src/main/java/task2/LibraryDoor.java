@@ -4,40 +4,38 @@ import main.java.services.Utylits;
 
 import java.util.concurrent.Semaphore;
 
-public class Library {
-    private static Library library = null;
+public class LibraryDoor {
+    private static LibraryDoor library = null;
     private Visitors[] visitors;
     private static int visitorsAmount;
-    private static Semaphore semaphore;
+    private static Semaphore semaphoreCapacity;
 
-    private Library() {}
+    private LibraryDoor() {
+        initialize();
+    }
 
-    public static Library getInstance() {
+    public static LibraryDoor getInstance() {
         if (library == null) {
-            return library = new Library();
+            return library = new LibraryDoor();
         }
         return library;
     }
 
     public void run() {
-        initialize();
-        Visitors.setSemaphore(semaphore);
-        boolean stopCondition = true;
+        Visitors.setSemaphore(semaphoreCapacity);
         for (int i = 0; i < visitorsAmount; i++) {
-            visitors[i]=new Visitors(i);
-        new Thread(visitors[i]).start();
+            visitors[i] = new Visitors();
+            visitors[i].setId(i);
+            new Thread(visitors[i]).start();
         }
-//        while (stopCondition) {
-//
-//        }
     }
 
     private void initialize() {
         System.out.print("Визначте скільки людей може перебувати в бібліотеці одночасно: ");
         int capacity = Utylits.getInt();
+        semaphoreCapacity = new Semaphore(capacity);
         System.out.print("Визначте скфльки людей хоче відвідати бібліотеку бібліотеці: ");
         visitorsAmount = Utylits.getInt();
-        visitors=new Visitors[visitorsAmount];
-        semaphore = new Semaphore(capacity);
+        visitors = new Visitors[visitorsAmount];
     }
 }
