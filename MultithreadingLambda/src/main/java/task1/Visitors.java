@@ -5,16 +5,6 @@ import main.java.services.Utylits;
 import java.util.concurrent.Semaphore;
 
 public class Visitors implements Runnable {
-    /*
-    Каждый поток должен писать в консоль что он(человек) делает.
-    - пришел ко входу в библиотеку
-    - ждет входа в библиотеку (происходит только если нет места на момент прихода
-    к библиотеке)
-    - вошел в библиотеку
-    - читает книгу (поток должен делать это действие рандомное кол-во времени от 1
-    до 5 секунд)
-    - вышел из библиотеки
-     */
     private int id;
     private static Semaphore semaphore;
     private static long now = System.currentTimeMillis();

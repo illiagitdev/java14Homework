@@ -22,14 +22,10 @@ public class Library {
     public void run() {
         initialize();
         Visitors.setSemaphore(semaphore);
-        boolean stopCondition = true;
         for (int i = 0; i < visitorsAmount; i++) {
             visitors[i]=new Visitors(i);
         new Thread(visitors[i]).start();
         }
-//        while (stopCondition) {
-//
-//        }
     }
 
     private void initialize() {
