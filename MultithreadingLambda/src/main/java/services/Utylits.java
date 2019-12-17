@@ -10,14 +10,15 @@ public class Utylits {
         return input.hasNextInt() ? input.nextInt() : getInt();
     }
 
-    public static void randomWaitTime(int seconds) {
+    public static int randomWaitTime(int seconds) {
         Random random = new Random();
-        int result = random.nextInt(seconds) + 1;
+        int result = (int) (random.nextDouble() * seconds * 1000);
         try {
-            TimeUnit.SECONDS.sleep(result);
+            TimeUnit.MILLISECONDS.sleep(result);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        return result;
     }
 
     public static void waitTime(double passDor) {
