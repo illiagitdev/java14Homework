@@ -1,4 +1,4 @@
 package main.java.task2;
 
-public class Вщщк {
+public class Door {
 }
