@@ -32,10 +32,10 @@ public class LibraryDoor {
 
     private void initialize() {
         System.out.print("Визначте скільки людей може перебувати в бібліотеці одночасно: ");
-        int capacity = Utylits.getInt();
+        int capacity = Utylits.getPositiveInt();
         semaphoreCapacity = new Semaphore(capacity);
         System.out.print("Визначте скфльки людей хоче відвідати бібліотеку бібліотеці: ");
-        visitorsAmount = Utylits.getInt();
+        visitorsAmount = Utylits.getPositiveInt();
         visitors = new Visitors[visitorsAmount];
     }
 }
