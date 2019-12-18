@@ -7,10 +7,10 @@ import java.util.concurrent.Semaphore;
 public class Lib {
     public void runLib() {
         System.out.print("Визначте скільки людей може перебувати в бібліотеці одночасно: ");
-        int capacity = Utylits.getInt();
+        int capacity = Utylits.getPositiveInt();
         Semaphore semaphore = new Semaphore(capacity, true);
         System.out.print("Визначте скфльки людей хоче відвідати бібліотеку бібліотеці: ");
-        int visitorsAmount = Utylits.getInt();
+        int visitorsAmount = Utylits.getPositiveInt();
         long startPoint = System.currentTimeMillis();
         for (int i = 0; i < visitorsAmount; i++) {
             new Thread(() -> {
