@@ -6,11 +6,12 @@ import java.util.concurrent.TimeUnit;
 
 public class Utylits {
     public static int getPositiveInt() {
+        int result = 0;
         Scanner input = new Scanner(System.in);
-        int result = input.hasNextInt() ? input.nextInt() : getPositiveInt();
+        result = input.hasNextInt() ? input.nextInt() : getPositiveInt();
         if(result < 0) {
             System.out.print("Value >= 0, enter again: ");
-            getPositiveInt();
+            return getPositiveInt();
         }
         return result;
     }
