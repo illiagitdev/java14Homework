@@ -5,9 +5,14 @@ import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 public class Utylits {
-    public static int getInt() {
+    public static int getPositiveInt() {
         Scanner input = new Scanner(System.in);
-        return input.hasNextInt() ? input.nextInt() : getInt();
+        int result = input.hasNextInt() ? input.nextInt() : getPositiveInt();
+        if(result < 0) {
+            System.out.print("Value >= 0, enter again: ");
+            getPositiveInt();
+        }
+        return result;
     }
 
     public static int randomWaitTime(int seconds) {
