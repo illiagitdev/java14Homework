@@ -4,10 +4,6 @@ import main.java.services.Utylits;
 
 import java.util.concurrent.Semaphore;
 
-/*
- Cам проход через дверь можно реализовать с помощью второго класса - Door, который мог бы быть инициализирован с
- помощью конструктора CyclicBarrier, к примеру. Либо же использовать синфронайзд. И все.
- */
 public class Library {
     public void runLibrary() {
         System.out.print("Визначте скільки людей може перебувати в бібліотеці одночасно: ");
