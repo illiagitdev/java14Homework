@@ -14,7 +14,7 @@ public class Line {
     public Line(double startPointX, double startPointY, double endPointX, double endPointY) {
         a = startPointY - endPointY;
         b = endPointX - startPointX;
-        c = startPointX * endPointY - endPointX * startPointY;
+        c = (startPointX * endPointY) - (endPointX * startPointY);
     }
 
     public double getA() {

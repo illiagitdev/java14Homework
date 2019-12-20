@@ -13,10 +13,6 @@ class Service {
     private Point edges[][];
     private TrapezoidComponents[] trapezoids;
 
-//    public Point[][] getEdges() {
-//        return edges;
-//    }
-
     Service(Point spectator, double fraction) {
         this.fraction = fraction;
         this.spectator = spectator;
@@ -28,11 +24,6 @@ class Service {
         AreaCalc trapezoidArea = new AreaCalc();
         //------------------- by Far points
         TrapezoidComponents[] trapezoidAreasFar = trapezoidArea.getAreaTMP(spectator, shape, workingSetFar);
-//        for (int i = 0; i < edges.length; i++) {
-//            for (int j = 0; j < edges[i].length; j++) {
-//                System.out.println("edges " + edges[i][j].toString());
-//            }
-//        }
         if (trapezoidAreasFar.length > 1) {
             areaSet[0] = Utils.getMax(trapezoidAreasFar);
         } else {
