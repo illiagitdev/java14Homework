@@ -11,7 +11,6 @@ public class Operation {
         String[] signs = {"+", "-", "*", "/", "%", "==", ">", "<"};
         Callable<Object> task = () -> evaluate(getNumber(), getNumber(), getSigh(signs));
 
-        //todo: FutureCallable<> futureCallable;
         Future future = executor.submit(task);
         try {
             if (!future.isDone()){
